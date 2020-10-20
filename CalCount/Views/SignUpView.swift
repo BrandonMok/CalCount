@@ -1,5 +1,7 @@
 
 import SwiftUI
+import CryptoKit
+import RealmSwift
 
 struct SignUpView: View {
     @State private var username = ""
@@ -59,8 +61,18 @@ struct SignUpView: View {
                     // Make sure passwords match
                     if password == passwordAgain {
                         // Hash password to store
+//                        var data = Data(password.utf8)
+//                        password = Insecure.MD5.hash(data: data)
                         
-                        // realm.
+                        let realm = try! Realm()
+                        
+                        // Object to save
+                        // NOTE: Realm doens't seem to allow to pass all as parameters when creating!
+                        var user = User()
+                        user.username = username
+                        user.password = password
+                        user.gender = gender
+
                         
                         
                     }

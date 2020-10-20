@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C92F5CFF253F5A4C00580088 /* CryptoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92F5CFE253F5A4C00580088 /* CryptoKit.framework */; };
+		C92F5D01253F5EB000580088 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C92F5D00253F5EB000580088 /* RealmSwift */; };
+		C92F5D03253F5EB400580088 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C92F5D02253F5EB400580088 /* Realm */; };
 		C9471072252B8ED500033FA5 /* CalCountApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9471071252B8ED500033FA5 /* CalCountApp.swift */; };
 		C9471074252B8ED500033FA5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9471073252B8ED500033FA5 /* ContentView.swift */; };
 		C9471076252B8ED600033FA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9471075252B8ED600033FA5 /* Assets.xcassets */; };
@@ -15,11 +18,10 @@
 		C9511F90253234580052C8FA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9511F8F253234580052C8FA /* LoginView.swift */; };
 		C9511F9225323E390052C8FA /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9511F9125323E390052C8FA /* SignUpView.swift */; };
 		C9AEF435253680C100DEF119 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF434253680C100DEF119 /* User.swift */; };
-		C9AEF4382536825B00DEF119 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C9AEF4372536825B00DEF119 /* RealmSwift */; };
-		C9AEF43A2536825B00DEF119 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C9AEF4392536825B00DEF119 /* Realm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C92F5CFE253F5A4C00580088 /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = System/Library/Frameworks/CryptoKit.framework; sourceTree = SDKROOT; };
 		C947106E252B8ED400033FA5 /* CalCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9471071252B8ED500033FA5 /* CalCountApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalCountApp.swift; sourceTree = "<group>"; };
 		C9471073252B8ED500033FA5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,8 +40,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9AEF43A2536825B00DEF119 /* Realm in Frameworks */,
-				C9AEF4382536825B00DEF119 /* RealmSwift in Frameworks */,
+				C92F5D03253F5EB400580088 /* Realm in Frameworks */,
+				C92F5D01253F5EB000580088 /* RealmSwift in Frameworks */,
+				C92F5CFF253F5A4C00580088 /* CryptoKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +90,7 @@
 		C9511F8725322BA80052C8FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C92F5CFE253F5A4C00580088 /* CryptoKit.framework */,
 				C9511F8825322BA90052C8FA /* CoreData.framework */,
 			);
 			name = Frameworks;
@@ -128,8 +132,8 @@
 			);
 			name = CalCount;
 			packageProductDependencies = (
-				C9AEF4372536825B00DEF119 /* RealmSwift */,
-				C9AEF4392536825B00DEF119 /* Realm */,
+				C92F5D00253F5EB000580088 /* RealmSwift */,
+				C92F5D02253F5EB400580088 /* Realm */,
 			);
 			productName = CalCount;
 			productReference = C947106E252B8ED400033FA5 /* CalCount.app */;
@@ -321,6 +325,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CalCount/Preview Content\"";
+				DEVELOPMENT_TEAM = FT5TU5KEM8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CalCount/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -341,6 +346,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CalCount/Preview Content\"";
+				DEVELOPMENT_TEAM = FT5TU5KEM8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CalCount/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -390,12 +396,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C9AEF4372536825B00DEF119 /* RealmSwift */ = {
+		C92F5D00253F5EB000580088 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C9AEF4362536825B00DEF119 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
-		C9AEF4392536825B00DEF119 /* Realm */ = {
+		C92F5D02253F5EB400580088 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C9AEF4362536825B00DEF119 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = Realm;
