@@ -55,7 +55,7 @@ struct SignUpView: View {
             
             Button(action: {
                 // Create User(), check input, store in Realm
-                if username.isEmpty || password.isEmpty || passwordAgain.isEmpty {
+                if !username.isEmpty || !password.isEmpty || !passwordAgain.isEmpty {
                     // Make sure passwords match
                     if password == passwordAgain {
                         // Hash password to store
@@ -86,7 +86,7 @@ struct SignUpView: View {
             .background(Color("PrimaryBlue"))
             .alert(isPresented: $error) {
                 Alert(title: Text("Login failed!"),
-                  message: Text(errorMsg),
+                  message: Text("\(errorMsg)"),
                   dismissButton: .default(Text("Ok"), action: {
                     username = ""
                     password = ""
