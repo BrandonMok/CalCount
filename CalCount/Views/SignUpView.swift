@@ -55,27 +55,27 @@ struct SignUpView: View {
             
             Button(action: {
                 // Create User(), check input, store in Realm
-                
-                if password == passwordAgain {
-                    
+                if username.isEmpty || password.isEmpty || passwordAgain.isEmpty {
+                    // Make sure passwords match
+                    if password == passwordAgain {
+                        // Hash password to store
+                        
+                        // realm.
+                        
+                        
+                    }
+                    else {
+                        // set error to true - error occurred
+                        error = true
+                        errorMsg = "Entered passwords do not match!"
+                    }
                 }
                 else {
-                    // set error to true - error occurred
                     error = true
-                    errorMsg = "Entered passwords do not match!"
+                    errorMsg = "Please enter input for all fields!"
                 }
-                
-                
-                // TODO - Create User() and store in Realm
-               // var user = User(username: username, password: password, gender: gender)
-//                realm.write {
-//                    realm.add();
-//                }
-                
-                
-                
             }, label: {
-                Text("Login")
+                Text("Submit")
                     .foregroundColor(.black)
                     .font(.title)
                     .fontWeight(.bold)
