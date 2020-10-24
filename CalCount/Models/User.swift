@@ -1,6 +1,7 @@
 
 import Foundation
 import RealmSwift
+import CryptoKit
 
 class User: Object {
     // REALM doesn't allow for init for parameters to be passed when creating object

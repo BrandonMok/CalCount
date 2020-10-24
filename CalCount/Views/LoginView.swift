@@ -1,5 +1,6 @@
 
 import SwiftUI
+import CryptoKit
 import RealmSwift
 
 struct LoginView: View {
@@ -25,23 +26,37 @@ struct LoginView: View {
                 .cornerRadius(5.0)
             
             Button(action: {
-                // TODO - Check with coredata!
-                // if login fails, set error = true
-//                error = true
+                if !username.isEmpty || !password.isEmpty {
+                    let inputData = Data(password.utf8)
+                    let hash = SHA256.hash(data: inputData)
+                    let password = hash.compactMap { String(format: "%02x", $0) }.joined()
+                    
+                    let realm = try! Realm()
+                    
+                    let user = realm.objects(User.self)
+                        .filter("username = %@ AND password = %@", username, password)
+
+                    
+                    if user.count == 0 {
+                        error = true
+                    }
+                }
+                else {
+                    error = true
+                }
                 
             }, label: {
                 Text("Login")
                     .foregroundColor(.black)
                     .font(.title)
                     .fontWeight(.bold)
+                    .frame(minWidth: 0, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 0, maxHeight: 20)
             })
-            
-            .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: 20)
             .padding()
             .background(Color("PrimaryBlue"))
             .alert(isPresented: $error) {
                 Alert(title: Text("Login failed!"),
-                  message: Text("Please make sure that the username and password entered are valid!"),
+                  message: Text("Please enter a valid username/password!"),
                   dismissButton: .default(Text("Ok"), action: {
                     // Set values in the textfields back to ""
                     username = ""

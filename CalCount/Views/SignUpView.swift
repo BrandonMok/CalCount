@@ -61,8 +61,8 @@ struct SignUpView: View {
                     // Make sure passwords match
                     if password == passwordAgain {
                         // Hash password to store
-//                        var data = Data(password.utf8)
-//                        password = Insecure.MD5.hash(data: data)
+                        let inputData = Data(password.utf8)
+                        let password = SHA256.hash(data: inputData)
                         
                         let realm = try! Realm()
                         
@@ -70,11 +70,13 @@ struct SignUpView: View {
                         // NOTE: Realm doens't seem to allow to pass all as parameters when creating!
                         var user = User()
                         user.username = username
-                        user.password = password
+                        user.password = password.compactMap { String(format: "%02x", $0) }.joined()
                         user.gender = gender
 
-                        
-                        
+                        // Write user to realm
+                        try! realm.write {
+                            realm.add(user)
+                        }                
                     }
                     else {
                         // set error to true - error occurred
