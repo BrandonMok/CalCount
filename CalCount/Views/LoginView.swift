@@ -8,6 +8,8 @@ struct LoginView: View {
     @State private var password = ""
     @State private var error = false
     
+    @State private var phidden = false
+    
     var body: some View {
         VStack {
             TextField("Username", text: $username)
@@ -18,12 +20,35 @@ struct LoginView: View {
                 .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                 .cornerRadius(5.0)
             
-            SecureField("Password", text: $password)
-                .padding()
-                .keyboardType(.alphabet)
-                .textContentType(.password)
-                .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
-                .cornerRadius(5.0)
+            ZStack {
+                HStack {
+                    if phidden {
+                        TextField("Password", text: $password)
+                            .padding()
+                            .keyboardType(.alphabet)
+                            .textContentType(.password)
+                            .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                            .cornerRadius(5.0)
+                    }
+                    else {
+                        SecureField("Password", text: $password)
+                            .offset(x: 15, y: 0)
+                            .padding()
+                            .keyboardType(.alphabet)
+                            .textContentType(.password)
+                            .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                            .cornerRadius(5.0)
+                    }
+                    
+                    Button(action: {
+                        self.phidden.toggle()
+                    }, label: {
+                        Image(systemName: self.phidden ? "eye.fill" : "eye.slash.fill")
+                            .foregroundColor(self.phidden ? Color.blue : Color.secondary)
+                    })
+                    
+                }
+            }
             
             Button(action: {
                 if !username.isEmpty || !password.isEmpty {
