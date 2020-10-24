@@ -7,11 +7,12 @@ struct SignUpView: View {
     @State private var username = ""
     @State private var password = ""
     @State private var passwordAgain = ""
-    @State private var gender = ""
+    @State private var selectedGender = 0
     @State private var error = false
+    @State private var success = false
     @State private var errorMsg = ""
     
-    let genders = ["Prefer not to say","Male", "Female"]
+    var genders = ["Prefer not to say","Male", "Female"]
     
     var body: some View {
         VStack {
@@ -20,34 +21,32 @@ struct SignUpView: View {
                 .keyboardType(.alphabet)
                 .textContentType(.username)
                 .foregroundColor(.black)
-                .border(Color.black)
+                .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                 .cornerRadius(5.0)
             
-            TextField("Password", text: $password)
+            SecureField("Password", text: $password)
                 .padding()
                 .keyboardType(.alphabet)
                 .textContentType(.password)
-                .border(Color.black)
-                .cornerRadius(5.0)
+                .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))                .cornerRadius(5.0)
             
-            TextField("Password Again", text: $passwordAgain)
+            SecureField("Password Again", text: $passwordAgain)
                 .padding()
                 .keyboardType(.alphabet)
                 .textContentType(.password)
-                .border(Color.black)
+                .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                 .cornerRadius(5.0)
             
 
             
             VStack {
-                Picker(selection: $gender, label:
-                        Text("Select your gender")) {
-                            ForEach(0 ..< genders.count) { index in
-                                Text(self.genders[index])
-                            }
-                        }
+                Picker(selection: $selectedGender, label: Text("Select your gender")) {
+                    ForEach(0 ..< genders.count) { index in
+                        Text(self.genders[index])
+                    }
+                }
                 
-                Text("**The selection of a gender is voluntary. Gender is only utilized to create base settings for the account (i.e. typical calories per day). If no gender is selected, you can simply set all user settings later.")
+                Text("**The selection of a gender is voluntary. Gender is only used to create base settings (i.e. typical calories per day). If no gender is selected, you can simply set all user settings later.")
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 
@@ -71,12 +70,15 @@ struct SignUpView: View {
                         var user = User()
                         user.username = username
                         user.password = password.compactMap { String(format: "%02x", $0) }.joined()
-                        user.gender = gender
+                        user.gender = genders[selectedGender]
 
                         // Write user to realm
                         try! realm.write {
                             realm.add(user)
-                        }                
+                        }
+                        
+                        // set to success to TRUE so can let user know they signed up successfully!
+                        success = true
                     }
                     else {
                         // set error to true - error occurred
@@ -93,13 +95,12 @@ struct SignUpView: View {
                     .foregroundColor(.black)
                     .font(.title)
                     .fontWeight(.bold)
+                    .frame(minWidth: 0, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 0, maxHeight: 20)
             })
-            
-            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: 20)
             .padding()
             .background(Color("PrimaryBlue"))
             .alert(isPresented: $error) {
-                Alert(title: Text("Login failed!"),
+                Alert(title: Text("Signup failed!"),
                   message: Text("\(errorMsg)"),
                   dismissButton: .default(Text("Ok"), action: {
                     username = ""
@@ -107,6 +108,14 @@ struct SignUpView: View {
                     passwordAgain = ""
                   }))
             }
+            .alert(isPresented: $success) {
+                Alert(title: Text("Signup successful!"),
+                  message: Text("\(errorMsg)"),
+                  dismissButton: .default(Text("Ok"), action: {
+                    // redirect somehow!
+                  }))
+            }
+            .cornerRadius(25)
             
             
             Spacer()

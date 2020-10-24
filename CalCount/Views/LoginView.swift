@@ -15,14 +15,14 @@ struct LoginView: View {
                 .keyboardType(.alphabet)
                 .textContentType(.username)
                 .foregroundColor(.black)
-                .border(Color.black)
+                .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                 .cornerRadius(5.0)
             
-            TextField("Password", text: $password)
+            SecureField("Password", text: $password)
                 .padding()
                 .keyboardType(.alphabet)
                 .textContentType(.password)
-                .border(Color.black)
+                .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                 .cornerRadius(5.0)
             
             Button(action: {
@@ -36,7 +36,7 @@ struct LoginView: View {
                     let user = realm.objects(User.self)
                         .filter("username = %@ AND password = %@", username, password)
 
-                    
+                    // if no user found, error
                     if user.count == 0 {
                         error = true
                     }
@@ -63,6 +63,7 @@ struct LoginView: View {
                     password = ""
                   }))
             }
+            .cornerRadius(25)
             
             
             Spacer()
