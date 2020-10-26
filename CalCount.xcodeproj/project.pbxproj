@@ -111,14 +111,12 @@
 		C9511F8A25322BBA0052C8FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C9DA822125475625004A95B6 /* Settings */,
 				C9471073252B8ED500033FA5 /* ContentView.swift */,
 				C9511F8D253230590052C8FA /* LandingView.swift */,
 				C9511F8F253234580052C8FA /* LoginView.swift */,
 				C9511F9125323E390052C8FA /* SignUpView.swift */,
 				C96BCE6125465369008121AE /* HomeView.swift */,
-				C96028482547267C001A3829 /* SettingsView.swift */,
-				C960284A25472AD9001A3829 /* ChangePasswordView.swift */,
-				C960284E25474C20001A3829 /* ChangeAccountGenderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,6 +129,16 @@
 				C960284C25473E8B001A3829 /* TabManager.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C9DA822125475625004A95B6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				C96028482547267C001A3829 /* SettingsView.swift */,
+				C960284A25472AD9001A3829 /* ChangePasswordView.swift */,
+				C960284E25474C20001A3829 /* ChangeAccountGenderView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
