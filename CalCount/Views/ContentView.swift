@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var loggedIn = false;
+    @EnvironmentObject var status: LoggedInStatus
     
     var body: some View {
-        if loggedIn {
+        if status.loggedIn {
             // logged in view
-            
+            HomeView().transition(.opacity)
         }
         else {
             LandingView()
@@ -24,6 +24,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(LoggedInStatus())
     }
 }

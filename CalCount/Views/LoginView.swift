@@ -7,8 +7,11 @@ struct LoginView: View {
     @State private var username = ""
     @State private var password = ""
     @State private var error = false
-    
+
     @State private var phidden = false
+    
+    @EnvironmentObject var status: LoggedInStatus
+    
     
     var body: some View {
         VStack {
@@ -65,6 +68,9 @@ struct LoginView: View {
                     if user.count == 0 {
                         error = true
                     }
+                    
+//                    self.lstatus.loggedIn = true
+                    self.status.loggedIn = true
                 }
                 else {
                     error = true
