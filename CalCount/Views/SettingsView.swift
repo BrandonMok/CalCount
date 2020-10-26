@@ -3,7 +3,12 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @ObservedObject var tabManager = TabManager()
     @EnvironmentObject var status: LoggedInStatus
+    
+    init(){
+        self.tabManager.selectedTab = Tabs.settings
+    }
     
     var body: some View {
         NavigationView {
@@ -34,6 +39,7 @@ struct SettingsView: View {
 //                }
                 
                 
+                // Logout Section
                 Section(){
                     Button(action: {
                         // logout
@@ -48,6 +54,7 @@ struct SettingsView: View {
                     })
                     .padding()
                     .background(Color("PrimaryBlue"))
+                    .cornerRadius(15)
                 }
             }
         } // navigationView
@@ -56,6 +63,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView().environmentObject(LoggedInStatus())
+        SettingsView().environmentObject(LoggedInStatus()).environmentObject(TabManager())
     }
 }

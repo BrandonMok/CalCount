@@ -10,7 +10,6 @@ enum Tabs: Hashable {
     case settings
 }
 
-
 class TabManager: ObservableObject {
     @Published var selectedTab = Tabs.home
 }

@@ -3,14 +3,11 @@ import SwiftUI
 
 
 struct HomeView: View {
-//    @EnvironmentObject var selectedTab: TabManager
-    
-    // TEMP
-    @State var selectedTab = Tabs.home
+    @EnvironmentObject var tabManager: TabManager
     
     var body: some View {
         VStack {
-            TabView(selection: $selectedTab) {
+            TabView(selection: $tabManager.selectedTab) { 
 
                 Text("Tab Content 1")
                     .tabItem {
