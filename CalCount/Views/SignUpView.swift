@@ -8,9 +8,6 @@ struct SignUpView: View {
     @State private var password = ""
     @State private var passwordAgain = ""
     @State private var selectedGender = 0
-    @State private var errorOccurred = false
-    @State private var success = false
-    @State private var errorMsg = ""
     
     @State private var showAlert = false
     @State private var msgTitle = ""
