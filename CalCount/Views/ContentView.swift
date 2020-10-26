@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var loggedIn = false;
+    
     var body: some View {
-        LandingView()
- 
+        if loggedIn {
+            // logged in view
+            
+        }
+        else {
+            LandingView()
+        }
     }
 }
 

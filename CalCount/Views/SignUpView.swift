@@ -92,7 +92,7 @@ struct SignUpView: View {
                 }
             }, label: {
                 Text("Submit")
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .font(.title)
                     .fontWeight(.bold)
                     .frame(minWidth: 0, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 0, maxHeight: 20)
