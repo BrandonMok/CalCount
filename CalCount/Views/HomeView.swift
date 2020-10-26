@@ -1,22 +1,17 @@
 
 import SwiftUI
 
-// enum for tab navigation
-enum Tabs: Hashable {
-    case home
-    case water
-    case nutrition
-    case settings
-}
 
 struct HomeView: View {
-    @State private var selectedTab = 0
+//    @EnvironmentObject var selectedTab: TabManager
+    
+    // TEMP
+    @State var selectedTab = Tabs.home
     
     var body: some View {
         VStack {
             TabView(selection: $selectedTab) {
-                
-                // TEMP - REplace with view instead of Text!
+
                 Text("Tab Content 1")
                     .tabItem {
                         Image(systemName: "house")
@@ -37,7 +32,6 @@ struct HomeView: View {
                         Text("Nutrition")
                     }
                     .tag(Tabs.nutrition)
-
                 
                 SettingsView()
                     .tabItem {
@@ -52,6 +46,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView().environmentObject(TabManager())
     }
 }

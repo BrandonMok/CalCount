@@ -17,6 +17,9 @@ struct ChangePasswordView: View {
     
     var body: some View {
         VStack {
+            
+            Spacer()
+            
             Text("Change password")
                 .font(.largeTitle)
                 .foregroundColor(Color("PrimaryBlue"))
@@ -93,6 +96,8 @@ struct ChangePasswordView: View {
                       message: Text("\(msg)"),
                       dismissButton:  .default(Text("Ok")))
             })
+            
+            Spacer()
         }//vstack
         .padding()
     }

@@ -2,6 +2,9 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @EnvironmentObject var status: LoggedInStatus
+    
     var body: some View {
         NavigationView {
             Form {
@@ -29,6 +32,23 @@ struct SettingsView: View {
 //                                Text("Manage your data")
 //                        }
 //                }
+                
+                
+                Section(){
+                    Button(action: {
+                        // logout
+                        self.status.loggedIn = false
+                        self.status.currentUser = User()
+                    }, label: {
+                        Text("Logout")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 20)
+                    })
+                    .padding()
+                    .background(Color("PrimaryBlue"))
+                }
             }
         } // navigationView
     }// body
@@ -36,6 +56,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView().environmentObject(LoggedInStatus())
     }
 }
