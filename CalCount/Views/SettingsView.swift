@@ -50,7 +50,7 @@ struct SettingsView: View {
                             .foregroundColor(.white)
                             .font(.title2)
                             .fontWeight(.bold)
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 20)
+                            .frame(maxWidth: .infinity, minHeight: 0, maxHeight: 20)
                     })
                     .padding()
                     .background(Color("PrimaryBlue"))

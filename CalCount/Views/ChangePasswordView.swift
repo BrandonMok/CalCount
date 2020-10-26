@@ -5,6 +5,10 @@ import CryptoKit
 
 struct ChangePasswordView: View {
     
+    // Reference: https://stackoverflow.com/questions/56571349/custom-back-button-for-navigationviews-navigation-bar-in-swiftui
+    // Used to send user back to navigationview
+    @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject private var status: LoggedInStatus
     
     @State private var password = ""
@@ -17,7 +21,6 @@ struct ChangePasswordView: View {
     
     var body: some View {
         VStack {
-            
             Spacer()
             
             Text("Change password")
@@ -44,13 +47,13 @@ struct ChangePasswordView: View {
             .padding(.bottom)
             
             
+            // Submit btn
             Button(action: {
                 if !password.isEmpty || !passwordAgain.isEmpty {
                     if password == passwordAgain {
                         
                         do {
                             let realm = try Realm()
-                            
                             
                             let inputData = Data(password.utf8)
                             let password = SHA256.hash(data: inputData)
@@ -64,6 +67,8 @@ struct ChangePasswordView: View {
                             showAlert.toggle()
                             msgTitle = "Password changed!"
                             msg = "Password changed successfully!"
+                            
+//                            self.presentationMode.wrappedValue.dismiss()
                         }
                         catch {
                             print(error.localizedDescription)
@@ -94,9 +99,14 @@ struct ChangePasswordView: View {
             .alert(isPresented: $showAlert, content: {
                 Alert(title: Text("\(msgTitle)"),
                       message: Text("\(msg)"),
-                      dismissButton:  .default(Text("Ok")))
+                      dismissButton: .default(Text("Ok"), action: {
+                        if msgTitle == "Password changed!" {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                      }))
             })
             
+            Spacer()
             Spacer()
         }//vstack
         .padding()
