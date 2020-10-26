@@ -67,8 +67,6 @@ struct ChangePasswordView: View {
                             showAlert.toggle()
                             msgTitle = "Password changed!"
                             msg = "Password changed successfully!"
-                            
-//                            self.presentationMode.wrappedValue.dismiss()
                         }
                         catch {
                             print(error.localizedDescription)

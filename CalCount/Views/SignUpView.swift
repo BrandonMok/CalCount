@@ -4,6 +4,9 @@ import CryptoKit
 import RealmSwift
 
 struct SignUpView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var username = ""
     @State private var password = ""
     @State private var passwordAgain = ""
@@ -121,10 +124,9 @@ struct SignUpView: View {
                 Alert(title: Text("\(msgTitle)"),
                   message: Text("\(msg)"),
                   dismissButton: .default(Text("Ok"), action: {
-//                    username = ""
-//                    password = ""
-//                    passwordAgain = ""
-//                    selectedGender = 0
+                    if msgTitle == "Signup Successful!" {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
                   }))
             }
 

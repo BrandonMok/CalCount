@@ -16,9 +16,13 @@ struct SettingsView: View {
                 Section(header: Text("Account")
                             .fontWeight(.heavy)
                             .foregroundColor(.blue)){
-                        NavigationLink(destination: ChangePasswordView()) {
-                                Text("Change password")
-                        }
+                    NavigationLink(destination: ChangePasswordView()) {
+                            Text("Change password")
+                    }
+                    
+                    NavigationLink(destination: ChangeAccountGenderView()) {
+                            Text("Change account gender")
+                    }
                 }
                 
 //                Section(header: Text("Goals")

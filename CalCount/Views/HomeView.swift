@@ -3,7 +3,7 @@ import SwiftUI
 
 
 struct HomeView: View {
-    @EnvironmentObject var tabManager: TabManager
+    @ObservedObject var tabManager = TabManager()
     
     var body: some View {
         VStack {
@@ -43,6 +43,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView().environmentObject(TabManager())
+        HomeView()
     }
 }
