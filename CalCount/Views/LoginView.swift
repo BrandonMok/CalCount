@@ -32,7 +32,6 @@ struct LoginView: View {
                     }
                     else {
                         SecureField("Password", text: $password)
-                            .offset(x: 15, y: 0)
                             .padding()
                             .keyboardType(.alphabet)
                             .textContentType(.password)

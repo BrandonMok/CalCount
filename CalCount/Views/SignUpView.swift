@@ -8,9 +8,13 @@ struct SignUpView: View {
     @State private var password = ""
     @State private var passwordAgain = ""
     @State private var selectedGender = 0
-    @State private var error = false
+    @State private var errorOccurred = false
     @State private var success = false
     @State private var errorMsg = ""
+    
+    @State private var showAlert = false
+    @State private var msgTitle = ""
+    @State private var msg = ""
     
     var genders = ["Prefer not to say","Male", "Female"]
     
@@ -28,7 +32,8 @@ struct SignUpView: View {
                 .padding()
                 .keyboardType(.alphabet)
                 .textContentType(.password)
-                .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))                .cornerRadius(5.0)
+                .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                .cornerRadius(5.0)
             
             SecureField("Password Again", text: $passwordAgain)
                 .padding()
@@ -65,30 +70,46 @@ struct SignUpView: View {
                         
                         let realm = try! Realm()
                         
-                        // Object to save
-                        // NOTE: Realm doens't seem to allow to pass all as parameters when creating!
-                        var user = User()
-                        user.username = username
-                        user.password = password.compactMap { String(format: "%02x", $0) }.joined()
-                        user.gender = genders[selectedGender]
-
-                        // Write user to realm
-                        try! realm.write {
-                            realm.add(user)
-                        }
+                        // First check if they aren't already signed up!
+                        let existentUser = realm.objects(User.self)
+                            .filter("username = %@ AND password = %@", username, password.compactMap { String(format: "%02x", $0) }.joined())
                         
-                        // set to success to TRUE so can let user know they signed up successfully!
-                        success = true
+                        
+                        // if no user found, error
+                        if existentUser.count > 0 {
+                            showAlert.toggle()
+                            msgTitle = "Signup Failed!"
+                            msg = "You're already registered!"
+                        }
+                        else {
+                            // Object to save
+                            // NOTE: Realm doens't seem to allow to pass all as parameters when creating!
+                            var user = User()
+                            user.username = username
+                            user.password = password.compactMap { String(format: "%02x", $0) }.joined()
+                            user.gender = genders[selectedGender]
+
+                            // Write user to realm
+                            try! realm.write {
+                                realm.add(user)
+                            }
+                            
+                            
+                            showAlert.toggle()
+                            msgTitle = "Signup Successful!"
+                            msg = "Thanks for joining!"
+                        }
                     }
                     else {
-                        // set error to true - error occurred
-                        error = true
-                        errorMsg = "Entered passwords do not match!"
+                        showAlert.toggle()
+                        msgTitle = "Signup Failed!"
+                        msg = "Entered passwords do not match!"
                     }
                 }
                 else {
-                    error = true
-                    errorMsg = "Please enter input for all fields!"
+                    showAlert.toggle()
+                    msgTitle = "Signup Failed!"
+                    msg = "Please enter input for all fields!"
                 }
             }, label: {
                 Text("Submit")
@@ -99,22 +120,17 @@ struct SignUpView: View {
             })
             .padding()
             .background(Color("PrimaryBlue"))
-            .alert(isPresented: $error) {
-                Alert(title: Text("Signup failed!"),
-                  message: Text("\(errorMsg)"),
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("\(msgTitle)"),
+                  message: Text("\(msg)"),
                   dismissButton: .default(Text("Ok"), action: {
-                    username = ""
-                    password = ""
-                    passwordAgain = ""
+//                    username = ""
+//                    password = ""
+//                    passwordAgain = ""
+//                    selectedGender = 0
                   }))
             }
-            .alert(isPresented: $success) {
-                Alert(title: Text("Signup successful!"),
-                  message: Text("\(errorMsg)"),
-                  dismissButton: .default(Text("Ok"), action: {
-                    // redirect somehow!
-                  }))
-            }
+
             .cornerRadius(25)
             
             
