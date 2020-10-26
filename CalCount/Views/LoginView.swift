@@ -68,9 +68,12 @@ struct LoginView: View {
                     if user.count == 0 {
                         error = true
                     }
-                    
-//                    self.lstatus.loggedIn = true
-                    self.status.loggedIn = true
+                    else {
+                        // In environment object "status", set variable loggedIn to true
+                        // and save currentUser for reference later
+                        self.status.loggedIn = true
+                        self.status.currentUser = user.first!
+                    }
                 }
                 else {
                     error = true
@@ -88,11 +91,7 @@ struct LoginView: View {
             .alert(isPresented: $error) {
                 Alert(title: Text("Login failed!"),
                   message: Text("Please enter a valid username/password!"),
-                  dismissButton: .default(Text("Ok"), action: {
-                    // Set values in the textfields back to ""
-                    username = ""
-                    password = ""
-                  }))
+                  dismissButton: .default(Text("Ok"), action: {}))
             }
             .cornerRadius(25)
             

@@ -17,6 +17,8 @@
 		C9511F8E253230590052C8FA /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9511F8D253230590052C8FA /* LandingView.swift */; };
 		C9511F90253234580052C8FA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9511F8F253234580052C8FA /* LoginView.swift */; };
 		C9511F9225323E390052C8FA /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9511F9125323E390052C8FA /* SignUpView.swift */; };
+		C96028492547267C001A3829 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96028482547267C001A3829 /* SettingsView.swift */; };
+		C960284B25472AD9001A3829 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960284A25472AD9001A3829 /* ChangePasswordView.swift */; };
 		C96BCE6025465274008121AE /* LoggedInStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96BCE5F25465274008121AE /* LoggedInStatus.swift */; };
 		C96BCE6225465369008121AE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96BCE6125465369008121AE /* HomeView.swift */; };
 		C9AEF435253680C100DEF119 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF434253680C100DEF119 /* User.swift */; };
@@ -34,6 +36,8 @@
 		C9511F8D253230590052C8FA /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		C9511F8F253234580052C8FA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C9511F9125323E390052C8FA /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		C96028482547267C001A3829 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C960284A25472AD9001A3829 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		C96BCE5F25465274008121AE /* LoggedInStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInStatus.swift; sourceTree = "<group>"; };
 		C96BCE6125465369008121AE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C9AEF434253680C100DEF119 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 				C9511F8F253234580052C8FA /* LoginView.swift */,
 				C9511F9125323E390052C8FA /* SignUpView.swift */,
 				C96BCE6125465369008121AE /* HomeView.swift */,
+				C96028482547267C001A3829 /* SettingsView.swift */,
+				C960284A25472AD9001A3829 /* ChangePasswordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,9 +206,11 @@
 				C9511F8E253230590052C8FA /* LandingView.swift in Sources */,
 				C9511F9225323E390052C8FA /* SignUpView.swift in Sources */,
 				C9AEF435253680C100DEF119 /* User.swift in Sources */,
+				C96028492547267C001A3829 /* SettingsView.swift in Sources */,
 				C9471074252B8ED500033FA5 /* ContentView.swift in Sources */,
 				C9511F90253234580052C8FA /* LoginView.swift in Sources */,
 				C96BCE6225465369008121AE /* HomeView.swift in Sources */,
+				C960284B25472AD9001A3829 /* ChangePasswordView.swift in Sources */,
 				C9471072252B8ED500033FA5 /* CalCountApp.swift in Sources */,
 				C96BCE6025465274008121AE /* LoggedInStatus.swift in Sources */,
 			);

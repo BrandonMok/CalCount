@@ -17,12 +17,12 @@ struct LandingView: View {
                     NavigationLink(destination: SignUpView()) {
                         Text("Sign Up")
                             .frame(minWidth: 0, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: 50)
-                            .padding(4)
+                            .padding(2)
                             .foregroundColor(.black)
                             .font(.largeTitle)
                             .background(Color(red: 248/255, green: 249/255, blue: 250/250))
                     }
-                    .cornerRadius(25)
+                    .cornerRadius(15)
                     .padding(.leading, 40)
                     .padding(.trailing, 40)
                 
@@ -30,12 +30,12 @@ struct LandingView: View {
                     NavigationLink(destination: LoginView()) {
                         Text("Login")
                             .frame(minWidth: 0, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: 50)
-                            .padding(4)
+                            .padding(2)
                             .foregroundColor(.black)
                             .font(.largeTitle)
                             .background(Color.white)
                     }
-                    .cornerRadius(25)
+                    .cornerRadius(15)
                     .padding(.leading, 40)
                     .padding(.trailing, 40)
                     .padding(.top)

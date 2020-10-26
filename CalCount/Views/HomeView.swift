@@ -39,7 +39,7 @@ struct HomeView: View {
                     .tag(Tabs.nutrition)
 
                 
-                Text("Tab Content 2")
+                SettingsView()
                     .tabItem {
                         Image(systemName: "gearshape")
                         Text("Settings")
