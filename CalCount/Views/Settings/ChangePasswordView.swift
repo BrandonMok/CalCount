@@ -26,7 +26,7 @@ struct ChangePasswordView: View {
             Text("Change password")
                 .font(.largeTitle)
                 .foregroundColor(Color("PrimaryBlue"))
-                .fontWeight(.bold)
+                .bold()
 
             VStack {
                 SecureField("Password", text: $password)

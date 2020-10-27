@@ -25,13 +25,13 @@ struct SettingsView: View {
                     }
                 }
                 
-//                Section(header: Text("Goals")
-//                            .fontWeight(.heavy)
-//                            .foregroundColor(.blue)){
-//                        NavigationLink(destination: ()) {
-//                                Text("Manager goals")
-//                        }
-//                }
+                Section(header: Text("Goals")
+                            .fontWeight(.heavy)
+                            .foregroundColor(.blue)){
+                        NavigationLink(destination: GoalView()) {
+                                Text("Manage goals")
+                        }
+                }
 //
 //
 //                Section(header: Text("Data")
