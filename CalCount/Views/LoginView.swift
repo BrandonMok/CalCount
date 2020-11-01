@@ -12,7 +12,6 @@ struct LoginView: View {
     
     @EnvironmentObject var status: LoggedInStatus
     
-    
     var body: some View {
         VStack {
             TextField("Username", text: $username)
@@ -59,6 +58,8 @@ struct LoginView: View {
                     let hash = SHA256.hash(data: inputData)
                     let password = hash.compactMap { String(format: "%02x", $0) }.joined()
                     
+//                    let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+//                    let realm = try! Realm(configuration: config)
                     let realm = try! Realm()
                     
                     let user = realm.objects(User.self)
@@ -84,7 +85,7 @@ struct LoginView: View {
                     .foregroundColor(.white)
                     .font(.title)
                     .fontWeight(.bold)
-                    .frame(minWidth: 0, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 0, maxHeight: 20)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 20)
             })
             .padding()
             .background(Color("PrimaryBlue"))
