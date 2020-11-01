@@ -4,22 +4,40 @@ import RealmSwift
 
 struct GoalView: View {
     
-    @EnvironmentObject var status: LoggedInStatus
+//    @EnvironmentObject var status: LoggedInStatus
+     @ObservedObject var status = LoggedInStatus()
+    
+    private var currentUser: User {
+        self.status.currentUser
+    }
     
     private var weightGoalOptions = ["None", "Lose", "Maintain", "Gain"]
     private var waterGoalOptions = ["None", "Decrease", "Increase"]
     @State private var selectedWeightGoal = ""
     @State private var selectedWaterGoal = ""
     
+    @State private var weightGoalSetSuccess = false
+    @State private var waterGoalSetSuccess = false
+    
+//    @State private var goalResuls: Results<Object> = Results<Object>()
+    
+    private var goalResults: Results<Goal>?
+    
+        
     init() {
         // On init, want to preset the values for the pickers if user already chose one!
         let realm = try! Realm()
+//
+//        let goalResults = realm.objects(Goal.self)
+//            .filter("user = %@", currentUser)
+//
+        goalResults = realm.objects(Goal.self)
+            .filter("user = %@", currentUser)
         
-        let goalResults = realm.objects(Goal.self)
-            .filter("user = %@", status.currentUser)
+        guard let gr = goalResults else {return}
         
-        if goalResults.count != 0 {
-            let goal = goalResults.first!
+        if gr.count != 0 {
+            let goal = gr.first!
             self.selectedWeightGoal = goal.weightGoal
             self.selectedWaterGoal = goal.waterGoal
         }
@@ -63,6 +81,41 @@ struct GoalView: View {
                         }
                     }
                     .pickerStyle(DefaultPickerStyle())
+                    
+                    Button(action: {
+                        // Open realm to try insert/update weight goal
+                        let realm = try! Realm()
+                        
+                        do {
+                            // get already set User goal obj if they had one already,
+                            // else make a new Goal()
+                            
+                            
+//                            realm.write {
+//
+//                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                        
+                        
+                        
+                        weightGoalSetSuccess.toggle()
+                    }, label: {
+                        Text("Confirm")
+                            .foregroundColor(.white)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .frame(minWidth: 0, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 0, maxHeight: 20)
+                    })
+                    .padding()
+                    .background(Color("PrimaryBlue"))
+                    .cornerRadius(15)
+                    .alert(isPresented: $weightGoalSetSuccess, content: {
+                        Alert(title: Text("Success"),
+                              message: Text("Weight goal was set successfully!"),
+                              dismissButton: .default(Text("OK")))
+                    })
                 }
                 
                 // MARK: - Water Intake
@@ -80,6 +133,29 @@ struct GoalView: View {
                         }
                     }
                     .pickerStyle(DefaultPickerStyle())
+                    
+                    
+                    Button(action: {
+                        // Open realm to try insert/update water goal
+                        
+                        
+                    }, label: {
+                        Text("Confirm")
+                            .foregroundColor(.white)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .frame(minWidth: 0, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 0, maxHeight: 20)
+                            .cornerRadius(15)
+
+                    })
+                    .padding()
+                    .background(Color("PrimaryBlue"))
+                    .cornerRadius(15)
+                    .alert(isPresented: $waterGoalSetSuccess, content: {
+                        Alert(title: Text("Success"),
+                              message: Text("Water goal was set successfully!"),
+                              dismissButton: .default(Text("OK")))
+                    })
                 }
                 
                 Spacer()
