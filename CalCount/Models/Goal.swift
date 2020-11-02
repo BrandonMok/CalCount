@@ -4,6 +4,6 @@ import RealmSwift
 
 class Goal: Object {
     @objc dynamic var user: User? = User()
-    @objc dynamic var weightGoal = ""
-    @objc dynamic var waterGoal = ""
+    @objc dynamic var weightGoal = "None"
+    @objc dynamic var waterGoal = "None"
 }

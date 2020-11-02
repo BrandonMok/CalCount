@@ -62,6 +62,9 @@ struct LoginView: View {
 //                    let realm = try! Realm(configuration: config)
                     let realm = try! Realm()
                     
+                    print(Realm.Configuration.defaultConfiguration.fileURL)
+                    
+                    
                     let user = realm.objects(User.self)
                         .filter("username = %@ AND password = %@", username, password)
 
