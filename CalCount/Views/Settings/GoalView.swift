@@ -4,13 +4,12 @@ import RealmSwift
 
 struct GoalView: View {
     
-
     @ObservedObject var status = LoggedInStatus()
     
 //    private var currentUser: User {
 //        self.status.currentUser
 //    }
-    
+
     private var weightGoalOptions = ["None", "Lose", "Maintain", "Gain"]
     private var waterGoalOptions = ["None", "Decrease", "Increase"]
     @State private var selectedWeightGoal = 0
@@ -79,7 +78,7 @@ struct GoalView: View {
                                 self.realm.add(newGoal)
                             })
                         }
-                        
+
                         weightGoalSetSuccess.toggle()
                     }, label: {
                         Text("Confirm")
@@ -133,7 +132,6 @@ struct GoalView: View {
                         }
                         
                         waterGoalSetSuccess.toggle()
-                        
                     }, label: {
                         Text("Confirm")
                             .foregroundColor(.white)

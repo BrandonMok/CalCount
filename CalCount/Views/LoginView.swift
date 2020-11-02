@@ -58,9 +58,9 @@ struct LoginView: View {
                     let hash = SHA256.hash(data: inputData)
                     let password = hash.compactMap { String(format: "%02x", $0) }.joined()
                     
-//                    let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-//                    let realm = try! Realm(configuration: config)
-                    let realm = try! Realm()
+                    let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+                    let realm = try! Realm(configuration: config)
+//                    let realm = try! Realm()
                     
                     print(Realm.Configuration.defaultConfiguration.fileURL)
                     
