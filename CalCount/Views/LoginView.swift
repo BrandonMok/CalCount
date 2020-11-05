@@ -72,7 +72,6 @@ struct LoginView: View {
                         // and save currentUser for reference later
                         self.status.loggedIn = true
                         self.status.currentUser = user.first!
-                        print("TEST \(self.status.currentUser)")
                     }
                 }
                 else {

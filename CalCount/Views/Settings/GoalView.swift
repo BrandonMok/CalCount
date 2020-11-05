@@ -8,7 +8,7 @@ struct GoalView: View {
     @EnvironmentObject var realmObj: RealmObject
 
     private var weightGoalOptions = ["None", "Lose", "Maintain", "Gain"]
-    private var waterGoalOptions = ["None", "Decrease", "Increase"]
+    private var waterGoalOptions = ["None", "Maintain", "Increase"]
     @State private var selectedWeightGoal = 0
     @State private var selectedWaterGoal = 0
     
@@ -64,9 +64,11 @@ struct GoalView: View {
                         }
                         else {
                             let newGoal = Goal()
-                            newGoal.user = status.currentUser 
+                            newGoal.user = status.currentUser
                             newGoal.weightGoal = weightGoalOptions[selectedWeightGoal]
                             newGoal.waterGoal = waterGoalOptions[0]
+                            
+                            usrGoal = newGoal
                             
                             try! realmObj.realm.write({
                                 realmObj.realm.add(newGoal)
@@ -120,6 +122,8 @@ struct GoalView: View {
                             newGoal.weightGoal = weightGoalOptions[0]
                             newGoal.waterGoal = waterGoalOptions[selectedWaterGoal]
                             
+                            usrGoal = newGoal
+                            
                             try! realmObj.realm.write({
                                 realmObj.realm.add(newGoal)
                             })
@@ -153,10 +157,10 @@ struct GoalView: View {
             
         }//ScrollView
         .onAppear(perform: {
+            // Check if this user already has a goal obj set!
             let goalResults = realmObj.realm.objects(Goal.self)
             
             if goalResults.count > 0 {
-                // Find if the user already configured a Goal object
                 for goal in goalResults {
                     if goal.user!.username == status.currentUser.username {
                         usrGoal = goal
