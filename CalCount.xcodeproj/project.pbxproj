@@ -25,6 +25,7 @@
 		C96BCE6025465274008121AE /* LoggedInStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96BCE5F25465274008121AE /* LoggedInStatus.swift */; };
 		C96BCE6225465369008121AE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96BCE6125465369008121AE /* HomeView.swift */; };
 		C97010682547A0DE003EC8FF /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97010672547A0DE003EC8FF /* GoalView.swift */; };
+		C9832D092554B2740006FC31 /* RealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9832D082554B2740006FC31 /* RealmObject.swift */; };
 		C9AEF435253680C100DEF119 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF434253680C100DEF119 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		C96BCE5F25465274008121AE /* LoggedInStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInStatus.swift; sourceTree = "<group>"; };
 		C96BCE6125465369008121AE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C97010672547A0DE003EC8FF /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		C9832D082554B2740006FC31 /* RealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObject.swift; sourceTree = "<group>"; };
 		C9AEF434253680C100DEF119 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +134,7 @@
 				C96BCE5F25465274008121AE /* LoggedInStatus.swift */,
 				C960284C25473E8B001A3829 /* TabManager.swift */,
 				C9608754254F3B7F00C087C2 /* Goal.swift */,
+				C9832D082554B2740006FC31 /* RealmObject.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				C9511F90253234580052C8FA /* LoginView.swift in Sources */,
 				C9608755254F3B7F00C087C2 /* Goal.swift in Sources */,
 				C96BCE6225465369008121AE /* HomeView.swift in Sources */,
+				C9832D092554B2740006FC31 /* RealmObject.swift in Sources */,
 				C960284D25473E8B001A3829 /* TabManager.swift in Sources */,
 				C960284B25472AD9001A3829 /* ChangePasswordView.swift in Sources */,
 				C9471072252B8ED500033FA5 /* CalCountApp.swift in Sources */,

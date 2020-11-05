@@ -7,6 +7,7 @@ struct ChangeAccountGenderView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var status : LoggedInStatus
+    @EnvironmentObject var realmObj: RealmObject
     
     @State private var showAlert = false
     @State private var selectedGender = 0
@@ -44,11 +45,9 @@ struct ChangeAccountGenderView: View {
             Button(action: {
                 // Update
                 do {
-                    let realm = try Realm()
+                    let userObj = self.status.currentUser
 
-                    var userObj = self.status.currentUser
-
-                    try realm.write {
+                    try realmObj.realm.write {
                         userObj.gender = gendersList[selectedGender]
                     }
 

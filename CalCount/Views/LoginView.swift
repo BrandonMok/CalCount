@@ -9,8 +9,10 @@ struct LoginView: View {
     @State private var error = false
 
     @State private var phidden = false
+    @State private var userFound = false
     
     @EnvironmentObject var status: LoggedInStatus
+    @EnvironmentObject var realmObj: RealmObject
     
     var body: some View {
         VStack {
@@ -57,17 +59,10 @@ struct LoginView: View {
                     let inputData = Data(password.utf8)
                     let hash = SHA256.hash(data: inputData)
                     let password = hash.compactMap { String(format: "%02x", $0) }.joined()
-                    
-                    let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-                    let realm = try! Realm(configuration: config)
-//                    let realm = try! Realm()
-                    
-                    print(Realm.Configuration.defaultConfiguration.fileURL)
-                    
-                    
-                    let user = realm.objects(User.self)
+                
+                    let user = realmObj.realm.objects(User.self)
                         .filter("username = %@ AND password = %@", username, password)
-
+                    
                     // if no user found, error
                     if user.count == 0 {
                         error = true
@@ -77,6 +72,7 @@ struct LoginView: View {
                         // and save currentUser for reference later
                         self.status.loggedIn = true
                         self.status.currentUser = user.first!
+                        print("TEST \(self.status.currentUser)")
                     }
                 }
                 else {

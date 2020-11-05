@@ -6,6 +6,7 @@ import RealmSwift
 struct SignUpView: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var realmObj: RealmObject
     
     @State private var username = ""
     @State private var password = ""
@@ -68,10 +69,8 @@ struct SignUpView: View {
                         let inputData = Data(password.utf8)
                         let password = SHA256.hash(data: inputData)
                         
-                        let realm = try! Realm()
-                        
                         // First check if they aren't already signed up!
-                        let existentUser = realm.objects(User.self)
+                        let existentUser = realmObj.realm.objects(User.self)
                             .filter("username = %@ AND password = %@", username, password.compactMap { String(format: "%02x", $0) }.joined())
                         
                         
@@ -84,14 +83,14 @@ struct SignUpView: View {
                         else {
                             // Object to save
                             // NOTE: Realm doens't seem to allow to pass all as parameters when creating!
-                            var user = User()
+                            let user = User()
                             user.username = username
                             user.password = password.compactMap { String(format: "%02x", $0) }.joined()
                             user.gender = genders[selectedGender]
 
                             // Write user to realm
-                            try! realm.write {
-                                realm.add(user)
+                            try! realmObj.realm.write {
+                                realmObj.realm.add(user)
                             }
                             
                             
@@ -116,7 +115,7 @@ struct SignUpView: View {
                     .foregroundColor(.white)
                     .font(.title)
                     .fontWeight(.bold)
-                    .frame(minWidth: 0, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 0, maxHeight: 20)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 20)
             })
             .padding()
             .background(Color("PrimaryBlue"))

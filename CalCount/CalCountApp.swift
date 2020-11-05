@@ -11,7 +11,9 @@ import SwiftUI
 struct CalCountApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(LoggedInStatus())
+            ContentView()
+                .environmentObject(LoggedInStatus())
+                .environmentObject(RealmObject())
         }
     }
 }

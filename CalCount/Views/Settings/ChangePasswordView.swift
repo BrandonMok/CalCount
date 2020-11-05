@@ -10,6 +10,7 @@ struct ChangePasswordView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject private var status: LoggedInStatus
+    @EnvironmentObject var realmObj: RealmObject
     
     @State private var password = ""
     @State private var passwordAgain = ""
@@ -53,14 +54,12 @@ struct ChangePasswordView: View {
                     if password == passwordAgain {
                         
                         do {
-                            let realm = try Realm()
-                            
                             let inputData = Data(password.utf8)
                             let password = SHA256.hash(data: inputData)
                             
-                            var userObj = self.status.currentUser
-
-                            try realm.write {
+                            let userObj = self.status.currentUser
+                            
+                            try realmObj.realm.write {
                                 userObj.password = password.compactMap { String(format: "%02x", $0) }.joined()
                             }
                             

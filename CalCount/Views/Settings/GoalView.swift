@@ -4,11 +4,8 @@ import RealmSwift
 
 struct GoalView: View {
     
-    @ObservedObject var status = LoggedInStatus()
-    
-//    private var currentUser: User {
-//        self.status.currentUser
-//    }
+    @EnvironmentObject private var status: LoggedInStatus
+    @EnvironmentObject var realmObj: RealmObject
 
     private var weightGoalOptions = ["None", "Lose", "Maintain", "Gain"]
     private var waterGoalOptions = ["None", "Decrease", "Increase"]
@@ -18,10 +15,7 @@ struct GoalView: View {
     @State private var weightGoalSetSuccess = false
     @State private var waterGoalSetSuccess = false
     
-
     @State private var usrGoal: Goal?
-    
-    @State private var realm = try! Realm()
     
     var body: some View {
         ScrollView {
@@ -64,18 +58,18 @@ struct GoalView: View {
                     // Weight
                     Button(action: {
                         if (usrGoal != nil) {
-                            try! self.realm.write({
+                            try! realmObj.realm.write({
                                 usrGoal?.weightGoal = weightGoalOptions[selectedWeightGoal]
                             })
                         }
                         else {
                             let newGoal = Goal()
-                            newGoal.user = status.currentUser   // ISSUE HERE? - not setting right
+                            newGoal.user = status.currentUser 
                             newGoal.weightGoal = weightGoalOptions[selectedWeightGoal]
                             newGoal.waterGoal = waterGoalOptions[0]
                             
-                            try! self.realm.write({
-                                self.realm.add(newGoal)
+                            try! realmObj.realm.write({
+                                realmObj.realm.add(newGoal)
                             })
                         }
 
@@ -116,7 +110,7 @@ struct GoalView: View {
                     // Water Intake
                     Button(action: {
                         if (usrGoal != nil) {
-                            try! self.realm.write({
+                            try! realmObj.realm.write({
                                 usrGoal?.waterGoal = waterGoalOptions[selectedWaterGoal]
                             })
                         }
@@ -126,8 +120,8 @@ struct GoalView: View {
                             newGoal.weightGoal = weightGoalOptions[0]
                             newGoal.waterGoal = waterGoalOptions[selectedWaterGoal]
                             
-                            try! self.realm.write({
-                                realm.add(newGoal)
+                            try! realmObj.realm.write({
+                                realmObj.realm.add(newGoal)
                             })
                         }
                         
@@ -159,7 +153,7 @@ struct GoalView: View {
             
         }//ScrollView
         .onAppear(perform: {
-            let goalResults = realm.objects(Goal.self)
+            let goalResults = realmObj.realm.objects(Goal.self)
             
             if goalResults.count > 0 {
                 // Find if the user already configured a Goal object
