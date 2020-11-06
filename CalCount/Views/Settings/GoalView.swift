@@ -4,7 +4,7 @@ import RealmSwift
 
 struct GoalView: View {
     
-    @EnvironmentObject private var status: LoggedInStatus
+    @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObj: RealmObject
 
     private var weightGoalOptions = ["None", "Lose", "Maintain", "Gain"]
@@ -69,6 +69,7 @@ struct GoalView: View {
                             newGoal.waterGoal = waterGoalOptions[0]
                             
                             usrGoal = newGoal
+                            status.currentGoal = newGoal   // save it under while user is using app
                             
                             try! realmObj.realm.write({
                                 realmObj.realm.add(newGoal)
@@ -123,6 +124,7 @@ struct GoalView: View {
                             newGoal.waterGoal = waterGoalOptions[selectedWaterGoal]
                             
                             usrGoal = newGoal
+                            status.currentGoal = newGoal
                             
                             try! realmObj.realm.write({
                                 realmObj.realm.add(newGoal)
