@@ -117,14 +117,22 @@
 		C9511F8A25322BBA0052C8FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C97285632554DCCB00EC5D1E /* Login-Registration */,
 				C9DA822125475625004A95B6 /* Settings */,
 				C9471073252B8ED500033FA5 /* ContentView.swift */,
 				C9511F8D253230590052C8FA /* LandingView.swift */,
-				C9511F8F253234580052C8FA /* LoginView.swift */,
-				C9511F9125323E390052C8FA /* SignUpView.swift */,
 				C96BCE6125465369008121AE /* HomeView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C97285632554DCCB00EC5D1E /* Login-Registration */ = {
+			isa = PBXGroup;
+			children = (
+				C9511F8F253234580052C8FA /* LoginView.swift */,
+				C9511F9125323E390052C8FA /* SignUpView.swift */,
+			);
+			path = "Login-Registration";
 			sourceTree = "<group>";
 		};
 		C9AEF433253680AF00DEF119 /* Models */ = {
