@@ -15,69 +15,86 @@ struct FoodView: View {
     
     @State var selectedPeriod = Periods.day
     
+    @State private var foodList = []    // need to fill it
+    
     init(){
         self.tabManager.selectedTab = Tabs.home
     }
     
     var body: some View {
-        VStack {
-            TopPeriodBar(selectedPeriod: $selectedPeriod)
-            
+        ZStack {
             VStack {
-                PieChartView(data: [10,20], title: "Calories")
-                    .frame(maxWidth: .infinity)
+                TopPeriodBar(selectedPeriod: $selectedPeriod)
                 
-                HStack {
-                    VStack{
-                        Text("0")
-                            .font(.largeTitle)
-                        
-                        Text("Total")
-                            .font(.title)
-                            .bold()
-                    }
-                    .padding()
+                VStack {
+                    PieChartView(data: [10,20], title: "Calories")
+                        .frame(maxWidth: .infinity)
                     
-                    VStack {
-                        Text("0")
-                            .font(.largeTitle)
+                    HStack {
+                        VStack{
+                            Text("0")
+                                .font(.largeTitle)
+                            
+                            Text("Total")
+                                .font(.title)
+                                .bold()
+                        }
+                        .padding()
                         
-                        Text("Remaining")
-                            .font(.title)
-                            .bold()
-                    }
-                    .padding()
-                }
-                
-                // Add food button
-                Button(action: {
-                    // Bring up same modal as the FAB
+                        VStack {
+                            Text("0")
+                                .font(.largeTitle)
+                            
+                            Text("Remaining")
+                                .font(.title)
+                                .bold()
+                        }
+                        .padding()
+                    }//hstack
                     
-                }, label: {
-                    Text("Add Food")
-                        .foregroundColor(.black)
-                        .font(.largeTitle)
-                        .bold()
-                        .padding(.horizontal)
-                        .padding(.vertical, 5)
-                })
-                .background(Color("PrimaryBlue"))
-                .border(Color.black)
-                .cornerRadius(5)
+                    // Add food button
+                    Button(action: {
+                        // Bring up same modal as the FAB
+                        
+                        
+                    }, label: {
+                        Text("Add Food")
+                            .foregroundColor(.black)
+                            .font(.largeTitle)
+                            .bold()
+                            .padding(.horizontal)
+                            .padding(.vertical, 5)
+                    })
+                    .background(Color("PrimaryBlue"))
+                    .border(Color.black)
+                    .cornerRadius(5)
+                    
+                }//vstack
+                .padding(.vertical, 20)
                 
-            }//hstack
-            .padding(.vertical)
+//                Spacer()
+                
+                
+                VStack {
+                    // List of all the items! - TODO
+                    // NEED a food row view
+//                    if !foodList.isEmpty {
+//                        List(foodList) { food in
+//
+//                        }
+//                    }
+                    
+                }//vstack
+            }//vstack
             
-            Spacer()
             
             
-            VStack {
-                // List of all the items! - TODO
-                // NEED a food row view
-            }
-        }//vstack
-    }
-}
+            
+        }//zstack
+           
+        
+    }//body
+}//struct
 
 struct FoodView_Previews: PreviewProvider {
     static var previews: some View {

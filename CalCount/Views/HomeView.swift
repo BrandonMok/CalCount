@@ -4,6 +4,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var tabManager = TabManager()
+    
     var body: some View {
         ZStack {
             VStack {
@@ -40,9 +41,11 @@ struct HomeView: View {
             }//vstack
             
 
-            // FAB
-            FloatingMenu()
-
+            // Only show the FAB on the home/food and water tabs!
+            if tabManager.selectedTab == Tabs.home || tabManager.selectedTab == Tabs.water {
+                // FAB
+                FloatingMenu()
+            }
         }//ZStack
     }//body
 }//struct
