@@ -1,5 +1,6 @@
 
 import SwiftUI
+import SwiftUICharts
 
 enum Periods {
     case day
@@ -23,10 +24,9 @@ struct FoodView: View {
             TopPeriodBar(selectedPeriod: $selectedPeriod)
             
             VStack {
-                // TODO
-                // Graph
+                PieChartView(data: [10,20], title: "Calories")
+                    .frame(maxWidth: .infinity)
                 
-                // two number things to show calories and amount left
                 HStack {
                     VStack{
                         Text("0")
@@ -49,6 +49,7 @@ struct FoodView: View {
                     .padding()
                 }
                 
+                // Add food button
                 Button(action: {
                     // Bring up same modal as the FAB
                     
@@ -61,13 +62,18 @@ struct FoodView: View {
                         .padding(.vertical, 5)
                 })
                 .background(Color("PrimaryBlue"))
-            }
+                .border(Color.black)
+                .cornerRadius(5)
+                
+            }//hstack
+            .padding(.vertical)
             
             Spacer()
             
             
             VStack {
                 // List of all the items! - TODO
+                // NEED a food row view
             }
         }//vstack
     }
@@ -98,6 +104,7 @@ struct TopPeriodBar: View {
                     .frame(maxWidth: .infinity)
             })
             .background(selectedPeriod == Periods.day ? Color(red: 173/255, green: 181/255, blue: 189/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
+            .border(selectedPeriod == Periods.day ? Color(red: 108/255, green: 117/255, blue: 125/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
             
             
             // WEEK BTN
@@ -113,6 +120,7 @@ struct TopPeriodBar: View {
                     .frame(maxWidth: .infinity)
             })
             .background(selectedPeriod == Periods.week ? Color(red: 173/255, green: 181/255, blue: 189/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
+            .border(selectedPeriod == Periods.week ? Color(red: 108/255, green: 117/255, blue: 125/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
         
             
             // MONTH BTN
@@ -129,6 +137,7 @@ struct TopPeriodBar: View {
                     .frame(maxWidth: .infinity)
             })
             .background(selectedPeriod == Periods.month ? Color(red: 173/255, green: 181/255, blue: 189/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
+            .border(selectedPeriod == Periods.day ? Color(red: 108/255, green: 117/255, blue: 125/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
             
             
         }//hstack
