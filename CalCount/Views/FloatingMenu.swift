@@ -4,75 +4,97 @@ import SwiftUI
 
 struct FloatingMenu: View {
     
+    @EnvironmentObject var mm: ModalManager
+    
     //https://www.youtube.com/watch?v=QCvP-iFfbAg
-    @State var showMenuItems = false
+    @State private var showMenuItems = false
     
     var body: some View {
         VStack {
             Spacer()
             
             if showMenuItems {
-                MenuItem(icon: "camera.fill")
+                VStack {
+                    Button(action: {
+                        print("VALUE: \(mm.showCalorieModal)")
+                        mm.showCalorieModal.toggle()
+                        showMenuItems.toggle()
+                    }, label: {
+                        Image(systemName: "scroll")
+                            .padding()
+                            .font(.title2)
+                            .foregroundColor(.white)
+
+                    })
+                    .padding()
+                    .background(Color("PrimaryBlue"))
+                    .cornerRadius(50)
+                    
+                    
+                    
+                    Button(action: {
+                        mm.showWaterModal.toggle()
+                        showMenuItems.toggle()
+                    }, label: {
+                        Image(systemName: "drop")
+                            .padding()
+                            .font(.title2)
+                            .foregroundColor(.white)
+                    })
+                    .padding()
+                    .background(Color("PrimaryBlue"))
+                    .cornerRadius(50)
+                    
+                }
             }
 
+            
+            
             Button(action: {
-                // TODO - show items (add food, add water icons)
                 showMenuItems.toggle()
-                
-
             }, label: {
                 Image(systemName: showMenuItems ? "xmark" : "plus")
                 .font(.system(.title))
                 .frame(width: 80, height: 80)
-                .foregroundColor(Color.white)
+                    .foregroundColor(showMenuItems ? Color.black : Color(red: 248/255, green: 249/255, blue: 250/255))
             })
-            .background(Color("PrimaryBlue"))
+            .background(showMenuItems ? .white : Color("PrimaryBlue"))
             .cornerRadius(38.5)
             .padding(.bottom, 20)
-            .shadow(color: Color.black.opacity(0.3),
-                    radius: 3,
-                    x: 3,
-                    y: 3)
-                
+            .shadow(color: Color.black.opacity(0.3),radius: 5, x: 3, y: 3)
         }//vstack
     }//body
 }//struct
 
-struct MenuItem: View {
-    var icon: String
-    
-    var body: some View {
-        ZStack {
-            // OR do a btn with rounded corners?
-            Button(action: {}, label: {
-                Image(systemName: icon)
-                    .padding()
-
-            })
-            .padding(8)
-            .background(Color("PrimaryBlue"))   // change color to somethign darker
-            .cornerRadius(50)
-            
-            
-            
-//            Button(action: {
-//                print("button clicked~")
-//
-//            }, label: {
-//                ZStack {
-//                    Circle()
-//                        .foregroundColor(Color(red: 153/255, green: 102/255, blue: 255/255))
-//                        .frame(width: 55, height: 55)
-//                        Image(systemName: icon)
-//                }
-//            })
-            
-        }
-    }
-}
-
 struct FloatingMenu_Previews: PreviewProvider {
     static var previews: some View {
         FloatingMenu()
+    }
+}
+
+
+struct CalorieAddModal: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Add Food")
+                .font(.title)
+                .fontWeight(.heavy)
+        }//VStack
+        .padding()
+        .background(Color.blue)
+        .shadow(color: Color.black.opacity(0.3),radius: 5, x: 3, y: 3)
+    }
+}
+
+struct WaterAddModal: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Add Water")
+                .font(.title)
+                .fontWeight(.heavy)
+        }//VStack
+        .padding()
+        .background(Color.blue)
+        .shadow(color: Color.black.opacity(0.3),radius: 5, x: 3, y: 3)
     }
 }

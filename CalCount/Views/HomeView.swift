@@ -4,13 +4,12 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var tabManager = TabManager()
-    
     var body: some View {
         ZStack {
             VStack {
                 TabView(selection: $tabManager.selectedTab) {
 
-                    Text("Tab Content 1")
+                    CalorieView()
                         .tabItem {
                             Image(systemName: "house")
                             Text("Home")
@@ -26,7 +25,7 @@ struct HomeView: View {
                     
                     Text("Tab again")
                         .tabItem {
-                            Image(systemName: "doc.on.clipboard")
+                            Image(systemName: "doc")
                             Text("Nutrition")
                         }
                         .tag(Tabs.nutrition)
@@ -40,33 +39,10 @@ struct HomeView: View {
                 }//tabview
             }//vstack
             
-            
-            VStack {
-                FloatingMenu()
-                    .padding(.bottom, 20)
-                
-//                Spacer()
-//                HStack {
-//                    Button(action: {
-//                        // TODO - show items (add food, add water icons)
-//
-//
-//                    }, label: {
-//                        Image(systemName: "plus")       // maybe on click, change this to an X
-//                        .font(.system(.title))
-//                        .frame(width: 77, height: 70)
-//                        .foregroundColor(Color.white)
-//                    })
-//                    .background(Color("PrimaryBlue"))
-//                    .cornerRadius(38.5)
-//                    .padding(.bottom, 20)
-//                    .shadow(color: Color.black.opacity(0.3),
-//                            radius: 3,
-//                            x: 3,
-//                            y: 3)
-//                }
-            }
-            
+
+            // FAB
+            FloatingMenu()
+
         }//ZStack
     }//body
 }//struct

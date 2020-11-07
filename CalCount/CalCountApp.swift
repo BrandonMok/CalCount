@@ -14,6 +14,7 @@ struct CalCountApp: App {
             ContentView()
                 .environmentObject(LoggedInStatus())
                 .environmentObject(RealmObject())
+                .environmentObject(ModalManager())
         }
     }
 }
