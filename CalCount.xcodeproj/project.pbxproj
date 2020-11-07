@@ -29,7 +29,7 @@
 		C9832D092554B2740006FC31 /* RealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9832D082554B2740006FC31 /* RealmObject.swift */; };
 		C9AEF435253680C100DEF119 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF434253680C100DEF119 /* User.swift */; };
 		C9FD4D2D2557297300BFF24A /* ModalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD4D2C2557297300BFF24A /* ModalManager.swift */; };
-		C9FD4D2F25572B5D00BFF24A /* CalorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD4D2E25572B5D00BFF24A /* CalorieView.swift */; };
+		C9FD4D2F25572B5D00BFF24A /* FoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD4D2E25572B5D00BFF24A /* FoodView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,7 +56,7 @@
 		C9832D082554B2740006FC31 /* RealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObject.swift; sourceTree = "<group>"; };
 		C9AEF434253680C100DEF119 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C9FD4D2C2557297300BFF24A /* ModalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalManager.swift; sourceTree = "<group>"; };
-		C9FD4D2E25572B5D00BFF24A /* CalorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieView.swift; sourceTree = "<group>"; };
+		C9FD4D2E25572B5D00BFF24A /* FoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +128,7 @@
 				C9471073252B8ED500033FA5 /* ContentView.swift */,
 				C96BCE6125465369008121AE /* HomeView.swift */,
 				C97285662554E44000EC5D1E /* FloatingMenu.swift */,
-				C9FD4D2E25572B5D00BFF24A /* CalorieView.swift */,
+				C9FD4D2E25572B5D00BFF24A /* FoodView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,7 +245,7 @@
 			files = (
 				C9511F8E253230590052C8FA /* LandingView.swift in Sources */,
 				C9511F9225323E390052C8FA /* SignUpView.swift in Sources */,
-				C9FD4D2F25572B5D00BFF24A /* CalorieView.swift in Sources */,
+				C9FD4D2F25572B5D00BFF24A /* FoodView.swift in Sources */,
 				C9AEF435253680C100DEF119 /* User.swift in Sources */,
 				C96028492547267C001A3829 /* SettingsView.swift in Sources */,
 				C9471074252B8ED500033FA5 /* ContentView.swift in Sources */,

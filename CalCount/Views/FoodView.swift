@@ -7,7 +7,7 @@ enum Periods {
     case month
 }
 
-struct CalorieView: View {
+struct FoodView: View {
 
     @ObservedObject var tabManager = TabManager()
 //    @EnvironmentObject var status: LoggedInStatus
@@ -29,8 +29,8 @@ struct CalorieView: View {
                 }, label: {
                     Text("Day")
                         .foregroundColor(.black)
-                        .font(.title)
-                        .padding()
+                        .font(.title2)
+                        .padding(.vertical)
                         .frame(maxWidth: .infinity)
                 })
                 .background(selectedPeriod == Periods.day ? Color(red: 173/255, green: 181/255, blue: 189/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
@@ -44,8 +44,8 @@ struct CalorieView: View {
                 }, label: {
                     Text("Week")
                         .foregroundColor(.black)
-                        .font(.title)
-                        .padding()
+                        .font(.title2)
+                        .padding(.vertical)
                         .frame(maxWidth: .infinity)
                 })
                 .background(selectedPeriod == Periods.week ? Color(red: 173/255, green: 181/255, blue: 189/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
@@ -55,11 +55,13 @@ struct CalorieView: View {
                 Button(action: {
                     // TODO get users data on calories/food for the month
                     
+                    
+                    selectedPeriod = Periods.month
                 }, label: {
                     Text("Month")
                         .foregroundColor(.black)
-                        .font(.title)
-                        .padding()
+                        .font(.title2)
+                        .padding(.vertical)
                         .frame(maxWidth: .infinity)
                 })
                 .background(selectedPeriod == Periods.month ? Color(red: 173/255, green: 181/255, blue: 189/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
@@ -75,8 +77,8 @@ struct CalorieView: View {
     }
 }
 
-struct CalorieView_Previews: PreviewProvider {
+struct FoodView_Previews: PreviewProvider {
     static var previews: some View {
-        CalorieView()
+        FoodView()
     }
 }

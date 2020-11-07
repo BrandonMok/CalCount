@@ -9,7 +9,7 @@ struct HomeView: View {
             VStack {
                 TabView(selection: $tabManager.selectedTab) {
 
-                    CalorieView()
+                    FoodView()
                         .tabItem {
                             Image(systemName: "house")
                             Text("Home")
