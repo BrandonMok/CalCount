@@ -68,7 +68,7 @@ struct FloatingMenu: View {
         }//vstack
         .fullScreenCover(isPresented: $mm.showModal, content: {
             if mm.showCalorieModal {
-                CalorieAddModal()
+                FoodAddModal()
             }
             else if mm.showWaterModal {
                 WaterAddModal()
@@ -84,7 +84,7 @@ struct FloatingMenu_Previews: PreviewProvider {
 }
 
 
-struct CalorieAddModal: View {
+struct FoodAddModal: View {
     @EnvironmentObject var mm: ModalManager
     
     var body: some View {
