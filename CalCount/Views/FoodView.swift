@@ -18,8 +18,6 @@ struct FoodView: View {
     
     @State private var foodList = [FoodEntry]()
     
-    @State private var test = false
-    
     
     init(){
         self.tabManager.selectedTab = Tabs.home
@@ -94,15 +92,8 @@ struct FoodView: View {
 //                    }
 
             }//vstack
+            
         }//vstack
-//        .fullScreenCover(isPresented: $test, content: {
-//            CalorieAddModal()
-//                .onTapGesture {
-//                    test.toggle()
-//                }
-//        })
-        
-        
     }//body
 }//struct
 

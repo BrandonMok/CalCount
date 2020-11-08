@@ -4,13 +4,11 @@ import SwiftUI
 
 struct FloatingMenu: View {
     
-    // MIGHT NOT need a modal manager!
     @EnvironmentObject var mm: ModalManager
     
     //https://www.youtube.com/watch?v=QCvP-iFfbAg
     @State private var showMenuItems = false
     
-//    @State private var showModal = false
     
     var body: some View {
         VStack {
