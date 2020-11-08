@@ -12,86 +12,96 @@ struct FoodView: View {
 
     @ObservedObject var tabManager = TabManager()
     @EnvironmentObject var status: LoggedInStatus
+    @EnvironmentObject var modalManager: ModalManager
     
     @State var selectedPeriod = Periods.day
     
-    @State private var foodList = []    // need to fill it
+    @State private var foodList = [FoodEntry]()
+    
+    @State private var test = false
+    
     
     init(){
         self.tabManager.selectedTab = Tabs.home
     }
     
     var body: some View {
-        ZStack {
+        VStack {
+            TopPeriodBar(selectedPeriod: $selectedPeriod)
+            
             VStack {
-                TopPeriodBar(selectedPeriod: $selectedPeriod)
+                PieChartView(data: [10,20], title: "Calories")
+                    .frame(maxWidth: .infinity)
                 
-                VStack {
-                    PieChartView(data: [10,20], title: "Calories")
-                        .frame(maxWidth: .infinity)
-                    
-                    HStack {
-                        VStack{
-                            Text("0")
-                                .font(.largeTitle)
-                            
-                            Text("Total")
-                                .font(.title)
-                                .bold()
-                        }
-                        .padding()
-                        
-                        VStack {
-                            Text("0")
-                                .font(.largeTitle)
-                            
-                            Text("Remaining")
-                                .font(.title)
-                                .bold()
-                        }
-                        .padding()
-                    }//hstack
-                    
-                    // Add food button
-                    Button(action: {
-                        // Bring up same modal as the FAB
-                        
-                        
-                    }, label: {
-                        Text("Add Food")
-                            .foregroundColor(.black)
+                HStack {
+                    VStack{
+                        Text("0")
                             .font(.largeTitle)
+                        
+                        Text("Total")
+                            .font(.title)
                             .bold()
-                            .padding(.horizontal)
-                            .padding(.vertical, 5)
-                    })
-                    .background(Color("PrimaryBlue"))
-                    .border(Color.black)
-                    .cornerRadius(5)
+                    }
+                    .padding()
                     
-                }//vstack
-                .padding(.vertical, 20)
+                    VStack {
+                        Text("0")
+                            .font(.largeTitle)
+                        
+                        Text("Remaining")
+                            .font(.title)
+                            .bold()
+                    }
+                    .padding()
+                }//hstack
                 
-//                Spacer()
                 
+                // Add food button
+                Button(action: {
+                    // Bring up same modal as the FAB
+                    modalManager.showCalorieModal.toggle()
+                    modalManager.showModal.toggle()
+                    
+//                    self.test.toggle()
+                }, label: {
+                    Text("Add Food")
+                        .foregroundColor(.black)
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
+                })
+                .background(Color("PrimaryBlue"))
+                .border(Color.black)
+                .cornerRadius(5)
                 
-                VStack {
-                    // List of all the items! - TODO
-                    // NEED a food row view
+            }//vstack
+            .padding(.vertical, 20)
+            
+            Spacer()
+            
+            
+            VStack {
+                // List of all the items! - TODO
+                // NEED a food row view
 //                    if !foodList.isEmpty {
 //                        List(foodList) { food in
 //
 //                        }
 //                    }
-                    
-                }//vstack
+//                    else {
+//                        Text("No food records!")
+//                    }
+
             }//vstack
-            
-            
-            
-            
-        }//zstack
-           
+        }//vstack
+//        .fullScreenCover(isPresented: $test, content: {
+//            CalorieAddModal()
+//                .onTapGesture {
+//                    test.toggle()
+//                }
+//        })
+        
         
     }//body
 }//struct

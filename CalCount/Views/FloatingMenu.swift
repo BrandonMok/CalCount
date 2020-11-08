@@ -4,10 +4,13 @@ import SwiftUI
 
 struct FloatingMenu: View {
     
+    // MIGHT NOT need a modal manager!
     @EnvironmentObject var mm: ModalManager
     
     //https://www.youtube.com/watch?v=QCvP-iFfbAg
     @State private var showMenuItems = false
+    
+//    @State private var showModal = false
     
     var body: some View {
         VStack {
@@ -15,9 +18,10 @@ struct FloatingMenu: View {
             
             if showMenuItems {
                 VStack {
+                    // Food btn
                     Button(action: {
-                        print("VALUE: \(mm.showCalorieModal)")
                         mm.showCalorieModal.toggle()
+                        mm.showModal.toggle()
                         showMenuItems.toggle()
                     }, label: {
                         Image(systemName: "scroll")
@@ -31,9 +35,10 @@ struct FloatingMenu: View {
                     .cornerRadius(50)
                     
                     
-                    
+                    // Water btn
                     Button(action: {
                         mm.showWaterModal.toggle()
+                        mm.showModal.toggle()
                         showMenuItems.toggle()
                     }, label: {
                         Image(systemName: "drop")
@@ -49,7 +54,7 @@ struct FloatingMenu: View {
             }
 
             
-            
+            // FAB button
             Button(action: {
                 showMenuItems.toggle()
             }, label: {
@@ -63,6 +68,23 @@ struct FloatingMenu: View {
             .padding(.bottom, 20)
             .shadow(color: Color.black.opacity(0.3),radius: 5, x: 3, y: 3)
         }//vstack
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .fullScreenCover(isPresented: $mm.showModal, content: {
+            if mm.showCalorieModal {
+                CalorieAddModal()
+                    .onTapGesture {
+                        mm.showCalorieModal.toggle()
+                        mm.showModal.toggle()
+                    }
+            }
+            else if mm.showWaterModal {
+                WaterAddModal()
+                    .onTapGesture {
+                        mm.showWaterModal.toggle()
+                        mm.showModal.toggle()
+                    }
+            }
+        })
     }//body
 }//struct
 
@@ -78,11 +100,22 @@ struct CalorieAddModal: View {
         VStack(alignment: .leading) {
             Text("Add Food")
                 .font(.title)
-                .fontWeight(.heavy)
+                .foregroundColor(.black)
+                .fontWeight(.bold)
+            
+            
+            Form {
+                Section(header: Text("Calories")
+                            .fontWeight(.heavy)
+                            .foregroundColor(.blue)){
+//                    TextField("Total number of people", text: $numOfPeople)
+//                        .keyboardType(.numberPad)
+                }
+            }
+            
+
         }//VStack
         .padding()
-        .background(Color.blue)
-        .shadow(color: Color.black.opacity(0.3),radius: 5, x: 3, y: 3)
     }
 }
 
@@ -94,7 +127,5 @@ struct WaterAddModal: View {
                 .fontWeight(.heavy)
         }//VStack
         .padding()
-        .background(Color.blue)
-        .shadow(color: Color.black.opacity(0.3),radius: 5, x: 3, y: 3)
     }
 }

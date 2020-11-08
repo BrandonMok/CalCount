@@ -164,7 +164,7 @@ struct GoalView: View {
             
             if goalResults.count > 0 {
                 for goal in goalResults {
-                    if goal.user!.username == status.currentUser.username {
+                    if goal.user?.username == status.currentUser.username {
                         usrGoal = goal
                         break
                     }

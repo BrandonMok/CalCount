@@ -32,8 +32,8 @@ struct SettingsView: View {
                                 Text("Manage goals")
                         }
                 }
-//
-//
+
+
 //                Section(header: Text("Data")
 //                            .fontWeight(.heavy)
 //                            .foregroundColor(.blue)){
@@ -61,6 +61,7 @@ struct SettingsView: View {
                     .cornerRadius(15)
                 }
             }
+            .navigationBarTitle("Settings")
         } // navigationView
     }// body
 }//struct
