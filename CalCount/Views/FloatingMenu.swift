@@ -66,21 +66,12 @@ struct FloatingMenu: View {
             .padding(.bottom, 20)
             .shadow(color: Color.black.opacity(0.3),radius: 5, x: 3, y: 3)
         }//vstack
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .fullScreenCover(isPresented: $mm.showModal, content: {
             if mm.showCalorieModal {
                 CalorieAddModal()
-                    .onTapGesture {
-                        mm.showCalorieModal.toggle()
-                        mm.showModal.toggle()
-                    }
             }
             else if mm.showWaterModal {
                 WaterAddModal()
-                    .onTapGesture {
-                        mm.showWaterModal.toggle()
-                        mm.showModal.toggle()
-                    }
             }
         })
     }//body
@@ -94,12 +85,29 @@ struct FloatingMenu_Previews: PreviewProvider {
 
 
 struct CalorieAddModal: View {
+    @EnvironmentObject var mm: ModalManager
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Add Food")
-                .font(.title)
-                .foregroundColor(.black)
-                .fontWeight(.bold)
+            HStack {
+                Text("Add Food")
+                    .font(.title)
+                    .foregroundColor(.black)
+                    .fontWeight(.bold)
+                
+                Spacer()
+                
+                // X-button to leave the "modal"
+                Button(action: {
+                    mm.showCalorieModal.toggle()
+                    mm.showModal.toggle()
+                }, label: {
+                    Image(systemName: "xmark")
+                        .font(.title)
+                        .foregroundColor(.black)
+                })
+            }
+
             
             
             Form {
@@ -118,12 +126,41 @@ struct CalorieAddModal: View {
 }
 
 struct WaterAddModal: View {
+    @EnvironmentObject var mm: ModalManager
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Add Water")
-                .font(.title)
-                .fontWeight(.heavy)
-        }//VStack
+            HStack {
+                Text("Add Water")
+                    .font(.title)
+                    .foregroundColor(.black)
+                    .fontWeight(.bold)
+                
+                Spacer()
+                
+                // X-button to leave the "modal"
+                Button(action: {
+                    mm.showWaterModal.toggle()
+                    mm.showModal.toggle()
+                }, label: {
+                    Image(systemName: "xmark")
+                        .font(.title)
+                        .foregroundColor(.black)
+                })
+            }
+            
+//                    Form {
+//                        Section(header: Text("Water")
+//                                    .fontWeight(.heavy)
+//                                    .foregroundColor(.blue)){
+//            //                    TextField("Total number of people", text: $numOfPeople)
+//            //                        .keyboardType(.numberPad)
+//                        }
+//                    }//form
+            
+            
+        }// Vstack
         .padding()
-    }
-}
+        
+    }//body
+}//struct

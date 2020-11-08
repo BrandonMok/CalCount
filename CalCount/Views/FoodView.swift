@@ -59,18 +59,14 @@ struct FoodView: View {
                     // Bring up same modal as the FAB
                     modalManager.showCalorieModal.toggle()
                     modalManager.showModal.toggle()
-                    
-//                    self.test.toggle()
                 }, label: {
                     Text("Add Food")
                         .foregroundColor(.black)
-                        .font(.largeTitle)
-                        .bold()
+                        .font(.title)
                         .padding(.horizontal)
                         .padding(.vertical, 5)
                 })
                 .background(Color("PrimaryBlue"))
-                .border(Color.black)
                 .cornerRadius(5)
                 
             }//vstack
@@ -93,7 +89,7 @@ struct FoodView: View {
 
             }//vstack
             
-        }//vstack
+        }//vstack        
     }//body
 }//struct
 
@@ -107,11 +103,19 @@ struct FoodView_Previews: PreviewProvider {
 struct TopPeriodBar: View {
     @Binding var selectedPeriod: Periods
     
+    // TODO
+    // Possibly just grab all data belonging to the user
+    // then run a for loop for the different conditions
+    // using the Date & calendar functions/utilities
+    // ** refer to the playground created for testing!!
+    
     var body: some View {
         HStack {
             // DAY BTN
             Button(action: {
                 // TODO get users data on calories/food for the month
+                
+                
                 
                 selectedPeriod = Periods.day
             }, label: {
