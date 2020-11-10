@@ -1,6 +1,7 @@
 
 
 import SwiftUI
+import UIKit
 
 struct FloatingMenu: View {
     
@@ -83,6 +84,14 @@ struct FloatingMenu_Previews: PreviewProvider {
     }
 }
 
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
+
 
 // MARK: - Modal to add a new Food!
 struct FoodAddModal: View {
@@ -118,6 +127,9 @@ struct FoodAddModal: View {
                 })
             }
             .padding(.bottom)
+            .onTapGesture {
+                self.hideKeyboard()
+            }
             
 
             Section(header: Text("Name")
@@ -214,8 +226,11 @@ struct FoodAddModal: View {
                   message: Text("There was an error creating the food! Please make sure all inputs are entered accordingly."),
                   dismissButton: .default(Text("OK")))
         })
-    }
-}
+        .onTapGesture {
+            self.hideKeyboard()
+        }
+    }//body
+}//struct
 
 struct WaterAddModal: View {
     @EnvironmentObject var mm: ModalManager
