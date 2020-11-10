@@ -92,13 +92,21 @@ extension View {
 }
 #endif
 
+extension String {
+   var isNumeric: Bool {
+     return !(self.isEmpty) && self.allSatisfy { $0.isNumber }
+   }
+}
+
 
 // MARK: - Modal to add a new Food!
 struct FoodAddModal: View {
     @EnvironmentObject var mm: ModalManager
+    @EnvironmentObject var status: LoggedInStatus
+    @EnvironmentObject var realmObj: RealmObject
     
     @State private var foodName = ""
-    @State private var calories = ""    // need to convert to int!  EX: Int(calories) ?? 0
+    @State private var calories = ""
     
     @State private var carbs = ""
     @State private var fats = ""
@@ -106,8 +114,13 @@ struct FoodAddModal: View {
     
     @State private var showAlert = false
     
+    @State private var alertTitle = ""
+    @State private var alertMsg = ""
+    
+    
     var body: some View {
         VStack(alignment: .leading) {
+            // TOP SECTION
             HStack {
                 Text("Add Food")
                     .font(.largeTitle)
@@ -131,7 +144,8 @@ struct FoodAddModal: View {
                 self.hideKeyboard()
             }
             
-
+            
+            // INPUTS/SECTION
             Section(header: Text("Name")
                         .font(.title)
                         .fontWeight(.bold)
@@ -195,14 +209,34 @@ struct FoodAddModal: View {
                     // CHECK input && add to realm!
                     if foodName.isEmpty || calories.isEmpty || carbs.isEmpty || fats.isEmpty || protein.isEmpty {
                         // ERROR - invalid input (blank)
-                        showAlert.toggle()
+                        showError()
                     }
                     else {
                         // There's input entered, still need to validate!
-                        
-                        
-                        
-                        
+                        if calories.isNumeric && carbs.isNumeric && fats.isNumeric && protein.isNumeric {
+                            // They're all numeric - create a FoodEntry
+  
+                            let foodEntry = FoodEntry()
+                            foodEntry.user = self.status.currentUser
+                            foodEntry.name = foodName
+                            foodEntry.calories = Int(calories)!
+                            foodEntry.carbs = Int(carbs)!
+                            foodEntry.fat = Int(fats)!
+                            foodEntry.protein = Int(protein)!
+                            foodEntry.date = Date()
+                            
+                            // SAVE object
+                            try! realmObj.realm.write {
+                                realmObj.realm.add(foodEntry)
+                            }
+                            
+                            // show alert for success
+                            showSuccess()
+                        }
+                        else {
+                            // Non numeric input for the numeric only fields
+                            showError()
+                        }
                     }
                 }, label: {
                     Text("Submit")
@@ -222,14 +256,32 @@ struct FoodAddModal: View {
         }//VStack
         .padding()
         .alert(isPresented: $showAlert, content: {
-            Alert(title: Text("Error"),
-                  message: Text("There was an error creating the food! Please make sure all inputs are entered accordingly."),
-                  dismissButton: .default(Text("OK")))
+            Alert(title: Text("\(alertTitle)"),
+                  message: Text("\(alertMsg)"),
+                  dismissButton: .default(Text("OK"), action: {
+                    if alertTitle == "Success" {
+                        mm.showCalorieModal.toggle()
+                        mm.showModal.toggle()
+                    }
+                  }))
         })
         .onTapGesture {
             self.hideKeyboard()
         }
     }//body
+    
+    
+    func showError() {
+        alertTitle = "Error"
+        alertMsg = "There was an error creating the food! Please make sure all inputs are entered accordingly."
+        showAlert.toggle()
+    }
+    
+    func showSuccess() {
+        alertTitle = "Success"
+        alertMsg = "Food entry added successfully!"
+        showAlert.toggle()  //show the alert for success/fail for this sheet
+    }
 }//struct
 
 struct WaterAddModal: View {

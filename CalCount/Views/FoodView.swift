@@ -108,6 +108,12 @@ struct FoodView: View {
             }//vstack
             .onAppear(perform: {
                 // Get all of this user's Food Entries!
+                
+                
+                // ISSUE: On appear occurs everytime you go to the tab
+                // TODO!!
+                // MIGHT need to keep a global for the array?
+                
                 let foodObjs =  realmObj.realm.objects(FoodEntry.self)
                 
                 if (foodObjs.count != 0) {
