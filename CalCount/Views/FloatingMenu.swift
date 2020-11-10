@@ -95,6 +95,8 @@ struct FoodAddModal: View {
     @State private var fats = ""
     @State private var protein = ""
     
+    @State private var showAlert = false
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -146,13 +148,13 @@ struct FoodAddModal: View {
             
             
                         
-            Section(header: Text("Macronutrients (g)")
+            Section(header: Text("Macronutrients")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.black)) {
              
                 
-                TextField("Carbohydrates", text: $carbs)
+                TextField("Carbohydrates (g)", text: $carbs)
                     .padding()
                     .keyboardType(.numberPad)
                     .foregroundColor(.black)
@@ -160,7 +162,7 @@ struct FoodAddModal: View {
                     .cornerRadius(5.0)
                 
                 
-                TextField("Fat", text: $fats)
+                TextField("Fat (g)", text: $fats)
                     .padding()
                     .keyboardType(.numberPad)
                     .foregroundColor(.black)
@@ -168,7 +170,7 @@ struct FoodAddModal: View {
                     .cornerRadius(5.0)
                 
                 
-                TextField("Protein", text: $protein)
+                TextField("Protein (g)", text: $protein)
                     .padding()
                     .keyboardType(.numberPad)
                     .foregroundColor(.black)
@@ -178,7 +180,18 @@ struct FoodAddModal: View {
             
             Section(){
                 Button(action: {
-
+                    // CHECK input && add to realm!
+                    if foodName.isEmpty || calories.isEmpty || carbs.isEmpty || fats.isEmpty || protein.isEmpty {
+                        // ERROR - invalid input (blank)
+                        showAlert.toggle()
+                    }
+                    else {
+                        // There's input entered, still need to validate!
+                        
+                        
+                        
+                        
+                    }
                 }, label: {
                     Text("Submit")
                         .foregroundColor(.white)
@@ -196,6 +209,11 @@ struct FoodAddModal: View {
             Spacer()
         }//VStack
         .padding()
+        .alert(isPresented: $showAlert, content: {
+            Alert(title: Text("Error"),
+                  message: Text("There was an error creating the food! Please make sure all inputs are entered accordingly."),
+                  dismissButton: .default(Text("OK")))
+        })
     }
 }
 
