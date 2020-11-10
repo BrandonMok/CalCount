@@ -17,6 +17,8 @@
 		C9511F8E253230590052C8FA /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9511F8D253230590052C8FA /* LandingView.swift */; };
 		C9511F90253234580052C8FA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9511F8F253234580052C8FA /* LoginView.swift */; };
 		C9511F9225323E390052C8FA /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9511F9125323E390052C8FA /* SignUpView.swift */; };
+		C95BA14F255A293700EF8149 /* FoodAddModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95BA14E255A293700EF8149 /* FoodAddModal.swift */; };
+		C95BA151255A29D000EF8149 /* WaterAddModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95BA150255A29D000EF8149 /* WaterAddModal.swift */; };
 		C95F1F4E25575127001A98C9 /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95F1F4D25575127001A98C9 /* FoodEntry.swift */; };
 		C96028492547267C001A3829 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96028482547267C001A3829 /* SettingsView.swift */; };
 		C960284B25472AD9001A3829 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960284A25472AD9001A3829 /* ChangePasswordView.swift */; };
@@ -46,6 +48,8 @@
 		C9511F8D253230590052C8FA /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		C9511F8F253234580052C8FA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C9511F9125323E390052C8FA /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		C95BA14E255A293700EF8149 /* FoodAddModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddModal.swift; sourceTree = "<group>"; };
+		C95BA150255A29D000EF8149 /* WaterAddModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAddModal.swift; sourceTree = "<group>"; };
 		C95F1F4D25575127001A98C9 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
 		C96028482547267C001A3829 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C960284A25472AD9001A3829 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 		C9511F8A25322BBA0052C8FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C95BA14D255A291400EF8149 /* Modals */,
 				C97285632554DCCB00EC5D1E /* Login-Registration */,
 				C9DA822125475625004A95B6 /* Settings */,
 				C9471073252B8ED500033FA5 /* ContentView.swift */,
@@ -135,6 +140,15 @@
 				C9FD4D2E25572B5D00BFF24A /* FoodView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C95BA14D255A291400EF8149 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				C95BA14E255A293700EF8149 /* FoodAddModal.swift */,
+				C95BA150255A29D000EF8149 /* WaterAddModal.swift */,
+			);
+			path = Modals;
 			sourceTree = "<group>";
 		};
 		C97285632554DCCB00EC5D1E /* Login-Registration */ = {
@@ -256,7 +270,9 @@
 				C9AEF435253680C100DEF119 /* User.swift in Sources */,
 				C96028492547267C001A3829 /* SettingsView.swift in Sources */,
 				C9471074252B8ED500033FA5 /* ContentView.swift in Sources */,
+				C95BA151255A29D000EF8149 /* WaterAddModal.swift in Sources */,
 				C9511F90253234580052C8FA /* LoginView.swift in Sources */,
+				C95BA14F255A293700EF8149 /* FoodAddModal.swift in Sources */,
 				C97285672554E44000EC5D1E /* FloatingMenu.swift in Sources */,
 				C9608755254F3B7F00C087C2 /* Goal.swift in Sources */,
 				C96BCE6225465369008121AE /* HomeView.swift in Sources */,
