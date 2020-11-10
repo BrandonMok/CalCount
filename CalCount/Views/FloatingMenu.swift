@@ -84,16 +84,24 @@ struct FloatingMenu_Previews: PreviewProvider {
 }
 
 
+// MARK: - Modal to add a new Food!
 struct FoodAddModal: View {
     @EnvironmentObject var mm: ModalManager
+    
+    @State private var foodName = ""
+    @State private var calories = ""    // need to convert to int!  EX: Int(calories) ?? 0
+    
+    @State private var carbs = ""
+    @State private var fats = ""
+    @State private var protein = ""
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Add Food")
-                    .font(.title)
+                    .font(.largeTitle)
                     .foregroundColor(.black)
-                    .fontWeight(.bold)
+                    .fontWeight(.heavy)
                 
                 Spacer()
                 
@@ -107,19 +115,85 @@ struct FoodAddModal: View {
                         .foregroundColor(.black)
                 })
             }
+            .padding(.bottom)
+            
 
+            Section(header: Text("Name")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)){
+                
+                TextField("Name", text: $foodName)
+                    .padding()
+                    .keyboardType(.alphabet)
+                    .foregroundColor(.black)
+                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                    .cornerRadius(5.0)
+            }//section
             
             
-            Form {
-                Section(header: Text("Calories")
-                            .fontWeight(.heavy)
-                            .foregroundColor(.blue)){
-//                    TextField("Total number of people", text: $numOfPeople)
-//                        .keyboardType(.numberPad)
-                }
+            Section(header: Text("Calories")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)) {
+                TextField("Calories", text: $calories)
+                    .padding()
+                    .keyboardType(.numberPad)
+                    .foregroundColor(.black)
+                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                    .cornerRadius(5.0)
             }
             
+            
+                        
+            Section(header: Text("Macronutrients (g)")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)) {
+             
+                
+                TextField("Carbohydrates", text: $carbs)
+                    .padding()
+                    .keyboardType(.numberPad)
+                    .foregroundColor(.black)
+                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                    .cornerRadius(5.0)
+                
+                
+                TextField("Fat", text: $fats)
+                    .padding()
+                    .keyboardType(.numberPad)
+                    .foregroundColor(.black)
+                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                    .cornerRadius(5.0)
+                
+                
+                TextField("Protein", text: $protein)
+                    .padding()
+                    .keyboardType(.numberPad)
+                    .foregroundColor(.black)
+                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                    .cornerRadius(5.0)
+            }
+            
+            Section(){
+                Button(action: {
 
+                }, label: {
+                    Text("Submit")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity, minHeight: 0, maxHeight: 20)
+                })
+                .padding()
+                .background(Color("PrimaryBlue"))
+                .cornerRadius(15)
+            }
+            .padding(.top)
+
+
+            Spacer()
         }//VStack
         .padding()
     }

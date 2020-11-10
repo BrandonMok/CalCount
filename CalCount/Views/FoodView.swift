@@ -13,27 +13,43 @@ struct FoodView: View {
     @ObservedObject var tabManager = TabManager()
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var modalManager: ModalManager
+    @EnvironmentObject var realmObj: RealmObject
     
     @State var selectedPeriod = Periods.day
-    
+
     @State private var foodList = [FoodEntry]()
+    @State private var foodListCopy = [FoodEntry]()
+    
+    @State private var totalCalories = 0
+    @State private var remainingCalories = 0
     
     
-    init(){
+    init() {
         self.tabManager.selectedTab = Tabs.home
+        
+        
     }
     
     var body: some View {
         VStack {
-            TopPeriodBar(selectedPeriod: $selectedPeriod)
+            // MARK: - TOP BAR (Day, Week, Month)
+            TopPeriodBar(selectedPeriod: $selectedPeriod, foodList: $foodList, foodListCopy: $foodListCopy, totalCalories: $totalCalories, remainingCalories: $remainingCalories)
             
             VStack {
-                PieChartView(data: [10,20], title: "Calories")
-                    .frame(maxWidth: .infinity)
+                if selectedPeriod == Periods.day {
+                    PieChartView(data: [10,20], title: "Calories")
+                        .frame(maxWidth: .infinity)
+                }
+//                else if selectedPeriod == Periods.week {
+//
+//                }
+//                else if selectedPeriod == Periods.month {
+//
+//                }
                 
                 HStack {
                     VStack{
-                        Text("0")
+                        Text("\(totalCalories)")
                             .font(.largeTitle)
                         
                         Text("Total")
@@ -43,7 +59,7 @@ struct FoodView: View {
                     .padding()
                     
                     VStack {
-                        Text("0")
+                        Text("\(remainingCalories)")
                             .font(.largeTitle)
                         
                         Text("Remaining")
@@ -54,9 +70,8 @@ struct FoodView: View {
                 }//hstack
                 
                 
-                // Add food button
+                // MARK: - Add food button
                 Button(action: {
-                    // Bring up same modal as the FAB
                     modalManager.showCalorieModal.toggle()
                     modalManager.showModal.toggle()
                 }, label: {
@@ -75,19 +90,36 @@ struct FoodView: View {
             Spacer()
             
             
+            // MARK: - Food List
             VStack {
-                // List of all the items! - TODO
-                // NEED a food row view
-//                    if !foodList.isEmpty {
-//                        List(foodList) { food in
-//
-//                        }
-//                    }
-//                    else {
-//                        Text("No food records!")
-//                    }
-
+                if !foodListCopy.isEmpty {
+                    List(foodListCopy, id: \.self) { food in
+                        FoodRow(food: food)
+                    }
+                }
+                else {
+                    Text("No food records!")
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                    
+                    Spacer()
+                    Spacer()
+                }
             }//vstack
+            .onAppear(perform: {
+                // Get all of this user's Food Entries!
+                let foodObjs =  realmObj.realm.objects(FoodEntry.self)
+                
+                if (foodObjs.count != 0) {
+                    foodObjs.forEach { food in
+                        if food.user!.username == status.currentUser.username {
+                            foodList.append(food)
+                        }
+                    }
+                    
+                    foodListCopy = foodList // reserve a copy of all foods, will modify foodLIstCopy when determining either day, week, or month foods
+                }
+            })//onAppear
             
         }//vstack        
     }//body
@@ -100,20 +132,56 @@ struct FoodView_Previews: PreviewProvider {
 }
 
 
+struct FoodRow: View {
+    var food: FoodEntry
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text("\(food.name)")
+                    .font(.title)
+                    .foregroundColor(.black)
+                    .bold()
+                
+                Text("\(food.calories)")
+                    .font(.title)
+                    .foregroundColor(.black)
+                    .bold()
+                    
+            }
+//            HStack {
+////                Text(food.date)
+//            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: 50)
+        .padding()
+    }
+}
+
+
+
 struct TopPeriodBar: View {
     @Binding var selectedPeriod: Periods
-    
-    // TODO
-    // Possibly just grab all data belonging to the user
-    // then run a for loop for the different conditions
-    // using the Date & calendar functions/utilities
-    // ** refer to the playground created for testing!!
+    @EnvironmentObject var status: LoggedInStatus
+    @EnvironmentObject var realmObj: RealmObject
+
+    @Binding var foodList: [FoodEntry]
+    @Binding var foodListCopy: [FoodEntry]
+    @Binding var totalCalories: Int
+    @Binding var remainingCalories:Int
+
     
     var body: some View {
         HStack {
             // DAY BTN
             Button(action: {
-                // TODO get users data on calories/food for the month
+                // Filter foodList by Date for today
+                // ON each btn click, always set foodListCopy = foodList
+                    // bc based on foodListCopy && .filter returns a new array
+            
+                
+                
+                // ALSO need to calculate the total calories
                 
                 
                 
@@ -131,7 +199,7 @@ struct TopPeriodBar: View {
             
             // WEEK BTN
             Button(action: {
-                // TODO get users data on calories/food for the month
+                // TODO get users data on calories/food for the week
                 
                 selectedPeriod = Periods.week
             }, label: {
@@ -159,7 +227,7 @@ struct TopPeriodBar: View {
                     .frame(maxWidth: .infinity)
             })
             .background(selectedPeriod == Periods.month ? Color(red: 173/255, green: 181/255, blue: 189/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
-            .border(selectedPeriod == Periods.day ? Color(red: 108/255, green: 117/255, blue: 125/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
+            .border(selectedPeriod == Periods.month ? Color(red: 108/255, green: 117/255, blue: 125/255) : Color(red: 233/255, green: 236/255, blue: 239/255))
             
             
         }//hstack

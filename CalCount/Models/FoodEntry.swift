@@ -4,6 +4,7 @@ import RealmSwift
 
 class FoodEntry: Object {
     @objc dynamic var user: User? = User()
+    @objc dynamic var name = ""
     @objc dynamic var calories = 0
     @objc dynamic var carbs = 0
     @objc dynamic var fat = 0
