@@ -3,11 +3,22 @@
 import SwiftUI
 import UIKit
 
+/**
+ * FoatingMenu
+ * Struct for the Floating Action Button (FAB)
+ * Allows for the creation of a food and water entry through the presented options
+ * Note: Can also add a food and water entry in their respective areas (i.e. the "home" tab and the "water" tab)
+ */
 struct FloatingMenu: View {
     
-    @EnvironmentObject var mm: ModalManager
+    // https://www.youtube.com/watch?v=QCvP-iFfbAg
+    // Note: The above YouTube video was referenced and used to help create my FAB and custom options
     
-    //https://www.youtube.com/watch?v=QCvP-iFfbAg
+    // Necessary EnvironmentObjects
+    @EnvironmentObject var mm: ModalManager
+    @EnvironmentObject var status: LoggedInStatus
+    @EnvironmentObject var realmObject: RealmObject
+    
     @State private var showMenuItems = false
     
     
@@ -15,13 +26,15 @@ struct FloatingMenu: View {
         VStack {
             Spacer()
             
+            // Check if showMenuItems was set to True from clicking the FAB
+             // Displays the two options of Food & Water
             if showMenuItems {
                 VStack {
-                    // Food btn
+                    // Food button
                     Button(action: {
-                        mm.showCalorieModal.toggle()
-                        mm.showModal.toggle()
-                        showMenuItems.toggle()
+                        mm.showCalorieModal.toggle()    // set which modal should show - Calorie modal
+                        mm.showModal.toggle()           // show the modal (a sheet) w/the form
+                        showMenuItems.toggle()          // hide the opened options from the FAB
                     }, label: {
                         Image(systemName: "scroll")
                             .padding()
@@ -34,11 +47,11 @@ struct FloatingMenu: View {
                     .cornerRadius(50)
                     
                     
-                    // Water btn
+                    // Water button
                     Button(action: {
-                        mm.showWaterModal.toggle()
-                        mm.showModal.toggle()
-                        showMenuItems.toggle()
+                        mm.showWaterModal.toggle()  // set which modal should show - Water modal
+                        mm.showModal.toggle()       // show the modal (a sheet) w/the form
+                        showMenuItems.toggle()      //  hide the opened options from the FAB
                     }, label: {
                         Image(systemName: "drop")
                             .padding()
@@ -54,8 +67,9 @@ struct FloatingMenu: View {
 
             
             // FAB button
+            // NOTE: only shows on the Food / home tab and Water tab
             Button(action: {
-                showMenuItems.toggle()
+                showMenuItems.toggle()  // show the options for the FAB (e.g. Food & water buttons)
             }, label: {
                 Image(systemName: showMenuItems ? "xmark" : "plus")
                 .font(.system(.title))
@@ -67,13 +81,16 @@ struct FloatingMenu: View {
             .padding(.bottom, 20)
             .shadow(color: Color.black.opacity(0.3),radius: 5, x: 3, y: 3)
         }//vstack
-        .fullScreenCover(isPresented: $mm.showModal, content: {
-            if mm.showCalorieModal {
-                FoodAddModal()
-            }
-            else if mm.showWaterModal {
-                WaterAddModal()
-            }
+        .fullScreenCover(isPresented: $mm.showModal, content: {      //fullscreencover acts as my "modal"
+            // deteremine which modal to show
+              if mm.showCalorieModal {
+                  //https://stackoverflow.com/questions/58743004/swiftui-environmentobject-error-may-be-missing-as-an-ancestor-of-this-view
+                  // Resource used to fix issue on subviews erroring out on environmentobject and missing an observable object
+                  FoodAddModal().environmentObject(self.mm).environmentObject(self.status).environmentObject(self.realmObject)
+              }
+              else if mm.showWaterModal {
+                  WaterAddModal().environmentObject(self.mm).environmentObject(self.status).environmentObject(self.realmObject)
+              }
         })
     }//body
 }//struct
@@ -84,6 +101,9 @@ struct FloatingMenu_Previews: PreviewProvider {
     }
 }
 
+
+// https://www.hackingwithswift.com/quick-start/swiftui/how-to-dismiss-the-keyboard-for-a-textfield
+// Extension to hide the keyboard
 #if canImport(UIKit)
 extension View {
     func hideKeyboard() {
@@ -92,6 +112,8 @@ extension View {
 }
 #endif
 
+
+// Extension to check if a text input is numeric
 extension String {
    var isNumeric: Bool {
      return !(self.isEmpty) && self.allSatisfy { $0.isNumber }

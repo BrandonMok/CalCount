@@ -2,6 +2,10 @@
 import SwiftUI
 import RealmSwift
 
+/*
+ * GoalView
+ * View under the settings tabs which allows the user to set goals
+ */
 struct GoalView: View {
     
     @EnvironmentObject var status: LoggedInStatus
@@ -55,7 +59,7 @@ struct GoalView: View {
                     }
                     .pickerStyle(DefaultPickerStyle())
 
-                    // Weight
+                    // Weight button
                     Button(action: {
                         if (usrGoal != nil) {
                             try! realmObj.realm.write({

@@ -2,8 +2,21 @@
 import SwiftUI
 
 
+/**
+ * HomeView
+ * The view that first shows when user logs in
+ * This view acts as the FOOD view
+ */
 struct HomeView: View {
+    
+    /**
+     * DO I really need the tabManager?
+     * Bc it's only here that I change the tab by doing an onTapGesture
+     *
+     */
     @ObservedObject var tabManager = TabManager()
+    @EnvironmentObject var realmObject: RealmObject
+    @EnvironmentObject var status: LoggedInStatus
     
     var body: some View {
         ZStack {
@@ -16,6 +29,9 @@ struct HomeView: View {
                             Text("Home")
                         }
                         .tag(Tabs.home)
+                        .onTapGesture {
+                            self.tabManager.selectedTab = Tabs.home
+                        }
                     
                     Text("Tab stuff")
                         .tabItem {
@@ -23,6 +39,9 @@ struct HomeView: View {
                             Text("Water")
                         }
                         .tag(Tabs.water)
+                        .onTapGesture {
+                            self.tabManager.selectedTab = Tabs.water
+                        }
                     
                     Text("Tab again")
                         .tabItem {
@@ -30,6 +49,9 @@ struct HomeView: View {
                             Text("Nutrition")
                         }
                         .tag(Tabs.nutrition)
+                        .onTapGesture {
+                            self.tabManager.selectedTab = Tabs.nutrition
+                        }
                     
                     SettingsView()
                         .tabItem {
@@ -37,6 +59,12 @@ struct HomeView: View {
                             Text("Settings")
                         }
                         .tag(Tabs.settings)
+                        .environmentObject(self.status)
+                        .environmentObject(self.realmObject)
+                        .environmentObject(self.tabManager)
+                        .onTapGesture {
+                            self.tabManager.selectedTab = Tabs.settings
+                        }
                 }//tabview
             }//vstack
             

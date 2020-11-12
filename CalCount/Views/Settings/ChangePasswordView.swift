@@ -3,6 +3,10 @@ import SwiftUI
 import RealmSwift
 import CryptoKit
 
+/**
+ * ChangePasswordView
+ * VIew under the settings tab that allows the user to change their password
+ */
 struct ChangePasswordView: View {
     
     // Reference: https://stackoverflow.com/questions/56571349/custom-back-button-for-navigationviews-navigation-bar-in-swiftui
@@ -15,6 +19,7 @@ struct ChangePasswordView: View {
     @State private var password = ""
     @State private var passwordAgain = ""
     
+    // Alert state variables
     @State private var showAlert = false
     @State private var msgTitle = ""
     @State private var msg = ""
@@ -48,9 +53,11 @@ struct ChangePasswordView: View {
             .padding(.bottom)
             
             
-            // Submit btn
+            // Submit button
             Button(action: {
+                // Make sure both password fields aren't empty
                 if !password.isEmpty || !passwordAgain.isEmpty {
+                    // make sure that the password is the same on both inputs
                     if password == passwordAgain {
                         
                         do {

@@ -19,6 +19,7 @@
 		C9511F9225323E390052C8FA /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9511F9125323E390052C8FA /* SignUpView.swift */; };
 		C95BA14F255A293700EF8149 /* FoodAddModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95BA14E255A293700EF8149 /* FoodAddModal.swift */; };
 		C95BA151255A29D000EF8149 /* WaterAddModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95BA150255A29D000EF8149 /* WaterAddModal.swift */; };
+		C95BA153255A2B2700EF8149 /* FoodManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95BA152255A2B2700EF8149 /* FoodManager.swift */; };
 		C95F1F4E25575127001A98C9 /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95F1F4D25575127001A98C9 /* FoodEntry.swift */; };
 		C96028492547267C001A3829 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96028482547267C001A3829 /* SettingsView.swift */; };
 		C960284B25472AD9001A3829 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960284A25472AD9001A3829 /* ChangePasswordView.swift */; };
@@ -50,6 +51,7 @@
 		C9511F9125323E390052C8FA /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		C95BA14E255A293700EF8149 /* FoodAddModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddModal.swift; sourceTree = "<group>"; };
 		C95BA150255A29D000EF8149 /* WaterAddModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAddModal.swift; sourceTree = "<group>"; };
+		C95BA152255A2B2700EF8149 /* FoodManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodManager.swift; sourceTree = "<group>"; };
 		C95F1F4D25575127001A98C9 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
 		C96028482547267C001A3829 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C960284A25472AD9001A3829 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				C9AEF434253680C100DEF119 /* User.swift */,
 				C9608754254F3B7F00C087C2 /* Goal.swift */,
 				C95F1F4D25575127001A98C9 /* FoodEntry.swift */,
+				C95BA152255A2B2700EF8149 /* FoodManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				C9FD4D2D2557297300BFF24A /* ModalManager.swift in Sources */,
 				C9832D092554B2740006FC31 /* RealmObject.swift in Sources */,
 				C960284D25473E8B001A3829 /* TabManager.swift in Sources */,
+				C95BA153255A2B2700EF8149 /* FoodManager.swift in Sources */,
 				C960284B25472AD9001A3829 /* ChangePasswordView.swift in Sources */,
 				C9471072252B8ED500033FA5 /* CalCountApp.swift in Sources */,
 				C97010682547A0DE003EC8FF /* GoalView.swift in Sources */,

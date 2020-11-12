@@ -2,26 +2,33 @@
 import SwiftUI
 import UIKit
 
+/**
+ * FoodAddModal
+ * Struct to act as a "modal" to show the user a form in which they can enter inputs to create a Food Entry
+ * Created / called from either the action of the FAB (i.e. tap the FAB button and tap the Food button) OR from the "home" tab
+ */
 struct FoodAddModal: View {
+    // EnvironmentObjects needed for application
     @EnvironmentObject var mm: ModalManager
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObj: RealmObject
     
+    // Food Entry state variables
     @State private var foodName = ""
     @State private var calories = ""
-    
     @State private var carbs = ""
     @State private var fats = ""
     @State private var protein = ""
     
+    // Alert state variables
     @State private var showAlert = false
-    
     @State private var alertTitle = ""
     @State private var alertMsg = ""
     
     
     var body: some View {
         VStack(alignment: .leading) {
+            
             // TOP SECTION
             HStack {
                 Text("Add Food")
@@ -107,6 +114,7 @@ struct FoodAddModal: View {
             }
             
             Section(){
+                // Submit button
                 Button(action: {
                     // CHECK input && add to realm!
                     if foodName.isEmpty || calories.isEmpty || carbs.isEmpty || fats.isEmpty || protein.isEmpty {
@@ -114,10 +122,10 @@ struct FoodAddModal: View {
                         showError()
                     }
                     else {
-                        // There's input entered, still need to validate!
+                        // There was input, now validate that the respective fields are numeric
                         if calories.isNumeric && carbs.isNumeric && fats.isNumeric && protein.isNumeric {
-                            // They're all numeric - create a FoodEntry
-  
+
+                            // Create a FoodEntry
                             let foodEntry = FoodEntry()
                             foodEntry.user = self.status.currentUser
                             foodEntry.name = foodName
@@ -127,7 +135,7 @@ struct FoodAddModal: View {
                             foodEntry.protein = Int(protein)!
                             foodEntry.date = Date()
                             
-                            // SAVE object
+                            // SAVE the object
                             try! realmObj.realm.write {
                                 realmObj.realm.add(foodEntry)
                             }
@@ -158,6 +166,7 @@ struct FoodAddModal: View {
         }//VStack
         .padding()
         .alert(isPresented: $showAlert, content: {
+            // Alert to show either success or failure
             Alert(title: Text("\(alertTitle)"),
                   message: Text("\(alertMsg)"),
                   dismissButton: .default(Text("OK"), action: {
@@ -168,11 +177,13 @@ struct FoodAddModal: View {
                   }))
         })
         .onTapGesture {
-            self.hideKeyboard()
+            self.hideKeyboard() // hide the keyboard if touch elsewhere
         }
     }//body
     
     
+    // Reusable showError function
+    // Sets and toggles the necessary fields
     func showError() {
         alertTitle = "Error"
         alertMsg = "There was an error creating the food! Please make sure all inputs are entered accordingly."

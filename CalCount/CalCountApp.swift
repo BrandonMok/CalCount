@@ -15,6 +15,7 @@ struct CalCountApp: App {
                 .environmentObject(LoggedInStatus())
                 .environmentObject(RealmObject())
                 .environmentObject(ModalManager())
+                .environmentObject(TabManager())
         }
     }
 }

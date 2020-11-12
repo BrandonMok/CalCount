@@ -3,6 +3,10 @@ import SwiftUI
 import RealmSwift
 import CryptoKit
 
+/**
+ * ChangeAccountGenderView
+ * View under the settings tab that allows the user to change user account gender
+ */
 struct ChangeAccountGenderView: View {
     
     @Environment(\.presentationMode) var presentationMode
@@ -43,7 +47,7 @@ struct ChangeAccountGenderView: View {
             
             
             Button(action: {
-                // Update
+                // Update the user object
                 do {
                     let userObj = self.status.currentUser
 

@@ -9,14 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @EnvironmentObject var tabManager: TabManager
     @EnvironmentObject var status: LoggedInStatus
+    @EnvironmentObject var realmObject: RealmObject
     
     var body: some View {
+        // To switch between loggedIn and notLoggedIn views, have this environment variable to switch
         if status.loggedIn {
-            // logged in view
-            HomeView().transition(.opacity)
+            // Logged in view
+            HomeView()
+                .transition(.opacity)
+                .environmentObject(self.status)
+                .environmentObject(self.realmObject)
+                .environmentObject(self.tabManager)
         }
         else {
+            // Not logged in!
             LandingView()
         }
     }

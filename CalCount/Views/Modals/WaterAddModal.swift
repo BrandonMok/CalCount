@@ -2,13 +2,21 @@
 import SwiftUI
 import UIKit
 
+/**
+ * WaterAddModal
+ * Struct to act as a "modal" to show the user a form in which they can enter inputs to create a Water Entry
+ * Created / called from either the action of the FAB (i.e. tap the FAB button and tap the Water button) OR from the "water" tab
+ */
 struct WaterAddModal: View {
+    
+    // EnvironmentObjects necessary for the application
     @EnvironmentObject var mm: ModalManager
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObj: RealmObject
     
     var body: some View {
         VStack(alignment: .leading) {
+            // TOP SECTION
             HStack {
                 Text("Add Water")
                     .font(.largeTitle)
@@ -29,7 +37,7 @@ struct WaterAddModal: View {
             }
             .padding(.bottom)
             .onTapGesture {
-                self.hideKeyboard()
+                self.hideKeyboard() // hide the keyboard if tapped elsewhere
             }
             
 //                    Form {

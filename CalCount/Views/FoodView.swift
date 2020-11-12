@@ -2,14 +2,26 @@
 import SwiftUI
 import SwiftUICharts
 
+
+/**
+ * Periods Enum
+ */
 enum Periods {
     case day
     case week
     case month
 }
 
+
+/**
+ * FoodView
+ * A view in the TabView that shows all the user's data on the food entries they've entered
+ * Can change between different time periods of their data, look at graphs, look at their entries, and manage their food entries
+ */
 struct FoodView: View {
 
+    // EnvironmentObjects necessary for the application
+//    @EnvironmentObject var status: LoggedInStatus+
     @ObservedObject var tabManager = TabManager()
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var modalManager: ModalManager
@@ -17,8 +29,9 @@ struct FoodView: View {
     
     @State var selectedPeriod = Periods.day
 
-    @State private var foodList = [FoodEntry]()
-    @State private var foodListCopy = [FoodEntry]()
+    // FoodLists
+    @State private var foodList = [FoodEntry]()     // main list (the one read in from Realm)
+    @State private var foodListCopy = [FoodEntry]() // copied of the main list that's used on the display
     
     @State private var totalCalories = 0
     @State private var remainingCalories = 0
@@ -26,8 +39,6 @@ struct FoodView: View {
     
     init() {
         self.tabManager.selectedTab = Tabs.home
-        
-        
     }
     
     var body: some View {
@@ -37,14 +48,15 @@ struct FoodView: View {
             
             VStack {
                 if selectedPeriod == Periods.day {
+                    // TODO: - Make chart use my data!!
                     PieChartView(data: [10,20], title: "Calories")
                         .frame(maxWidth: .infinity)
                 }
 //                else if selectedPeriod == Periods.week {
-//
+//                      // change type of chart
 //                }
 //                else if selectedPeriod == Periods.month {
-//
+//                      // change type of chart
 //                }
                 
                 HStack {
