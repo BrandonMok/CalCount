@@ -7,13 +7,9 @@ import SwiftUI
  */
 struct SettingsView: View {
     
-    @ObservedObject var tabManager = TabManager()
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObject: RealmObject
     
-//    init(){
-//        self.tabManager.selectedTab = Tabs.settings
-//    }
     
     var body: some View {
         NavigationView {
@@ -21,9 +17,11 @@ struct SettingsView: View {
                 Section(header: Text("Account")
                             .fontWeight(.heavy)
                             .foregroundColor(.blue)){
-                    NavigationLink(destination: ChangePasswordView()
+                    NavigationLink(destination:
+                                    ChangePasswordView()
                                     .environmentObject(self.status)
                                     .environmentObject(self.realmObject)
+                    
                     ) {
                             Text("Change password")
                     }
@@ -71,11 +69,13 @@ struct SettingsView: View {
             }
             .navigationBarTitle("Settings")
         } // navigationView
+        
+        
     }// body
 }//struct
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView().environmentObject(LoggedInStatus()).environmentObject(TabManager())
+        SettingsView()
     }
 }

@@ -14,7 +14,7 @@ struct HomeView: View {
      * Bc it's only here that I change the tab by doing an onTapGesture
      *
      */
-    @ObservedObject var tabManager = TabManager()
+    @EnvironmentObject var tabManager: TabManager
     @EnvironmentObject var realmObject: RealmObject
     @EnvironmentObject var status: LoggedInStatus
     
@@ -54,17 +54,18 @@ struct HomeView: View {
                         }
                     
                     SettingsView()
+                        .environmentObject(self.status)
+                        .environmentObject(self.realmObject)
+//                        .onTapGesture {
+//                            self.tabManager.selectedTab = Tabs.settings
+//                            print(self.tabManager.selectedTab)
+//                        }
                         .tabItem {
                             Image(systemName: "gearshape")
                             Text("Settings")
                         }
                         .tag(Tabs.settings)
-                        .environmentObject(self.status)
-                        .environmentObject(self.realmObject)
-                        .environmentObject(self.tabManager)
-                        .onTapGesture {
-                            self.tabManager.selectedTab = Tabs.settings
-                        }
+
                 }//tabview
             }//vstack
             
