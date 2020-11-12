@@ -7,6 +7,7 @@ import SwiftUI
  */
 struct SettingsView: View {
     
+    // EnvironmentObjects necessary for the application
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObject: RealmObject
     
@@ -68,8 +69,7 @@ struct SettingsView: View {
                 }
             }
             .navigationBarTitle("Settings")
-        } // navigationView
-        
+        } // navigationView        
         
     }// body
 }//struct

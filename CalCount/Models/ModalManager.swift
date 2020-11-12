@@ -2,8 +2,11 @@
 
 import Foundation
 
-// Observable object to keep track if the modal's should show
-// Can add food/water anywhere in app!
+/**
+ * ModalManager Class
+ * An observable object used to determine which modal to show and if it should be shown
+ * Used in both the FAB button actions & the individual  Food / Home tab and Water tab
+ */
 class ModalManager: ObservableObject {
     // property shared by FloatingMenu (has the button and actions) and the Food & water View
     @Published var showModal = false

@@ -2,6 +2,11 @@
 import Foundation
 import RealmSwift
 
+/**
+ * FoodEntry Class
+ * Class that represents a FoodEntry
+ * Used & stored in realm -> therefore needs to extend Object
+ */
 class FoodEntry: Object {
     @objc dynamic var user: User? = User()
     @objc dynamic var name = ""

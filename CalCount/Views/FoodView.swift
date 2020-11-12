@@ -21,8 +21,6 @@ enum Periods {
 struct FoodView: View {
 
     // EnvironmentObjects necessary for the application
-//    @EnvironmentObject var status: LoggedInStatus+
-    @ObservedObject var tabManager = TabManager()
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var modalManager: ModalManager
     @EnvironmentObject var realmObj: RealmObject
@@ -33,13 +31,10 @@ struct FoodView: View {
     @State private var foodList = [FoodEntry]()     // main list (the one read in from Realm)
     @State private var foodListCopy = [FoodEntry]() // copied of the main list that's used on the display
     
+    // Calulated fields 
     @State private var totalCalories = 0
     @State private var remainingCalories = 0
-    
-    
-    init() {
-        self.tabManager.selectedTab = Tabs.home
-    }
+
     
     var body: some View {
         VStack {

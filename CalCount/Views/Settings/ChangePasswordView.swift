@@ -13,6 +13,7 @@ struct ChangePasswordView: View {
     // Used to send user back to navigationview
     @Environment(\.presentationMode) var presentationMode
     
+    // EnvironmentObjects necessary for the application
     @EnvironmentObject private var status: LoggedInStatus
     @EnvironmentObject var realmObj: RealmObject
     
@@ -62,10 +63,11 @@ struct ChangePasswordView: View {
                         
                         do {
                             let inputData = Data(password.utf8)
-                            let password = SHA256.hash(data: inputData)
+                            let password = SHA256.hash(data: inputData) //hash the password!
                             
                             let userObj = self.status.currentUser
                             
+                            // Update this user's password!
                             try realmObj.realm.write {
                                 userObj.password = password.compactMap { String(format: "%02x", $0) }.joined()
                             }
@@ -80,15 +82,11 @@ struct ChangePasswordView: View {
                         
                     }
                     else {
-                        showAlert.toggle()
-                        msgTitle = "Couldn't change password"
-                        msg = "Please make sure the entered password matches!"
+                        errorAlert()    // error with their input
                     }
                 }
                 else {
-                    showAlert.toggle()
-                    msgTitle = "Couldn't change password"
-                    msg = "Please enter a new password!"
+                    errorAlert()        // error with their input
                 }
             }, label: {
                 Text("Submit")
@@ -114,8 +112,16 @@ struct ChangePasswordView: View {
             Spacer()
         }//vstack
         .padding()
+    }//body
+    
+    
+    func errorAlert() {
+        showAlert.toggle()
+        msgTitle = "Couldn't change password"
+        msg = "Please make sure both password fields contain the same password!"
     }
-}
+}//struct
+
 
 struct ChangePasswordView_Previews: PreviewProvider {
     static var previews: some View {
