@@ -3,7 +3,17 @@ import SwiftUI
 import CryptoKit
 import RealmSwift
 
+/**
+ * LoginView
+ * View displayed to allow the user to login into the application
+ */
 struct LoginView: View {
+    
+    // EnvironmentObjects necessary for the application
+    @EnvironmentObject var status: LoggedInStatus
+    @EnvironmentObject var realmObj: RealmObject
+    
+    // Login State Variables
     @State private var username = ""
     @State private var password = ""
     @State private var error = false
@@ -11,8 +21,6 @@ struct LoginView: View {
     @State private var phidden = false
     @State private var userFound = false
     
-    @EnvironmentObject var status: LoggedInStatus
-    @EnvironmentObject var realmObj: RealmObject
     
     var body: some View {
         VStack {
@@ -54,6 +62,7 @@ struct LoginView: View {
             }.padding(.bottom , 15)
             
             
+            // Login Button
             Button(action: {
                 if !username.isEmpty || !password.isEmpty {
                     let inputData = Data(password.utf8)

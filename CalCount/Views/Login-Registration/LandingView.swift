@@ -1,6 +1,11 @@
 
 import SwiftUI
 
+/**
+ * LandingView
+ * The view to display on first startup of the application
+ * Shows until the user actually logins, then it's changed out
+ */
 struct LandingView: View {
     var body: some View {
         NavigationView {

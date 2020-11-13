@@ -13,6 +13,10 @@ struct HomeView: View {
     @EnvironmentObject var realmObject: RealmObject
     @EnvironmentObject var status: LoggedInStatus
     
+//    @ObservedObject var foodManager = FoodManager(foodUsername: status.currentUser.username)
+    
+//    var foodManager: FoodManager = FoodManager(foodUsername: "")
+    
     var body: some View {
         ZStack {
             VStack {
@@ -21,6 +25,7 @@ struct HomeView: View {
                     FoodView()
                         .environmentObject(self.status)
                         .environmentObject(self.realmObject)
+//                        .environmentObject(self.foodManager)
                         .tabItem {
                             Image(systemName: "house")
                             Text("Home")
@@ -70,5 +75,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(LoggedInStatus())
     }
 }

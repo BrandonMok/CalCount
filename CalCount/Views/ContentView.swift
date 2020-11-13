@@ -13,6 +13,7 @@ struct ContentView: View {
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObject: RealmObject
     
+    
     var body: some View {
         // To switch between loggedIn and notLoggedIn views, have this environment variable to switch
         if status.loggedIn {
@@ -32,6 +33,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(LoggedInStatus())
+        ContentView()
     }
 }

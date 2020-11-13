@@ -25,6 +25,10 @@ struct FoodView: View {
     @EnvironmentObject var modalManager: ModalManager
     @EnvironmentObject var realmObj: RealmObject
     
+//    @EnvironmentObject var foodManager: FoodManager
+//    @ObservedObject var foodManager = FoodManager()
+    
+    
     @State var selectedPeriod = Periods.day
 
     // FoodLists
@@ -34,6 +38,15 @@ struct FoodView: View {
     // Calulated fields 
     @State private var totalCalories = 0
     @State private var remainingCalories = 0
+    
+//    init() {
+////        var fm = FoodManager(currentUser: self.status.currentUser.username)
+//        // then pass this to the FoodView()?
+//        foodManager.getUsersFoodList(username: self.status.currentUser.username)        // or do it on an onAppear?
+//
+//        print(foodManager.foodsList)
+//
+//    }
 
     
     var body: some View {
@@ -41,100 +54,101 @@ struct FoodView: View {
             // MARK: - TOP BAR (Day, Week, Month)
             TopPeriodBar(selectedPeriod: $selectedPeriod, foodList: $foodList, foodListCopy: $foodListCopy, totalCalories: $totalCalories, remainingCalories: $remainingCalories)
             
-            VStack {
-                if selectedPeriod == Periods.day {
-                    // TODO: - Make chart use my data!!
-                    PieChartView(data: [10,20], title: "Calories")
-                        .frame(maxWidth: .infinity)
-                }
-//                else if selectedPeriod == Periods.week {
-//                      // change type of chart
-//                }
-//                else if selectedPeriod == Periods.month {
-//                      // change type of chart
-//                }
-                
-                HStack {
-                    VStack{
-                        Text("\(totalCalories)")
-                            .font(.largeTitle)
-                        
-                        Text("Total")
-                            .font(.title)
-                            .bold()
+//            ScrollView {
+                VStack {
+                    if selectedPeriod == Periods.day {
+                        // TODO: - Make chart use my data!!
+                        PieChartView(data: [10,20], title: "Calories")
+                            .frame(maxWidth: .infinity)
                     }
-                    .padding()
+    //                else if selectedPeriod == Periods.week {
+    //                      // change type of chart
+    //                }
+    //                else if selectedPeriod == Periods.month {
+    //                      // change type of chart
+    //                }
                     
-                    VStack {
-                        Text("\(remainingCalories)")
-                            .font(.largeTitle)
+                    HStack {
+                        VStack{
+                            Text("\(totalCalories)")
+                                .font(.largeTitle)
+                            
+                            Text("Total")
+                                .font(.title)
+                                .bold()
+                        }
+                        .padding()
                         
-                        Text("Remaining")
-                            .font(.title)
-                            .bold()
-                    }
-                    .padding()
-                }//hstack
-                
-                
-                // MARK: - Add food button
-                Button(action: {
-                    modalManager.showCalorieModal.toggle()
-                    modalManager.showModal.toggle()
-                }, label: {
-                    Text("Add Food")
-                        .foregroundColor(.black)
-                        .font(.title)
-                        .padding(.horizontal)
-                        .padding(.vertical, 5)
-                })
-                .background(Color("PrimaryBlue"))
-                .cornerRadius(5)
-                
-            }//vstack
-            .padding(.vertical, 20)
-            
-            Spacer()
-            
-            
-            // MARK: - Food List
-            VStack {
-                if !foodListCopy.isEmpty {
-                    List(foodListCopy, id: \.self) { food in
-                        FoodRow(food: food)
-                    }
-                }
-                else {
-                    Text("No food records!")
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
+                        VStack {
+                            Text("\(remainingCalories)")
+                                .font(.largeTitle)
+                            
+                            Text("Remaining")
+                                .font(.title)
+                                .bold()
+                        }
+                        .padding()
+                    }//hstack
                     
-                    Spacer()
-                    Spacer()
-                }
-            }//vstack
-            .onAppear(perform: {
-                // Get all of this user's Food Entries!
+                    
+                    // MARK: - Add food button
+                    Button(action: {
+                        modalManager.showCalorieModal.toggle()
+                        modalManager.showModal.toggle()
+                    }, label: {
+                        Text("Add Food")
+                            .foregroundColor(.black)
+                            .font(.title)
+                            .padding(.horizontal)
+                            .padding(.vertical, 5)
+                    })
+                    .background(Color("PrimaryBlue"))
+                    .cornerRadius(5)
+                    
+                }//vstack
+                .padding(.vertical, 20)
+                
+                Spacer()
                 
                 
-                // ISSUE: On appear occurs everytime you go to the tab
-                // TODO!!
-                // MIGHT need to keep a global for the array?
-                
-                let foodObjs =  realmObj.realm.objects(FoodEntry.self)
-                
-                if (foodObjs.count != 0) {
-                    foodObjs.forEach { food in
-                        if food.user!.username == status.currentUser.username {
-                            foodList.append(food)
+                // MARK: - Food List
+                VStack {
+                    if !foodListCopy.isEmpty {
+                        List(foodListCopy, id: \.self) { food in
+                            FoodRow(food: food)
                         }
                     }
+                    else {
+                        Text("No food records!")
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                        
+                        Spacer()
+                        Spacer()
+                    }
+                }//vstack
+                .onAppear(perform: {
+                    // Get all of this user's Food Entries!
                     
-                    foodListCopy = foodList // reserve a copy of all foods, will modify foodLIstCopy when determining either day, week, or month foods
-                }
-            })//onAppear
-            
-        }//vstack        
+                    
+                    // ISSUE: On appear occurs everytime you go to the tab
+                    // TODO!!
+                    // MIGHT need to keep a global for the array?
+                    
+                    let foodObjs =  realmObj.realm.objects(FoodEntry.self)
+                    
+                    if (foodObjs.count != 0) {
+                        foodObjs.forEach { food in
+                            if food.user!.username == status.currentUser.username {
+                                foodList.append(food)
+                            }
+                        }
+                        
+                        foodListCopy = foodList // reserve a copy of all foods, will modify foodLIstCopy when determining either day, week, or month foods
+                    }
+                })//onAppear
+//            }//scrollview
+        }//vstack
     }//body
 }//struct
 
@@ -145,16 +159,22 @@ struct FoodView_Previews: PreviewProvider {
 }
 
 
+/**
+ * FoodRow
+ * A view to represent a Food Entry row
+ */
 struct FoodRow: View {
     var food: FoodEntry
+    @State private var du = DateUtility()
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
                 Text("\(food.name)")
                     .font(.title)
                     .foregroundColor(.black)
-                    .bold()
+                
+                Spacer()
                 
                 Text("\(food.calories)")
                     .font(.title)
@@ -162,22 +182,40 @@ struct FoodRow: View {
                     .bold()
                     
             }
-//            HStack {
-////                Text(food.date)
-//            }
+            
+            Spacer()
+
+            Text("\(du.formatTime(passedDate: food.date, timeStyle: .medium ))")
+                .font(.subheadline)
+                .foregroundColor(.black)
+                .bold()
+        
         }
         .frame(maxWidth: .infinity, maxHeight: 50)
         .padding()
+        .contentShape(Rectangle())
+        .onTapGesture {
+            // TODO make a modal to update or delete!
+            
+            
+            
+        }
     }
 }
 
 
-
+/**
+ * TopPeriodBar
+ * Top bar to allow the user to change between their data fro Day, Week, and Month
+ */
 struct TopPeriodBar: View {
-    @Binding var selectedPeriod: Periods
+
+    // EnvironmentObjects
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObj: RealmObject
-
+    
+    // Binding - passed in value
+    @Binding var selectedPeriod: Periods
     @Binding var foodList: [FoodEntry]
     @Binding var foodListCopy: [FoodEntry]
     @Binding var totalCalories: Int
@@ -246,6 +284,8 @@ struct TopPeriodBar: View {
         }//hstack
         .frame(maxWidth: .infinity)
         .background(Color(red: 233/255, green: 236/255, blue: 239/255))
-    }
-}
+        
+        
+    }//body
+}//struct
 

@@ -3,21 +3,30 @@ import SwiftUI
 import CryptoKit
 import RealmSwift
 
+/**
+ * SignUpView
+ * A view to display when the user clicks the "Sign Up" button on the LandingView to signup for an account
+ */
 struct SignUpView: View {
     
+    // EnvironmentObject necessary for the application
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var realmObj: RealmObject
     
+    // SignUp related state variables
     @State private var username = ""
     @State private var password = ""
     @State private var passwordAgain = ""
     @State private var selectedGender = 0
     
+    // Alert state variables
     @State private var showAlert = false
     @State private var msgTitle = ""
     @State private var msg = ""
     
+    // Array of gender options
     var genders = ["Prefer not to say","Male", "Female"]
+    
     
     var body: some View {
         VStack {
@@ -60,6 +69,7 @@ struct SignUpView: View {
             .padding()
             
             
+            // Sign up button
             Button(action: {
                 // Create User(), check input, store in Realm
                 if !username.isEmpty || !password.isEmpty || !passwordAgain.isEmpty {
