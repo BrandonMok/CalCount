@@ -54,7 +54,6 @@ struct FoodView: View {
             // MARK: - TOP BAR (Day, Week, Month)
             TopPeriodBar(selectedPeriod: $selectedPeriod, foodList: $foodList, foodListCopy: $foodListCopy, totalCalories: $totalCalories, remainingCalories: $remainingCalories)
             
-//            ScrollView {
                 VStack {
                     if selectedPeriod == Periods.day {
                         // TODO: - Make chart use my data!!
@@ -147,7 +146,8 @@ struct FoodView: View {
                         foodListCopy = foodList // reserve a copy of all foods, will modify foodLIstCopy when determining either day, week, or month foods
                     }
                 })//onAppear
-//            }//scrollview
+            
+  
         }//vstack
     }//body
 }//struct
