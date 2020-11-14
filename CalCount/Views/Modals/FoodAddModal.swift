@@ -12,6 +12,7 @@ struct FoodAddModal: View {
     @EnvironmentObject var mm: ModalManager
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObj: RealmObject
+    @EnvironmentObject var foodManager: FoodManager
     
     // Food Entry state variables
     @State private var foodName = ""
@@ -139,6 +140,8 @@ struct FoodAddModal: View {
                             try! realmObj.realm.write {
                                 realmObj.realm.add(foodEntry)
                             }
+                            
+                            foodManager.updateFoodsList()
                             
                             // show alert for success
                             showSuccess()

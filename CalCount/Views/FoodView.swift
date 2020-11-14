@@ -120,7 +120,8 @@ struct FoodView: View {
                     // SAME as the Day btn action, BUT needed the data to show initially even w/o having clicked the button!
                     foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.isDateInToday($0.date) }
                     foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
-                    totalCalories = 0   // set totalCalories back to 0 so that it only accounts for this time period's total cals
+                    
+                    totalCalories = 0
                     for food in foodManager.foodsListCopy {
                         totalCalories += food.calories
                     }
@@ -128,6 +129,7 @@ struct FoodView: View {
                 
                 
             }//ScrollView
+            .padding(.bottom, 20)
         }//outter vstack
     }//body
 }//struct
