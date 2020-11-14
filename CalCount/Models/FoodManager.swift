@@ -34,7 +34,6 @@ class FoodManager: ObservableObject {
         for food in entries {
             if food.user?.username == username {
                 if !foodsList.contains(where: {$0.name == food.name}) {
-                    print("in the !contains")
                     foodsList.append(food)
                 }
             }
