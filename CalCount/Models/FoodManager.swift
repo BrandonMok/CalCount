@@ -19,6 +19,7 @@ class FoodManager: ObservableObject {
             for food in entries {
                 if food.user?.username == username {
                     self.foodsList.append(food)
+                    self.foodsListCopy.append(food)
                 }
             }
             
@@ -26,6 +27,8 @@ class FoodManager: ObservableObject {
         }
     }
     
-    // Published field to keep track of all of this user's food
-    @Published var foodsList: [FoodEntry] = [FoodEntry]()
+    @Published var foodsList: [FoodEntry] = [FoodEntry]()       // The MAIN food list - used to be filtered on
+    @Published var foodsListCopy: [FoodEntry] = [FoodEntry]()   // A copy of the food list that will use the main foodsList to filter upon (allows the original to be preserved)
+
+    
 }//class
