@@ -119,6 +119,7 @@ struct FoodView: View {
                 .onReceive(foodManager.$foodsList, perform: { _ in
                     // SAME as the Day btn action, BUT needed the data to show initially even w/o having clicked the button!
                     foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.isDateInToday($0.date) }
+                    foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
                     totalCalories = 0   // set totalCalories back to 0 so that it only accounts for this time period's total cals
                     for food in foodManager.foodsListCopy {
                         totalCalories += food.calories
@@ -164,7 +165,7 @@ struct FoodRow: View {
             
             Spacer()
 
-            Text("\(du.formatTime(passedDate: food.date, timeStyle: .medium ))")
+            Text("\(du.formatDate(passedDate: food.date, dateStyle: .medium )) - \(du.formatTime(passedDate: food.date, timeStyle: .short))")
                 .font(.subheadline)
                 .foregroundColor(.black)
                 .bold()
@@ -172,12 +173,13 @@ struct FoodRow: View {
         }
         .frame(maxWidth: .infinity, maxHeight: 50)
         .padding()
+        .background(Color(red: 233.0/255, green: 236.0/255, blue: 239.0/255))
         .contentShape(Rectangle())
         .onTapGesture {
             // TODO make a modal to update or delete!
             
             
-            
+            // remove from the foodManager food List! - if deleted!
         }
     }
 }
@@ -213,6 +215,7 @@ struct TopPeriodBar: View {
 //                    }
 
                     foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.isDateInToday($0.date) }
+                    foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
                     
                     totalCalories = 0   // set totalCalories back to 0 so that it only accounts for this time period's total cals
                     
@@ -243,10 +246,12 @@ struct TopPeriodBar: View {
 //                    if status.currentGoal != nil {
 ////                        var totalAllottedCals = status.currentGoal?.weightGoal
 //                    }
- 
+                    
                     foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.compare(Date(), to: $0.date, toGranularity: .weekday) == .orderedSame }
                     
-                    totalCalories = 0   // set totalCalories back to 0 so that it only accounts for this time period's total cals
+                    foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
+                    
+                    totalCalories = 0
                     
                     for food in foodManager.foodsListCopy {
                         totalCalories += food.calories
@@ -277,8 +282,9 @@ struct TopPeriodBar: View {
  
                     
                     foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.compare(Date(), to: $0.date, toGranularity: .month) == .orderedSame }
+                    foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
                     
-                    totalCalories = 0   // set totalCalories back to 0 so that it only accounts for this time period's total cals
+                    totalCalories = 0
                     
                     for food in foodManager.foodsListCopy {
                         totalCalories += food.calories
@@ -306,3 +312,15 @@ struct TopPeriodBar: View {
     }//body
 }//struct
 
+
+extension Date {
+    func isInSevenDays() -> Bool {
+        let now = Date()
+        let calendar = Calendar.current
+        let weekday = calendar.dateComponents([.weekday], from: now)
+        let startDate = calendar.startOfDay(for: now)
+        let nextWeekday = calendar.nextDate(after: now, matching: weekday, matchingPolicy: .nextTime)!
+        let endDate = calendar.date(byAdding: .day, value: 1, to: nextWeekday)!
+        return self >= startDate && self < endDate
+    }
+}
