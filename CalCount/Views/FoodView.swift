@@ -1,6 +1,7 @@
 
 import SwiftUI
 import SwiftUICharts
+import UIKit
 
 
 /**
@@ -24,10 +25,7 @@ struct FoodView: View {
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var modalManager: ModalManager
     @EnvironmentObject var realmObj: RealmObject
-    
-//    @EnvironmentObject var foodManager: FoodManager
-//    @ObservedObject var foodManager = FoodManager()
-    
+    @EnvironmentObject var foodManager: FoodManager
     
     @State var selectedPeriod = Periods.day
 
@@ -38,15 +36,6 @@ struct FoodView: View {
     // Calulated fields 
     @State private var totalCalories = 0
     @State private var remainingCalories = 0
-    
-//    init() {
-////        var fm = FoodManager(currentUser: self.status.currentUser.username)
-//        // then pass this to the FoodView()?
-//        foodManager.getUsersFoodList(username: self.status.currentUser.username)        // or do it on an onAppear?
-//
-//        print(foodManager.foodsList)
-//
-//    }
 
     
     var body: some View {
@@ -56,6 +45,7 @@ struct FoodView: View {
             
             ScrollView {
                 VStack {
+                    // Top Chart to display data
                     if selectedPeriod == Periods.day {
                         // TODO: - Make chart use my data!!
                         PieChartView(data: [10,20], title: "Calories")
@@ -68,6 +58,7 @@ struct FoodView: View {
     //                      // change type of chart
     //                }
                     
+                    // HStack with the calculated calories & remainder
                     HStack {
                         VStack{
                             Text("\(totalCalories)")
@@ -113,8 +104,8 @@ struct FoodView: View {
                 
                 // MARK: - Food List
                 VStack {
-                    if !foodListCopy.isEmpty {
-                        ForEach(foodListCopy, id: \.self) { food in
+                    if !foodManager.foodsList.isEmpty {
+                        ForEach(foodManager.foodsList, id: \.self) { food in
                             FoodRow(food: food)
                         }
                     }
@@ -127,29 +118,8 @@ struct FoodView: View {
                         Spacer()
                     }
                 }//vstack
-                .onAppear(perform: {
-                    // Get all of this user's Food Entries!
-                    
-                    
-                    // ISSUE: On appear occurs everytime you go to the tab
-                    // TODO!!
-                    // MIGHT need to keep a global for the array?
-                    
-                    let foodObjs =  realmObj.realm.objects(FoodEntry.self)
-                    
-                    if (foodObjs.count != 0) {
-                        foodObjs.forEach { food in
-                            if food.user!.username == status.currentUser.username {
-                                foodList.append(food)
-                            }
-                        }
-                        
-                        foodListCopy = foodList // reserve a copy of all foods, will modify foodLIstCopy when determining either day, week, or month foods
-                    }
-                })//onAppear
-            
             }//ScrollView
-        }//vstack
+        }//outter vstack
     }//body
 }//struct
 

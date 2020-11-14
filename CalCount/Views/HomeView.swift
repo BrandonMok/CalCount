@@ -9,13 +9,11 @@ import SwiftUI
  */
 struct HomeView: View {
     
+    // EnvironmentObjects
     @EnvironmentObject var tabManager: TabManager
     @EnvironmentObject var realmObject: RealmObject
     @EnvironmentObject var status: LoggedInStatus
     
-//    @ObservedObject var foodManager = FoodManager(foodUsername: status.currentUser.username)
-    
-//    var foodManager: FoodManager = FoodManager(foodUsername: "")
     
     var body: some View {
         ZStack {

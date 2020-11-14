@@ -13,6 +13,8 @@ struct LoginView: View {
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObj: RealmObject
     
+    @EnvironmentObject var foodManager: FoodManager
+    
     // Login State Variables
     @State private var username = ""
     @State private var password = ""
@@ -81,6 +83,7 @@ struct LoginView: View {
                         // and save currentUser for reference later
                         self.status.loggedIn = true
                         self.status.currentUser = user.first!
+                        self.foodManager.username = user.first!.username    // store username for foodManger! - Had issues with trying to use username from LoggedInStatus so had to do it this way
                     }
                 }
                 else {
