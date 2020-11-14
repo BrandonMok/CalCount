@@ -41,4 +41,20 @@ class FoodManager: ObservableObject {
         
         foodsListCopy = foodsList
     }
+    
+    /**
+     * calculateConsumedCalories
+     * @return Int
+     * Calculates the total consumed calories based on the foodsListCopy
+     * The foodsListCopy is an array that's a filtered version of the foodsList for the specific/chosen time period (e.g. Day, Week, Month)
+     */
+    func calculateConsumedCalories() -> Int {
+        var total = 0
+        
+        for food in foodsListCopy {
+            total += food.calories
+        }
+        
+        return total
+    }
 }//class
