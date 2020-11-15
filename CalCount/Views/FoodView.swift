@@ -23,12 +23,16 @@ struct FoodView: View {
 
     // EnvironmentObjects necessary for the application
     @EnvironmentObject var status: LoggedInStatus
-    @EnvironmentObject var modalManager: ModalManager
-    @EnvironmentObject var realmObj: RealmObject
+    @EnvironmentObject var realmObject: RealmObject
     @EnvironmentObject var foodManager: FoodManager
+    @EnvironmentObject var modalManager: ModalManager
     
     // Selected Time Period of data to see (e.g. Day, Week, Month)
     @State var selectedPeriod = Periods.day
+    
+//    @State var tappedFood: FoodEntry?
+    @State var showEditModal = false    // so issue, using modal manager triggers on the FloatingMenu (where FAB is) but need to pass in food to edit modal
+    
     
     // Calulated fields 
     @State private var totalCalories = 0
@@ -123,8 +127,6 @@ struct FoodView: View {
 
                     totalCalories = foodManager.calculateConsumedCalories()
                 })
-                
-                
             }//ScrollView
             .padding(.bottom, 20)
         }//outter vstack
@@ -143,9 +145,17 @@ struct FoodView_Previews: PreviewProvider {
  * A view to represent a Food Entry row
  */
 struct FoodRow: View {
-    var food: FoodEntry
-    @State private var du = DateUtility()
+    // EnvironmentObjects
+    @EnvironmentObject var realmObject: RealmObject
+    @EnvironmentObject var foodManager: FoodManager
     
+    var food: FoodEntry // passed in food
+    
+    // local state variables
+    @State private var du = DateUtility()
+    @State var showEditModal = false
+    
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -175,13 +185,13 @@ struct FoodRow: View {
         .background(Color(red: 233.0/255, green: 236.0/255, blue: 239.0/255))
         .contentShape(Rectangle())
         .onTapGesture {
-            // TODO make a modal to update or delete!
-            
-            
-            // remove from the foodManager food List! - if deleted!
+            showEditModal.toggle()
         }
-    }
-}
+        .fullScreenCover(isPresented: $showEditModal, content: {
+            FoodEditModal(food: food, showEditModal: $showEditModal)
+        })
+    }//body
+}//struct
 
 
 /**
@@ -300,6 +310,11 @@ struct TopPeriodBar: View {
 }//struct
 
 
+
+/**
+ * Extension Date
+ * Check to see if a date is within the current week
+ */
 extension Date {
     func isInSevenDays() -> Bool {
         let now = Date()

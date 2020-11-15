@@ -11,5 +11,6 @@ class ModalManager: ObservableObject {
     // property shared by FloatingMenu (has the button and actions) and the Food & water View
     @Published var showModal = false
     @Published var showCalorieModal = false
+    @Published var showCalorieEditModal = false
     @Published var showWaterModal = false
 }

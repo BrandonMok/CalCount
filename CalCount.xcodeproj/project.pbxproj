@@ -20,6 +20,7 @@
 		C95BA14F255A293700EF8149 /* FoodAddModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95BA14E255A293700EF8149 /* FoodAddModal.swift */; };
 		C95BA151255A29D000EF8149 /* WaterAddModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95BA150255A29D000EF8149 /* WaterAddModal.swift */; };
 		C95BA153255A2B2700EF8149 /* FoodManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95BA152255A2B2700EF8149 /* FoodManager.swift */; };
+		C95D79472560935600EB69A1 /* FoodEditModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95D79462560935600EB69A1 /* FoodEditModal.swift */; };
 		C95F1F4E25575127001A98C9 /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95F1F4D25575127001A98C9 /* FoodEntry.swift */; };
 		C96028492547267C001A3829 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96028482547267C001A3829 /* SettingsView.swift */; };
 		C960284B25472AD9001A3829 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960284A25472AD9001A3829 /* ChangePasswordView.swift */; };
@@ -53,6 +54,7 @@
 		C95BA14E255A293700EF8149 /* FoodAddModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddModal.swift; sourceTree = "<group>"; };
 		C95BA150255A29D000EF8149 /* WaterAddModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAddModal.swift; sourceTree = "<group>"; };
 		C95BA152255A2B2700EF8149 /* FoodManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodManager.swift; sourceTree = "<group>"; };
+		C95D79462560935600EB69A1 /* FoodEditModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEditModal.swift; sourceTree = "<group>"; };
 		C95F1F4D25575127001A98C9 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
 		C96028482547267C001A3829 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C960284A25472AD9001A3829 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				C95BA14E255A293700EF8149 /* FoodAddModal.swift */,
 				C95BA150255A29D000EF8149 /* WaterAddModal.swift */,
+				C95D79462560935600EB69A1 /* FoodEditModal.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				C9471074252B8ED500033FA5 /* ContentView.swift in Sources */,
 				C95BA151255A29D000EF8149 /* WaterAddModal.swift in Sources */,
 				C9511F90253234580052C8FA /* LoginView.swift in Sources */,
+				C95D79472560935600EB69A1 /* FoodEditModal.swift in Sources */,
 				C95BA14F255A293700EF8149 /* FoodAddModal.swift in Sources */,
 				C97285672554E44000EC5D1E /* FloatingMenu.swift in Sources */,
 				C9608755254F3B7F00C087C2 /* Goal.swift in Sources */,

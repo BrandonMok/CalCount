@@ -23,7 +23,6 @@ struct HomeView: View {
                     FoodView()
                         .environmentObject(self.status)
                         .environmentObject(self.realmObject)
-//                        .environmentObject(self.foodManager)
                         .tabItem {
                             Image(systemName: "house")
                             Text("Home")
