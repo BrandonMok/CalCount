@@ -7,9 +7,12 @@ import SwiftUI
  * Created / called from either the action of the FAB (i.e. tap the FAB button and tap the Food button) OR from the "home" tab
  */
 struct FoodEditModal: View {
+    // https://developer.apple.com/forums/thread/120034
+    // Reference to how to have binding value be passed to a subview
     
-    var food: FoodEntry?
-    @Binding var showEditModal: Bool
+    @State private var food: FoodEntry
+    var showEditModal: Binding<Bool>
+    
     
     // EnvironmentObjects needed for application
     @EnvironmentObject var realmObj: RealmObject
@@ -27,8 +30,16 @@ struct FoodEditModal: View {
     @State private var alertTitle = ""
     @State private var alertMsg = ""
     
-    // TODO
-    // Preload all the textfields/inputs w/ this food's values
+    
+    init(food: FoodEntry, showEditModal: Binding<Bool>) {
+        self.showEditModal = showEditModal
+        self._food = State(initialValue: food)
+        self._foodName = State(initialValue: String(food.name))
+        self._calories = State(initialValue: String(food.calories))
+        self._carbs = State(initialValue: String(food.carbs))
+        self._fats =  State(initialValue: String(food.fat))
+        self._protein =  State(initialValue: String(food.protein))
+    }
     
     
     var body: some View {
@@ -36,7 +47,7 @@ struct FoodEditModal: View {
 
             // TOP SECTION
             HStack {
-                Text("Edit Food - \(food!.name)")
+                Text("Edit Food - \(food.name)")
                     .font(.largeTitle)
                     .foregroundColor(.black)
                     .fontWeight(.heavy)
@@ -45,7 +56,7 @@ struct FoodEditModal: View {
 
                 // X-button to leave the "modal"
                 Button(action: {
-                    showEditModal.toggle()
+                    self.showEditModal.wrappedValue.toggle()
                 }, label: {
                     Image(systemName: "xmark")
                         .font(.title)
@@ -59,79 +70,80 @@ struct FoodEditModal: View {
 
 
             // INPUTS/SECTION
-//            Section(header: Text("Name")
-//                        .font(.title)
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.black)){
-//
-//                TextField("Name", text: $foodName)
-//                    .padding()
-//                    .keyboardType(.alphabet)
-//                    .foregroundColor(.black)
-//                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
-//                    .cornerRadius(5.0)
-//            }//section
-//
-//
-//            Section(header: Text("Calories")
-//                        .font(.title)
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.black)) {
-//                TextField("Calories", text: $calories)
-//                    .padding()
-//                    .keyboardType(.numberPad)
-//                    .foregroundColor(.black)
-//                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
-//                    .cornerRadius(5.0)
-//            }
-//
-//
-//
-//            Section(header: Text("Macronutrients")
-//                        .font(.title)
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.black)) {
-//
-//
-//                TextField("Carbohydrates (g)", text: $carbs)
-//                    .padding()
-//                    .keyboardType(.numberPad)
-//                    .foregroundColor(.black)
-//                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
-//                    .cornerRadius(5.0)
-//
-//
-//                TextField("Fat (g)", text: $fats)
-//                    .padding()
-//                    .keyboardType(.numberPad)
-//                    .foregroundColor(.black)
-//                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
-//                    .cornerRadius(5.0)
-//
-//
-//                TextField("Protein (g)", text: $protein)
-//                    .padding()
-//                    .keyboardType(.numberPad)
-//                    .foregroundColor(.black)
-//                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
-//                    .cornerRadius(5.0)
-//            }
-//
-//            Section(){
-//                HStack {
-//                    // Edit Button
-//                    Button(action: {
-//                        if foodName.isEmpty || calories.isEmpty || carbs.isEmpty || fats.isEmpty || protein.isEmpty {
-//                            showError()
-//                        }
-//                        else {
-//                            // There was input, now validate that the respective fields are numeric
-//                            if calories.isNumeric && carbs.isNumeric && fats.isNumeric && protein.isNumeric {
-//
-//                                // Edit the food object
+            Section(header: Text("Name")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)){
+
+                TextField("Name", text: $foodName)
+                    .padding()
+                    .keyboardType(.alphabet)
+                    .foregroundColor(.black)
+                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                    .cornerRadius(5.0)
+            }//section
+
+
+            Section(header: Text("Calories")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)) {
+                TextField("Calories", text: $calories)
+                    .padding()
+                    .keyboardType(.numberPad)
+                    .foregroundColor(.black)
+                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                    .cornerRadius(5.0)
+            }
+
+
+
+            Section(header: Text("Macronutrients")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)) {
+
+
+                TextField("Carbohydrates (g)", text: $carbs)
+                    .padding()
+                    .keyboardType(.numberPad)
+                    .foregroundColor(.black)
+                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                    .cornerRadius(5.0)
+
+                TextField("Fat (g)", text: $fats)
+                    .padding()
+                    .keyboardType(.numberPad)
+                    .foregroundColor(.black)
+                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                    .cornerRadius(5.0)
+
+
+                TextField("Protein (g)", text: $protein)
+                    .padding()
+                    .keyboardType(.numberPad)
+                    .foregroundColor(.black)
+                    .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
+                    .cornerRadius(5.0)
+            }
+
+            Section(){
+                HStack {
+                    // Edit Button
+                    Button(action: {
+                        if foodName.isEmpty || calories.isEmpty || carbs.isEmpty || fats.isEmpty || protein.isEmpty {
+                            showError()
+                        }
+                        else {
+                            // There was input, now validate that the respective fields are numeric
+                            if calories.isNumeric && carbs.isNumeric && fats.isNumeric && protein.isNumeric {
+
+                                // Edit the food object
 //                                try! realmObj.realm.write {
 //                                    // change the property in here!
 //                                    // TODO
+//
+//                                      // compare the State variables with the food object to see which ones are different?
 //
 //                                }
 //
@@ -139,51 +151,44 @@ struct FoodEditModal: View {
 //
 //                                // show alert for success
 //                                showSuccess(whichSuccess: "edit")
-//                            }
-//                            else {
-//                                // Non numeric input for the numeric only fields
-//                                showError()
-//                            }
-//                        }
-//                    }, label: {
-//                        Text("Confirm")
-//                            .foregroundColor(.white)
-//                            .font(.title2)
-//                            .fontWeight(.bold)
-////                            .frame(maxWidth: .infinity, minHeight: 0, maxHeight: 20)
-//                    })
-//                    .padding()
-//                    .background(Color("PrimaryBlue"))
-//                    .cornerRadius(15)
-//
-//
-//                    // Delete button
-//                    Button(action: {
-//                        // delete the food item!
-//
-//
-//
-//                    }, label: {
-//                        Text("Delete")
-//                            .foregroundColor(.white)
-//                            .font(.title2)
-//                            .fontWeight(.bold)
-////                            .frame(maxWidth: .infinity, minHeight: 0, maxHeight: 20)
-//                    })
-//                    .padding()
-//                    .background(Color(red: 230/255, green: 57/255, blue: 70/255))
-//                    .cornerRadius(15)
-//
-//
-//
-//                }//hstack
-//
-//
-//            }//section
-//            .padding(.top)
-//
-//
-//            Spacer()
+                            }
+                            else {
+                                // Non numeric input for the numeric only fields
+                                showError()
+                            }
+                        }
+                    }, label: {
+                        Text("Confirm")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                    })
+                    .padding()
+                    .background(Color("PrimaryBlue"))
+                    .cornerRadius(15)
+
+
+                    // Delete button
+                    Button(action: {
+                        // delete the food item!
+
+
+
+                    }, label: {
+                        Text("Delete")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                    })
+                    .padding()
+                    .background(Color(red: 230/255, green: 57/255, blue: 70/255))
+                    .cornerRadius(15)
+                }//hstack
+            }//section
+            .padding(.top)
+
+
+            Spacer()
         }//VStack
         .padding()
         .alert(isPresented: $showAlert, content: {
@@ -192,7 +197,7 @@ struct FoodEditModal: View {
                   message: Text("\(alertMsg)"),
                   dismissButton: .default(Text("OK"), action: {
                     if alertTitle == "Success" {
-                        showEditModal.toggle()
+                        self.showEditModal.wrappedValue.toggle()
                     }
                   }))
         })
@@ -225,8 +230,10 @@ struct FoodEditModal: View {
     }
 }//struct
 
+
 struct FoodEditModal_Previews: PreviewProvider {
     static var previews: some View {
-        FoodEditModal(food: FoodEntry(), showEditModal: .constant(true))
+        Text("Food Edit Modal")    // don't know what value I'd but for the showEditModal under this preview
+//        FoodEditModal(food: FoodEntry(), showEditModal: .init(Binding<Bool>)!)
     }
 }

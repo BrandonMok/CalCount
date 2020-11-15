@@ -252,7 +252,7 @@ struct TopPeriodBar: View {
 ////                        var totalAllottedCals = status.currentGoal?.weightGoal
 //                    }
                     
-                    foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.compare(Date(), to: $0.date, toGranularity: .weekday) == .orderedSame }
+                    foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.compare(Date(), to: $0.date, toGranularity: .weekOfYear) == .orderedSame }
                     
                     foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
                     
@@ -308,21 +308,3 @@ struct TopPeriodBar: View {
         
     }//body
 }//struct
-
-
-
-/**
- * Extension Date
- * Check to see if a date is within the current week
- */
-extension Date {
-    func isInSevenDays() -> Bool {
-        let now = Date()
-        let calendar = Calendar.current
-        let weekday = calendar.dateComponents([.weekday], from: now)
-        let startDate = calendar.startOfDay(for: now)
-        let nextWeekday = calendar.nextDate(after: now, matching: weekday, matchingPolicy: .nextTime)!
-        let endDate = calendar.date(byAdding: .day, value: 1, to: nextWeekday)!
-        return self >= startDate && self < endDate
-    }
-}
