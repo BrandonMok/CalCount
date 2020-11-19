@@ -8,6 +8,7 @@ import RealmSwift
  * Used & stored in realm -> therefore needs to extend Object
  */
 class FoodEntry: Object {
+    @objc dynamic var id = UUID().uuidString
     @objc dynamic var user: User? = User()
     @objc dynamic var name = ""
     @objc dynamic var calories = 0

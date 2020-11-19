@@ -8,20 +8,13 @@ import RealmSwift
  */
 class RealmObject: ObservableObject {
     
-    // Published field referencing the Realm instance
     @Published var realm: Realm
     
     init() {
-        let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-        realm = try! Realm(configuration: config)
+//        let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+//        realm = try! Realm(configuration: config)
+        
+        realm = try! Realm()
         print("REALM FILE LOCATION: \(Realm.Configuration.defaultConfiguration.fileURL)")
     }
-    
-    
-    
-    // Other useful information possibly for later
-    //                    let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-    //                    let realm = try! Realm(configuration: config)
-    //                    let realm = try! Realm()
-
 }

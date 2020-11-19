@@ -84,7 +84,6 @@ struct FoodEditModal: View {
                     .cornerRadius(5.0)
             }
 
-
             Section(header: Text("Calories")
                         .font(.title)
                         .fontWeight(.bold)
@@ -96,8 +95,6 @@ struct FoodEditModal: View {
                     .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                     .cornerRadius(5.0)
             }
-
-
 
             Section(header: Text("Macronutrients")
                         .font(.title)
@@ -150,7 +147,6 @@ struct FoodEditModal: View {
                                 }
 
                                 foodManager.updateFoodsList()
-//                                showSuccess(whichSuccess: "edit")
                                                                 
                                 alertTitle = "Success"
                                 alertMsg = "Food entry edited successfully!"
@@ -197,7 +193,6 @@ struct FoodEditModal: View {
                         Alert(title: Text("Delete Food"),
                               message: Text("Are you sure you wnat to delete this food item?"),
                               primaryButton: .default(Text("Confirm"), action: {
-                                
                                 
                             if let foodInArr = foodManager.foodsList.firstIndex(
                                 where: {
