@@ -22,11 +22,12 @@ struct FoodEditModal: View {
     @State private var foodName = ""
     @State private var calories = ""
     @State private var carbs = ""
-    @State private var fats = ""
+    @State private var fat = ""
     @State private var protein = ""
     
     // Alert state variables
     @State private var showAlert = false
+    @State private var showAreYouSureAlert = false
     @State private var alertTitle = ""
     @State private var alertMsg = ""
     
@@ -37,7 +38,7 @@ struct FoodEditModal: View {
         self._foodName = State(initialValue: String(food.name))
         self._calories = State(initialValue: String(food.calories))
         self._carbs = State(initialValue: String(food.carbs))
-        self._fats =  State(initialValue: String(food.fat))
+        self._fat =  State(initialValue: String(food.fat))
         self._protein =  State(initialValue: String(food.protein))
     }
     
@@ -81,7 +82,7 @@ struct FoodEditModal: View {
                     .foregroundColor(.black)
                     .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                     .cornerRadius(5.0)
-            }//section
+            }
 
 
             Section(header: Text("Calories")
@@ -103,7 +104,6 @@ struct FoodEditModal: View {
                         .fontWeight(.bold)
                         .foregroundColor(.black)) {
 
-
                 TextField("Carbohydrates (g)", text: $carbs)
                     .padding()
                     .keyboardType(.numberPad)
@@ -111,7 +111,7 @@ struct FoodEditModal: View {
                     .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                     .cornerRadius(5.0)
 
-                TextField("Fat (g)", text: $fats)
+                TextField("Fat (g)", text: $fat)
                     .padding()
                     .keyboardType(.numberPad)
                     .foregroundColor(.black)
@@ -127,33 +127,37 @@ struct FoodEditModal: View {
                     .cornerRadius(5.0)
             }
 
+            
+            
+            // MARK: - Buttons
             Section(){
                 HStack {
                     // Edit Button
                     Button(action: {
-                        if foodName.isEmpty || calories.isEmpty || carbs.isEmpty || fats.isEmpty || protein.isEmpty {
+                        if foodName.isEmpty || calories.isEmpty || carbs.isEmpty || fat.isEmpty || protein.isEmpty {
                             showError()
                         }
                         else {
                             // There was input, now validate that the respective fields are numeric
-                            if calories.isNumeric && carbs.isNumeric && fats.isNumeric && protein.isNumeric {
-
+                            if calories.isNumeric && carbs.isNumeric && fat.isNumeric && protein.isNumeric {
                                 // Edit the food object
-//                                try! realmObj.realm.write {
-//                                    // change the property in here!
-//                                    // TODO
-//
-//                                      // compare the State variables with the food object to see which ones are different?
-//
-//                                }
-//
-//                                foodManager.updateFoodsList()
-//
-//                                // show alert for success
+                                try! realmObj.realm.write {
+                                    food.name = foodName
+                                    food.calories = Int(calories)!
+                                    food.carbs = Int(carbs)!
+                                    food.fat = Int(fat)!
+                                    food.protein = Int(protein)!
+                                }
+
+                                foodManager.updateFoodsList()
 //                                showSuccess(whichSuccess: "edit")
+                                                                
+                                alertTitle = "Success"
+                                alertMsg = "Food entry edited successfully!"
+                                showAlert.toggle()
+
                             }
                             else {
-                                // Non numeric input for the numeric only fields
                                 showError()
                             }
                         }
@@ -166,14 +170,20 @@ struct FoodEditModal: View {
                     .padding()
                     .background(Color("PrimaryBlue"))
                     .cornerRadius(15)
+                    .alert(isPresented: $showAlert, content: {
+                        Alert(title: Text("\(alertTitle)"),
+                              message: Text("\(alertMsg)"),
+                              dismissButton: .default(Text("OK"), action: {
+                                if alertTitle == "Success" {
+                                    self.showEditModal.wrappedValue.toggle()
+                                }
+                              }))
+                    })
 
 
                     // Delete button
                     Button(action: {
-                        // delete the food item!
-
-
-
+                        showAreYouSureAlert.toggle()
                     }, label: {
                         Text("Delete")
                             .foregroundColor(.white)
@@ -183,6 +193,42 @@ struct FoodEditModal: View {
                     .padding()
                     .background(Color(red: 230/255, green: 57/255, blue: 70/255))
                     .cornerRadius(15)
+                    .alert(isPresented: $showAreYouSureAlert) {
+                        Alert(title: Text("Delete Food"),
+                              message: Text("Are you sure you wnat to delete this food item?"),
+                              primaryButton: .default(Text("Confirm"), action: {
+                                
+                                
+                            if let foodInArr = foodManager.foodsList.firstIndex(
+                                where: {
+                                    $0.name == food.name && $0.calories == food.calories }) {
+                                foodManager.foodsList.remove(at: foodInArr)
+                                foodManager.foodsListCopy = foodManager.foodsList
+                            }
+                                
+//                                foodManager.foodsList = []
+//                                foodManager.foodsListCopy = []
+                                    
+                            try! realmObj.realm.write {
+                                realmObj.realm.delete(self.food)
+                            }
+                                
+                                
+//                            foodManager.updateFoodsList()
+                                
+                            alertTitle = "Success"
+                            alertMsg = "Food entry deleted successfully!"
+                            showAreYouSureAlert.toggle()
+
+                          }),
+                          secondaryButton: .default(Text("Cancel"), action: {
+                            showAreYouSureAlert.toggle()
+                          }
+                        ))//Alert
+                    }//alert
+                    
+                    
+                    
                 }//hstack
             }//section
             .padding(.top)
@@ -191,41 +237,16 @@ struct FoodEditModal: View {
             Spacer()
         }//VStack
         .padding()
-        .alert(isPresented: $showAlert, content: {
-            // Alert to show either success or failure
-            Alert(title: Text("\(alertTitle)"),
-                  message: Text("\(alertMsg)"),
-                  dismissButton: .default(Text("OK"), action: {
-                    if alertTitle == "Success" {
-                        self.showEditModal.wrappedValue.toggle()
-                    }
-                  }))
-        })
         .onTapGesture {
-            self.hideKeyboard() // hide the keyboard if touch elsewhere
+            self.hideKeyboard()
         }
     }//body
     
     
     // Reusable showError function
-    // Sets and toggles the necessary fields
     func showError() {
         alertTitle = "Error"
         alertMsg = "There was an error editing the food! Please make sure all inputs are entered accordingly."
-        showAlert.toggle()
-    }
-    
-    // Success alert message title and message setting
-    func showSuccess(whichSuccess: String) {
-        alertTitle = "Success"
-        
-        if whichSuccess == "edit" {
-            alertMsg = "Food entry edited successfully!"
-        }
-        else {
-            alertMsg = "Food entry deleted successfully!"
-        }
-        
         showAlert.toggle()
     }
 }//struct
