@@ -30,9 +30,8 @@ struct FoodView: View {
     // Selected Time Period of data to see (e.g. Day, Week, Month)
     @State var selectedPeriod = Periods.day
     
-//    @State var tappedFood: FoodEntry?
-    @State var showEditModal = false    // so issue, using modal manager triggers on the FloatingMenu (where FAB is) but need to pass in food to edit modal
-    
+    @State var showEditModal = false
+
     
     // Calulated fields 
     @State private var totalCalories = 0

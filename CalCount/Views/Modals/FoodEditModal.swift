@@ -137,7 +137,7 @@ struct FoodEditModal: View {
                         else {
                             // There was input, now validate that the respective fields are numeric
                             if calories.isNumeric && carbs.isNumeric && fat.isNumeric && protein.isNumeric {
-                                // Edit the food object
+                                
                                 try! realmObj.realm.write {
                                     food.name = foodName
                                     food.calories = Int(calories)!
@@ -193,10 +193,10 @@ struct FoodEditModal: View {
                         Alert(title: Text("Delete Food"),
                               message: Text("Are you sure you wnat to delete this food item?"),
                               primaryButton: .default(Text("Confirm"), action: {
-                                
+                
+                            
                             if let foodInArr = foodManager.foodsList.firstIndex(
-                                where: {
-                                    $0.name == food.name && $0.calories == food.calories }) {
+                                where: {$0.id == food.id }) {
                                 foodManager.foodsList.remove(at: foodInArr)
                                 foodManager.foodsListCopy = foodManager.foodsList
                             }

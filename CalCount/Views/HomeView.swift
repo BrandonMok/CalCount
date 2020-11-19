@@ -14,6 +14,8 @@ struct HomeView: View {
     @EnvironmentObject var realmObject: RealmObject
     @EnvironmentObject var status: LoggedInStatus
     
+    @EnvironmentObject var mm: ModalManager
+    
     
     var body: some View {
         ZStack {
@@ -29,7 +31,7 @@ struct HomeView: View {
                         }
                         .tag(Tabs.home)
                     
-                    Text("Tab stuff")
+                    Text("Water tab")
                         .environmentObject(self.status)
                         .environmentObject(self.realmObject)
                         .tabItem {
@@ -55,7 +57,6 @@ struct HomeView: View {
                             Text("Settings")
                         }
                         .tag(Tabs.settings)
-
                 }//tabview
             }//vstack
             

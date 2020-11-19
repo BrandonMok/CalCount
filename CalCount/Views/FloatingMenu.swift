@@ -19,7 +19,7 @@ struct FloatingMenu: View {
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObject: RealmObject
     
-    @State private var showMenuItems = false
+    @State var showMenuItems = false
     
     
     var body: some View {
