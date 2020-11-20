@@ -201,13 +201,12 @@ struct FoodEditModal: View {
                                 foodManager.foodsListCopy = foodManager.foodsList
                             }
                                 
-//                                foodManager.foodsList = []
-//                                foodManager.foodsListCopy = []
-                                    
+                            
+                            // PROBLEM:
+                            // Deleting object throws object invalidated or deleted error!
                             try! realmObj.realm.write {
                                 realmObj.realm.delete(self.food)
                             }
-                                
                                 
 //                            foodManager.updateFoodsList()
                                 

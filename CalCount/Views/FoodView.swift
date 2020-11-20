@@ -29,6 +29,7 @@ struct FoodView: View {
     
     // Selected Time Period of data to see (e.g. Day, Week, Month)
     @State var selectedPeriod = Periods.day
+    @State var chartData: [Double] = []
     
     @State var showEditModal = false
 
@@ -41,23 +42,22 @@ struct FoodView: View {
     var body: some View {
         VStack {
             // MARK: - TOP BAR (Day, Week, Month)
-            TopPeriodBar(selectedPeriod: $selectedPeriod, totalCalories: $totalCalories, remainingCalories: $remainingCalories)
+            TopPeriodBar(selectedPeriod: $selectedPeriod, totalCalories: $totalCalories, remainingCalories: $remainingCalories, chartData: $chartData)
             
             ScrollView {
                 VStack {
                     // Top Chart to display data
                     if selectedPeriod == Periods.day {
-                        // TODO: - Make chart use my data!!
-                        // Data will be consumed? - have to loop at what data is accepts (i.e. total and then entries?)
-                        PieChartView(data: [10,20], title: "Calories")
+                        PieChartView(data: chartData, title: "Calories")
                             .frame(maxWidth: .infinity)
                     }
-    //                else if selectedPeriod == Periods.week {
-    //                      // change type of chart
-    //                }
-    //                else if selectedPeriod == Periods.month {
-    //                      // change type of chart
-    //                }
+                    else if selectedPeriod == Periods.week {
+//                        BarChartView(data: ChartData(values: [("2018 Q4",63150), ("2019 Q1",50900), ("2019 Q2",77550), ("2019 Q3",79600), ("2019 Q4",92550)]), title: "Week")
+                    }
+                    else if selectedPeriod == Periods.month {
+                        LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Month")
+                        
+                    }
                     
                     // HStack with the calculated calories & remainder
                     HStack {
@@ -208,6 +208,7 @@ struct TopPeriodBar: View {
     @Binding var selectedPeriod: Periods
     @Binding var totalCalories: Int
     @Binding var remainingCalories: Int
+    @Binding var chartData: [Double]
 
     
     var body: some View {
@@ -226,6 +227,9 @@ struct TopPeriodBar: View {
                     foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
                     
                     totalCalories = foodManager.calculateConsumedCalories()
+        
+                    chartData = []
+                    chartData.append(contentsOf: foodManager.getDayChartData())
                 }
                 
 

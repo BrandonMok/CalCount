@@ -57,4 +57,18 @@ class FoodManager: ObservableObject {
         
         return total
     }
+    
+    
+    
+    func getDayChartData() -> [Double] {
+        return [Double(calculateConsumedCalories())];
+    }
+    
+//    func getWeekChartData() -> [Int] {
+//        // [value, value] each value in the array will be the total for each day of the week
+//    }
+//
+//    func getMonthChartData() -> [Int] {
+//        // [value, value] each value in the array will be the total for each day of the month
+//    }
 }//class

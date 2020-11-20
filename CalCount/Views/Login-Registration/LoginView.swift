@@ -74,16 +74,18 @@ struct LoginView: View {
                     let user = realmObj.realm.objects(User.self)
                         .filter("username = %@ AND password = %@", username, password)
                     
-                    // if no user found, error
                     if user.count == 0 {
                         error = true
                     }
                     else {
-                        // In environment object "status", set variable loggedIn to true
-                        // and save currentUser for reference later
                         self.status.loggedIn = true
                         self.status.currentUser = user.first!
                         self.foodManager.username = user.first!.username    // store username for foodManger! - Had issues with trying to use username from LoggedInStatus so had to do it this way
+                        
+                        
+                        UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+                        UserDefaults.standard.set(self.status.currentUser, forKey: "curUser")
+                        UserDefaults.standard.synchronize()
                     }
                 }
                 else {
