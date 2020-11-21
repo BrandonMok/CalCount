@@ -31,7 +31,7 @@ struct HomeView: View {
                         }
                         .tag(Tabs.home)
                     
-                    Text("Water tab")
+                    WaterView()
                         .environmentObject(self.status)
                         .environmentObject(self.realmObject)
                         .tabItem {

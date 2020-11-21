@@ -17,6 +17,7 @@ struct CalCountApp: App {
                 .environmentObject(ModalManager())
                 .environmentObject(TabManager())
                 .environmentObject(FoodManager())
+                .environmentObject(WaterManager())
         }
     }
 }

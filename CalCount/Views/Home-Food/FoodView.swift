@@ -52,11 +52,10 @@ struct FoodView: View {
                             .frame(maxWidth: .infinity)
                     }
                     else if selectedPeriod == Periods.week {
-//                        BarChartView(data: ChartData(values: [("2018 Q4",63150), ("2019 Q1",50900), ("2019 Q2",77550), ("2019 Q3",79600), ("2019 Q4",92550)]), title: "Week")
+//                        BarChartView(data: ChartData(points: chartData), title: "Week")
                     }
                     else if selectedPeriod == Periods.month {
-                        LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Month")
-                        
+//                        LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Month")
                     }
                     
                     // HStack with the calculated calories & remainder
@@ -228,7 +227,7 @@ struct TopPeriodBar: View {
                     
                     totalCalories = foodManager.calculateConsumedCalories()
         
-                    chartData = []
+//                    chartData = []
                     chartData.append(contentsOf: foodManager.getDayChartData())
                 }
                 
@@ -260,6 +259,8 @@ struct TopPeriodBar: View {
                     foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
                     
                     totalCalories = foodManager.calculateConsumedCalories()
+                    
+//                    foodManager.getWeekChartData()
                 }
                 
                 selectedPeriod = Periods.week

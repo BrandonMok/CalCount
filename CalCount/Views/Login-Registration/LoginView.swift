@@ -14,6 +14,7 @@ struct LoginView: View {
     @EnvironmentObject var realmObj: RealmObject
     
     @EnvironmentObject var foodManager: FoodManager
+    @EnvironmentObject var waterManager: WaterManager
     
     // Login State Variables
     @State private var username = ""
@@ -81,11 +82,20 @@ struct LoginView: View {
                         self.status.loggedIn = true
                         self.status.currentUser = user.first!
                         self.foodManager.username = user.first!.username    // store username for foodManger! - Had issues with trying to use username from LoggedInStatus so had to do it this way
+                        self.waterManager.username = user.first!.username
                         
                         
-                        UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
-                        UserDefaults.standard.set(self.status.currentUser, forKey: "curUser")
-                        UserDefaults.standard.synchronize()
+//                        UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+//                        
+//                        
+//                        let encodedData = try! NSKeyedArchiver.archivedData(withRootObject: self.status.currentUser, requiringSecureCoding: false)
+//                        
+//                        UserDefaults.standard.set(encodedData, forKey: "curUser")
+////                        UserDefaults.standard.set(self.status.currentUser, forKey: "curUser")
+//                        
+//                        
+//                        
+//                        UserDefaults.standard.synchronize()
                     }
                 }
                 else {

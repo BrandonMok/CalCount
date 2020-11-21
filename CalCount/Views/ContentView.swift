@@ -14,12 +14,16 @@ struct ContentView: View {
     @EnvironmentObject var realmObject: RealmObject
     
     @EnvironmentObject var foodManager: FoodManager
+    @EnvironmentObject var waterManager: WaterManager
     
+//    @State var decoded = UserDefaults.standard.object(forKey: "curUser") as! Data
+//    @State var userObj = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! User
+
     
     var body: some View {
         VStack {
             // To switch between loggedIn and notLoggedIn views, have this environment variable to switch
-            if self.status.loggedIn || UserDefaults.standard.bool(forKey: "isUserLoggedIn") {
+            if self.status.loggedIn { //UserDefaults.standard.bool(forKey: "isUserLoggedIn")
                 // Logged in view
                 HomeView()
                     .transition(.opacity)
@@ -32,16 +36,21 @@ struct ContentView: View {
                 LandingView()
             }
         }//VSTack
-        .onAppear {
-            let loggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
-            
-            if loggedIn {
-                self.status.loggedIn = true
-                self.status.currentUser = UserDefaults.standard.object(forKey: "curUser") as? User ?? User()
-                let theUser = UserDefaults.standard.object(forKey: "curUser") as? User ?? User()
-                self.foodManager.username = theUser.username
-            }
-        }//onAppear
+//        .onAppear {
+////            let isTheUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+////
+//////            let decoded  = UserDefaults.standard.object(forKey: "curUser") as! Data
+//////            let userObj = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! User
+////
+////            if isTheUserLoggedIn {
+////                self.status.loggedIn = true
+////
+////                guard let currUser = UserDefaults.standard.object(forKey: "curUser") as? User else {return}
+////                self.status.currentUser = currUser
+////                self.foodManager.username = currUser.username
+////                self.waterManager.username = currUser.username
+////            }
+//        }//onAppear
     }
 }
 

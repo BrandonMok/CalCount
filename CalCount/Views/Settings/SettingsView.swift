@@ -57,9 +57,9 @@ struct SettingsView: View {
                         self.status.loggedIn = false
                         self.status.currentUser = User()
                         
-                        UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
-                        UserDefaults.standard.set(nil, forKey: "curUser")
-                        UserDefaults.standard.synchronize()
+//                        UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+//                        UserDefaults.standard.set(nil, forKey: "curUser")
+//                        UserDefaults.standard.synchronize()
 
                     }, label: {
                         Text("Logout")

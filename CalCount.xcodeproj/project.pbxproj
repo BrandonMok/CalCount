@@ -27,6 +27,9 @@
 		C960284D25473E8B001A3829 /* TabManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960284C25473E8B001A3829 /* TabManager.swift */; };
 		C960284F25474C20001A3829 /* ChangeAccountGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960284E25474C20001A3829 /* ChangeAccountGenderView.swift */; };
 		C9608755254F3B7F00C087C2 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9608754254F3B7F00C087C2 /* Goal.swift */; };
+		C968A13025689A64008A193C /* WaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968A12F25689A64008A193C /* WaterView.swift */; };
+		C968A13225689C84008A193C /* WaterEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968A13125689C84008A193C /* WaterEntry.swift */; };
+		C968A13425689CFB008A193C /* WaterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968A13325689CFB008A193C /* WaterManager.swift */; };
 		C96BCE6025465274008121AE /* LoggedInStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96BCE5F25465274008121AE /* LoggedInStatus.swift */; };
 		C96BCE6225465369008121AE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96BCE6125465369008121AE /* HomeView.swift */; };
 		C97010682547A0DE003EC8FF /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97010672547A0DE003EC8FF /* GoalView.swift */; };
@@ -61,6 +64,9 @@
 		C960284C25473E8B001A3829 /* TabManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabManager.swift; sourceTree = "<group>"; };
 		C960284E25474C20001A3829 /* ChangeAccountGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAccountGenderView.swift; sourceTree = "<group>"; };
 		C9608754254F3B7F00C087C2 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		C968A12F25689A64008A193C /* WaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterView.swift; sourceTree = "<group>"; };
+		C968A13125689C84008A193C /* WaterEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEntry.swift; sourceTree = "<group>"; };
+		C968A13325689CFB008A193C /* WaterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterManager.swift; sourceTree = "<group>"; };
 		C96BCE5F25465274008121AE /* LoggedInStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInStatus.swift; sourceTree = "<group>"; };
 		C96BCE6125465369008121AE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C97010672547A0DE003EC8FF /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
@@ -137,13 +143,14 @@
 		C9511F8A25322BBA0052C8FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C968A12E25689A55008A193C /* Water */,
+				C968A12D25689A3A008A193C /* Home-Food */,
 				C95BA14D255A291400EF8149 /* Modals */,
 				C97285632554DCCB00EC5D1E /* Login-Registration */,
 				C9DA822125475625004A95B6 /* Settings */,
 				C9471073252B8ED500033FA5 /* ContentView.swift */,
 				C96BCE6125465369008121AE /* HomeView.swift */,
 				C97285662554E44000EC5D1E /* FloatingMenu.swift */,
-				C9FD4D2E25572B5D00BFF24A /* FoodView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -156,6 +163,22 @@
 				C95D79462560935600EB69A1 /* FoodEditModal.swift */,
 			);
 			path = Modals;
+			sourceTree = "<group>";
+		};
+		C968A12D25689A3A008A193C /* Home-Food */ = {
+			isa = PBXGroup;
+			children = (
+				C9FD4D2E25572B5D00BFF24A /* FoodView.swift */,
+			);
+			path = "Home-Food";
+			sourceTree = "<group>";
+		};
+		C968A12E25689A55008A193C /* Water */ = {
+			isa = PBXGroup;
+			children = (
+				C968A12F25689A64008A193C /* WaterView.swift */,
+			);
+			path = Water;
 			sourceTree = "<group>";
 		};
 		C97285632554DCCB00EC5D1E /* Login-Registration */ = {
@@ -180,6 +203,8 @@
 				C95F1F4D25575127001A98C9 /* FoodEntry.swift */,
 				C95BA152255A2B2700EF8149 /* FoodManager.swift */,
 				C976BE39255E114500EE4ACB /* DateUtility.swift */,
+				C968A13125689C84008A193C /* WaterEntry.swift */,
+				C968A13325689CFB008A193C /* WaterManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -277,6 +302,7 @@
 				C9511F9225323E390052C8FA /* SignUpView.swift in Sources */,
 				C976BE3A255E114500EE4ACB /* DateUtility.swift in Sources */,
 				C9FD4D2F25572B5D00BFF24A /* FoodView.swift in Sources */,
+				C968A13025689A64008A193C /* WaterView.swift in Sources */,
 				C9AEF435253680C100DEF119 /* User.swift in Sources */,
 				C96028492547267C001A3829 /* SettingsView.swift in Sources */,
 				C9471074252B8ED500033FA5 /* ContentView.swift in Sources */,
@@ -295,7 +321,9 @@
 				C9471072252B8ED500033FA5 /* CalCountApp.swift in Sources */,
 				C97010682547A0DE003EC8FF /* GoalView.swift in Sources */,
 				C95F1F4E25575127001A98C9 /* FoodEntry.swift in Sources */,
+				C968A13425689CFB008A193C /* WaterManager.swift in Sources */,
 				C96BCE6025465274008121AE /* LoggedInStatus.swift in Sources */,
+				C968A13225689C84008A193C /* WaterEntry.swift in Sources */,
 				C960284F25474C20001A3829 /* ChangeAccountGenderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

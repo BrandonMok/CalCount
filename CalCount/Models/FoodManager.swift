@@ -63,12 +63,41 @@ class FoodManager: ObservableObject {
     func getDayChartData() -> [Double] {
         return [Double(calculateConsumedCalories())];
     }
-    
-//    func getWeekChartData() -> [Int] {
+
+//    func getWeekChartData() -> [Double] {
 //        // [value, value] each value in the array will be the total for each day of the week
-//    }
+//        var weekFoodArr: [Double] = []
+//        var day: Date? = nil
+//        
+////        let test = Dictionary(grouping: foodsListCopy) { $0.date }
+////        print("TEST: \(test)")
 //
-//    func getMonthChartData() -> [Int] {
+////        for food in foodsListCopy {
+////            // need to check if the first date is the same as the 2nd date
+//////            if day == nil {
+//////                day = food.date
+//////            }
+//////            else {
+//////
+//////            }
+////
+////
+//////            if Calendar.current.dateComponents([.day], from: )
+////
+////
+////
+////            weekFoodArr.append(Double(food.calories))
+////        }
+//        return weekFoodArr
+//    }
+
+//    func getMonthChartData() -> [Double] {
 //        // [value, value] each value in the array will be the total for each day of the month
+//        var monthFoodArr: [Double] = []
+//
+//        for food in foodsListCopy {
+//          // group by day?
+//        }
+//
 //    }
 }//class
