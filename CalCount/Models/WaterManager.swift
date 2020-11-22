@@ -15,7 +15,7 @@ class WaterManager: ObservableObject {
     // Used to know which FoodEntry data is there's and only use theirs
     var username: String = "" {
         didSet {
-//            updateFoodsList()
+            updateWaterList()
             objectWillChange.send()
         }
     }
@@ -32,7 +32,7 @@ class WaterManager: ObservableObject {
         
         for water in entries {
             if water.user?.username == username {
-                if !waterList.contains(where: {$0.id == water.id}) {
+                if !waterList.contains(where: {$0.id == water.id}) && Calendar.current.isDateInToday(water.date){
                     tempWaterList.append(water)
                 }
             }
