@@ -116,7 +116,7 @@ struct WaterRow: View {
                 
                 Spacer()
                 
-                Text("\(water.amount)")
+                Text("\(water.amount)oz")
                     .font(.title)
                     .foregroundColor(.black)
                     .bold()

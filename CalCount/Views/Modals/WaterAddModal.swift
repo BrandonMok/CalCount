@@ -53,7 +53,7 @@ struct WaterAddModal: View {
             Section(header: Text("Quantity")
                         .fontWeight(.heavy)
                         .foregroundColor(.blue)){
-                TextField("Quantity (g)", text: $amount)
+                TextField("Quantity (oz)", text: $amount)
                     .keyboardType(.numberPad)
                     .padding()
                     .foregroundColor(.black)
@@ -63,47 +63,64 @@ struct WaterAddModal: View {
             
             Section(){
                 // Submit button - TODO: not showing!
-//                Button(action: {
-//                    // CHECK input && add to realm!
-//                    if amount.isEmpty {
-//                        // ERROR - invalid input (blank)
-//                        showError()
-//                    }
-//                    else {
-//                        if amount.isNumeric {
-//
-//                            // Create a WaterEntry
-//                            let waterEntry = WaterEntry()
-//                            waterEntry.user = self.status.currentUser
-//                            waterEntry.amount = Int(amount)!
-//
-//                            // SAVE the object
-//                            try! realmObj.realm.write {
-//                                realmObj.realm.add(waterEntry)
-//                            }
-//
-//                            waterManager.updateWaterList()
-//
-//                            // show alert for success
-//                            showSuccess()
-//                        }
-//                        else {
-//                            // Non numeric input for the numeric only fields
-//                            showError()
-//                        }
-//                    }
-//                }, label: {
-//                    Text("Submit")
-//                        .foregroundColor(.white)
-//                        .font(.title2)
-//                        .fontWeight(.bold)
-//                        .frame(maxWidth: .infinity, minHeight: 0, maxHeight: 20)
-//                })
+                Button(action: {
+                    // CHECK input && add to realm!
+                    if amount.isEmpty {
+                        // ERROR - invalid input (blank)
+                        showError()
+                    }
+                    else {
+                        if amount.isNumeric {
+
+                            // Create a WaterEntry
+                            let waterEntry = WaterEntry()
+                            waterEntry.user = self.status.currentUser
+                            waterEntry.amount = Int(amount)!
+
+                            // SAVE the object
+                            try! realmObj.realm.write {
+                                realmObj.realm.add(waterEntry)
+                            }
+
+                            waterManager.updateWaterList()
+
+                            // show alert for success
+                            showSuccess()
+                        }
+                        else {
+                            // Non numeric input for the numeric only fields
+                            showError()
+                        }
+                    }
+                }, label: {
+                    Text("Submit")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity, minHeight: 0, maxHeight: 20)
+                })
+                .padding()
+                .background(Color("PrimaryBlue"))
+                .cornerRadius(15)
             
-            }
+            }//section
             .padding(.top)
+                
+            
+            Spacer()
         }// Vstack
         .padding()
+        .alert(isPresented: $showAlert, content: {
+            // Alert to show either success or failure
+            Alert(title: Text("\(alertTitle)"),
+                  message: Text("\(alertMsg)"),
+                  dismissButton: .default(Text("OK"), action: {
+                    if alertTitle == "Success" {
+                        mm.showWaterModal.toggle()
+                        mm.showModal.toggle()
+                    }
+                  }))
+        })
         .onTapGesture {
             self.hideKeyboard()
         }
