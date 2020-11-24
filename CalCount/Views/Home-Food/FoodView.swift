@@ -31,9 +31,6 @@ struct FoodView: View {
     @State var selectedPeriod = Periods.day
     @State var chartData: [Double] = []
     
-    @State var showEditModal = false
-
-    
     // Calulated fields 
     @State private var totalCalories = 0
     @State private var remainingCalories = 0
@@ -125,6 +122,13 @@ struct FoodView: View {
 
                     totalCalories = foodManager.calculateConsumedCalories()
                 })
+                
+                // do an on appear? and check on the selectedPeriod??
+                
+                
+                
+                
+                
             }//ScrollView
             .padding(.bottom, 20)
         }//outter vstack

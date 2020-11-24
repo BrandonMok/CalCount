@@ -62,7 +62,6 @@ struct WaterAddModal: View {
             }
             
             Section(){
-                // Submit button - TODO: not showing!
                 Button(action: {
                     // CHECK input && add to realm!
                     if amount.isEmpty {

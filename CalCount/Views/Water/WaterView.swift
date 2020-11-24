@@ -6,11 +6,11 @@ import UIKit
 /**
  * WaterView
  * A view in the TabView that shows all the user's data on the water entries they've entered
- * Can change between different time periods of their data, look at graphs, look at their entries, and manage their food entries
+ * Can change between different time periods of their data, look at graphs, look at their entries, and manage their water logs
  */
 struct WaterView: View {
     
-//    @EnvironmentObject var tabManager: TabManager
+    // EnvironmentObjects necessary for the application
     @EnvironmentObject var realmObject: RealmObject
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var waterManager: WaterManager
@@ -107,6 +107,8 @@ struct WaterRow: View {
     
     @State private var du = DateUtility()
     
+    @State var showWaterAlertModal = false
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -127,11 +129,11 @@ struct WaterRow: View {
         .padding()
         .background(Color(red: 233.0/255, green: 236.0/255, blue: 239.0/255))
         .contentShape(Rectangle())
-//        .onTapGesture {
-//            showEditModal.toggle()
-//        }
-//        .fullScreenCover(isPresented: $showEditModal, content: {
-//            FoodEditModal(food: food, showEditModal: $showEditModal)
-//        })
+        .onTapGesture {
+            showWaterAlertModal.toggle()
+        }
+        .fullScreenCover(isPresented: $showWaterAlertModal, content: {
+            WaterEditModal(water: water, showWaterAlertModal: $showWaterAlertModal)
+        })
     }
 }

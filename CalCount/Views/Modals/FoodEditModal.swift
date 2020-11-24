@@ -4,7 +4,6 @@ import SwiftUI
 /**
  * FoodEditModal
  * Struct to act as a "modal" to show the user a form in which they can edit a Food Entry
- * Created / called from either the action of the FAB (i.e. tap the FAB button and tap the Food button) OR from the "home" tab
  */
 struct FoodEditModal: View {
     // https://developer.apple.com/forums/thread/120034
@@ -26,8 +25,8 @@ struct FoodEditModal: View {
     @State private var protein = ""
     
     // Alert state variables
-    @State private var showAlert = false
-    @State private var showAreYouSureAlert = false
+    @State private var showAlert = false            // bool var for CONFIRM edit button alert
+    @State private var showAreYouSureAlert = false  // bool var for DELETE edit button alert
     @State private var alertTitle = ""
     @State private var alertMsg = ""
     
@@ -191,7 +190,7 @@ struct FoodEditModal: View {
                     .cornerRadius(15)
                     .alert(isPresented: $showAreYouSureAlert) {
                         Alert(title: Text("Delete Food"),
-                              message: Text("Are you sure you wnat to delete this food item?"),
+                              message: Text("Are you sure you want to delete this food item?"),
                               primaryButton: .default(Text("Confirm"), action: {
                 
                             
@@ -220,9 +219,6 @@ struct FoodEditModal: View {
                           }
                         ))//Alert
                     }//alert
-                    
-                    
-                    
                 }//hstack
             }//section
             .padding(.top)

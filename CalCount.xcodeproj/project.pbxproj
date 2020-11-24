@@ -34,6 +34,7 @@
 		C96BCE6225465369008121AE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96BCE6125465369008121AE /* HomeView.swift */; };
 		C97010682547A0DE003EC8FF /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97010672547A0DE003EC8FF /* GoalView.swift */; };
 		C97285672554E44000EC5D1E /* FloatingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97285662554E44000EC5D1E /* FloatingMenu.swift */; };
+		C9739E32256D54D8007EED1C /* WaterEditModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9739E31256D54D8007EED1C /* WaterEditModal.swift */; };
 		C976BE3A255E114500EE4ACB /* DateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C976BE39255E114500EE4ACB /* DateUtility.swift */; };
 		C9832D092554B2740006FC31 /* RealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9832D082554B2740006FC31 /* RealmObject.swift */; };
 		C9AEF435253680C100DEF119 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF434253680C100DEF119 /* User.swift */; };
@@ -71,6 +72,7 @@
 		C96BCE6125465369008121AE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C97010672547A0DE003EC8FF /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		C97285662554E44000EC5D1E /* FloatingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingMenu.swift; sourceTree = "<group>"; };
+		C9739E31256D54D8007EED1C /* WaterEditModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEditModal.swift; sourceTree = "<group>"; };
 		C976BE39255E114500EE4ACB /* DateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtility.swift; sourceTree = "<group>"; };
 		C9832D082554B2740006FC31 /* RealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObject.swift; sourceTree = "<group>"; };
 		C9AEF434253680C100DEF119 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				C95BA14E255A293700EF8149 /* FoodAddModal.swift */,
 				C95BA150255A29D000EF8149 /* WaterAddModal.swift */,
 				C95D79462560935600EB69A1 /* FoodEditModal.swift */,
+				C9739E31256D54D8007EED1C /* WaterEditModal.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				C95F1F4E25575127001A98C9 /* FoodEntry.swift in Sources */,
 				C968A13425689CFB008A193C /* WaterManager.swift in Sources */,
 				C96BCE6025465274008121AE /* LoggedInStatus.swift in Sources */,
+				C9739E32256D54D8007EED1C /* WaterEditModal.swift in Sources */,
 				C968A13225689C84008A193C /* WaterEntry.swift in Sources */,
 				C960284F25474C20001A3829 /* ChangeAccountGenderView.swift in Sources */,
 			);
