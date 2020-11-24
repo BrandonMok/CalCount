@@ -21,22 +21,27 @@ struct WaterView: View {
     var body: some View {
         ScrollView {
             VStack {
-                // TODO: do a conditional between two PieCharts, 1 that doesn't have a goal set
-                // and another to have data to have both goal & consumed
-                PieChartView(data: [Double(waterManager.totalConsumed)], title: "Water Consumption")
-                    .frame(maxWidth: .infinity)
+                if status.currentGoal != nil {
+                    // PieChartView(data: [somenumberIDK, Double(waterManager.totalConsumed)], title: "Water Consumption")
+                    //                        .frame(maxWidth: .infinity)
+                }
+                else {
+                    PieChartView(data: [Double(waterManager.totalConsumed)], title: "Water Consumption")
+                        .frame(maxWidth: .infinity)
+                }
                 
                 HStack {
-                    VStack{
-                        // TODO: do a conditional so if there's a goal show it else don't
-                        Text("TEMP oz")
-                            .font(.largeTitle)
-                        
-                        Text("Goal")
-                            .font(.title)
-                            .bold()
+                    if status.currentGoal != nil {
+                        VStack{
+                            Text("TEMP oz")                 // TODO: fill in with the goal's value
+                                .font(.largeTitle)
+                            
+                            Text("Goal")
+                                .font(.title)
+                                .bold()
+                        }
+                        .padding()
                     }
-                    .padding()
                     
                     VStack {
                         Text("\(waterManager.totalConsumed)oz")
