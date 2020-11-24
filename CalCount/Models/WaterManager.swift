@@ -9,6 +9,7 @@ import RealmSwift
  */
 class WaterManager: ObservableObject {
     @Published var waterList: [WaterEntry] = [WaterEntry]()
+    @Published var totalConsumed: Int = 0
     
     // Username
     // Is set on login as it take the username of the current user
@@ -39,5 +40,19 @@ class WaterManager: ObservableObject {
         }
         
         waterList = tempWaterList.sorted(by: { $0.date < $1.date })
+        calculateConsumedWater()
+    }
+    
+    /**
+     * calculateConsumedWater
+     * @return Int
+     * Calculates the total consumed water(oz)
+     */
+    func calculateConsumedWater() {
+        var total = 0
+        for water in waterList {
+            total += water.amount
+        }
+        totalConsumed = total
     }
 }

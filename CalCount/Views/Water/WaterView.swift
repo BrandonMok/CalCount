@@ -27,6 +27,7 @@ struct WaterView: View {
                 // HStack with the calculated water consumption
                 HStack {
                     VStack{
+                        // TODO: do a conditional so if there's a goal show it else don't
                         Text("TEMP oz")
                             .font(.largeTitle)
                         
@@ -37,7 +38,7 @@ struct WaterView: View {
                     .padding()
                     
                     VStack {
-                        Text("TEMP oz")
+                        Text("\(waterManager.totalConsumed)oz")
                             .font(.largeTitle)
                         
                         Text("Consumed")
@@ -45,9 +46,6 @@ struct WaterView: View {
                             .bold()
                     }
                     .padding()
-                    
-                    
-                    
                 }//hstack
             }//vstack
             .padding(.vertical, 20)
@@ -85,6 +83,9 @@ struct WaterView: View {
                 }
             } 
         }// Scrollview
+        .onAppear {
+            waterManager.calculateConsumedWater()
+        }
     }
 }
 
