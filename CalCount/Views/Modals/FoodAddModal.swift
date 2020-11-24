@@ -143,7 +143,8 @@ struct FoodAddModal: View {
                             
                             foodManager.updateFoodsList()
                             
-                            
+                            // After updating the added food entry to the list, need to sort by the period!
+                            // otherwise, regardless of period, it will show all the entries that aren't in the selected period!
                             switch foodManager.selectedPeriod {
                                 case Periods.day:
                                     foodManager.filterForDay()
