@@ -59,8 +59,8 @@ struct WaterEditModal: View {
                         .fontWeight(.heavy)
                         .foregroundColor(.blue)){
                 TextField("Quantity (oz)", text: $amount)
-                    .keyboardType(.numberPad)
                     .padding()
+                    .keyboardType(.numberPad)
                     .foregroundColor(.black)
                     .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                     .cornerRadius(5.0)

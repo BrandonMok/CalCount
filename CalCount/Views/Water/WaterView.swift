@@ -84,7 +84,7 @@ struct WaterView: View {
             } 
         }// Scrollview
         .onAppear {
-            waterManager.calculateConsumedWater()
+            waterManager.updateWaterList()
         }
     }
 }

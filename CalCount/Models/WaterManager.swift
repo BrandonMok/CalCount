@@ -29,17 +29,16 @@ class WaterManager: ObservableObject {
     func updateWaterList() {
         let realm = try! Realm()
         let entries = realm.objects(WaterEntry.self)
-        var tempWaterList: [WaterEntry] = []
         
         for water in entries {
             if water.user?.username == username {
-                if !waterList.contains(where: {$0.id == water.id}) && Calendar.current.isDateInToday(water.date){
-                    tempWaterList.append(water)
+                if !waterList.contains(where: {$0.id == water.id}) && Calendar.current.isDateInToday(water.date) {
+                    waterList.append(water)
                 }
             }
         }
         
-        waterList = tempWaterList.sorted(by: { $0.date < $1.date })
+        waterList = waterList.sorted(by: { $0.date < $1.date })
         calculateConsumedWater()
     }
     
