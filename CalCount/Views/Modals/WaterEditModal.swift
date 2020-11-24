@@ -139,11 +139,7 @@ struct WaterEditModal: View {
                             }
                                 
                             waterManager.updateWaterList()
-                                
-                            alertTitle = "Success"
-                            alertMsg = "Water log deleted successfully!"
                             showAreYouSureAlert.toggle()
-
                           }),
                           secondaryButton: .default(Text("Cancel"), action: {
                             showAreYouSureAlert.toggle()

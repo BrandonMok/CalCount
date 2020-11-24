@@ -16,15 +16,16 @@ struct WaterView: View {
     @EnvironmentObject var waterManager: WaterManager
     @EnvironmentObject var modalManager: ModalManager
     
-    @State private var chartData: [Double] = []
+    @State var waterChartData: [Double] = []
     
     var body: some View {
         ScrollView {
             VStack {
-                PieChartView(data: chartData, title: "Water Consumption")
+                // TODO: do a conditional between two PieCharts, 1 that doesn't have a goal set
+                // and another to have data to have both goal & consumed
+                PieChartView(data: [Double(waterManager.totalConsumed)], title: "Water Consumption")
                     .frame(maxWidth: .infinity)
                 
-                // HStack with the calculated water consumption
                 HStack {
                     VStack{
                         // TODO: do a conditional so if there's a goal show it else don't
@@ -66,10 +67,9 @@ struct WaterView: View {
             
             Spacer()
             
-            // VStack to hold the list of water log entries
             VStack {
                 if !waterManager.waterList.isEmpty {
-                    ForEach(waterManager.waterList, id: \.self) { water in
+                    ForEach(waterManager.waterList, id: \.id) { water in
                         WaterRow(water: water)
                     }
                 }

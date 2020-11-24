@@ -102,7 +102,7 @@ struct FoodView: View {
                 // MARK: - Food List
                 VStack {
                     if !foodManager.foodsListCopy.isEmpty {
-                        ForEach(foodManager.foodsListCopy, id: \.self) { food in
+                        ForEach(foodManager.foodsListCopy, id: \.id) { food in
                             FoodRow(food: food)
                         }
                     }
