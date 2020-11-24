@@ -22,10 +22,11 @@ class FoodManager: ObservableObject {
     @Published var foodsListCopy: [FoodEntry] = [FoodEntry]()   // A copy of the food list that will use the main foodsList to filter upon (allows the original to be preserved)
     @Published var totalCals = 0
     
+    @Published var selectedPeriod = Periods.day
+    
     
     /*
      * updateFoodsList
-     * Function that acts as both a GETTER and an UPDATER
      * Gets the FoodEntry(s) that this user created
      */
     func updateFoodsList() {
@@ -38,7 +39,7 @@ class FoodManager: ObservableObject {
                     foodsList.append(food)
                 }
             }
-        }//for
+        }
         
         foodsListCopy = foodsList
     }

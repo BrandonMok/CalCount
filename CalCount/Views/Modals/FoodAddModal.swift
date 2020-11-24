@@ -143,7 +143,19 @@ struct FoodAddModal: View {
                             
                             foodManager.updateFoodsList()
                             
-                            // show alert for success
+                            
+                            switch foodManager.selectedPeriod {
+                                case Periods.day:
+                                    foodManager.filterForDay()
+                                case Periods.week:
+                                    foodManager.filterForWeek()
+                                case Periods.month:
+                                    foodManager.filterForMonth()
+                            }
+                            
+                            foodManager.calculateConsumedCalories()
+                            
+                            
                             showSuccess()
                         }
                         else {

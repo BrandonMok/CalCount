@@ -32,14 +32,13 @@ struct FoodView: View {
     @State var chartData: [Double] = []
     
     // Calulated fields 
-//    @State private var totalCalories = 0
     @State private var remainingCalories = 0
 
     
     var body: some View {
         VStack {
             // MARK: - TOP BAR (Day, Week, Month)
-            TopPeriodBar(selectedPeriod: $selectedPeriod, remainingCalories: $remainingCalories, chartData: $chartData)
+            TopPeriodBar(remainingCalories: $remainingCalories, chartData: $chartData)
             
             ScrollView {
                 VStack {
@@ -118,16 +117,17 @@ struct FoodView: View {
                 .onAppear {
                     chartData = []
                     
-                    if selectedPeriod == Periods.day {
-                        foodManager.filterForDay()
-                        chartData.append(contentsOf: foodManager.getDayChartData())
+                    switch foodManager.selectedPeriod {
+                        case Periods.day:
+                            foodManager.filterForDay()
+                            chartData.append(contentsOf: foodManager.getDayChartData())
+                        case Periods.week:
+                            foodManager.filterForWeek()
+                        case Periods.month:
+                            foodManager.filterForMonth()
                     }
-                    else if selectedPeriod == Periods.week {
-                        foodManager.filterForWeek()
-                    }
-                    else if selectedPeriod == Periods.month {
-                        foodManager.filterForMonth()
-                    }
+                    
+                    foodManager.calculateConsumedCalories()
                 }
             }//ScrollView
             .padding(.bottom, 20)
@@ -208,12 +208,13 @@ struct TopPeriodBar: View {
     @EnvironmentObject var foodManager: FoodManager
     
     // Binding - passed in value
-    @Binding var selectedPeriod: Periods
-//    @Binding var totalCalories: Int
     @Binding var remainingCalories: Int
     @Binding var chartData: [Double]
-
     
+    var selectedPeriod: Periods {
+        self.foodManager.selectedPeriod
+    }
+
     var body: some View {
         HStack {
             // DAY BTN
@@ -227,13 +228,14 @@ struct TopPeriodBar: View {
 //                    }
 
                     foodManager.filterForDay()
+                    foodManager.calculateConsumedCalories()
         
                     chartData = []
                     chartData.append(contentsOf: foodManager.getDayChartData())
                 }
                 
 
-                selectedPeriod = Periods.day
+                self.foodManager.selectedPeriod = Periods.day
             }, label: {
                 Text("Day")
                     .foregroundColor(.black)
@@ -256,11 +258,13 @@ struct TopPeriodBar: View {
 //                    }
                     
                     foodManager.filterForWeek()
+                    foodManager.calculateConsumedCalories()
+
                     
 //                    foodManager.getWeekChartData()
                 }
                 
-                selectedPeriod = Periods.week
+                self.foodManager.selectedPeriod = Periods.week
             }, label: {
                 Text("Week")
                     .foregroundColor(.black)
@@ -283,9 +287,12 @@ struct TopPeriodBar: View {
 //                    }
  
                     foodManager.filterForMonth()
+                    foodManager.calculateConsumedCalories()
+
+                    
                 }
                 
-                selectedPeriod = Periods.month
+                self.foodManager.selectedPeriod = Periods.month
             }, label: {
                 Text("Month")
                     .foregroundColor(.black)
