@@ -20,6 +20,7 @@ class FoodManager: ObservableObject {
     
     @Published var foodsList: [FoodEntry] = [FoodEntry]()       // The MAIN food list - used to be filtered on
     @Published var foodsListCopy: [FoodEntry] = [FoodEntry]()   // A copy of the food list that will use the main foodsList to filter upon (allows the original to be preserved)
+    @Published var totalCals = 0
     
     
     /*
@@ -55,11 +56,45 @@ class FoodManager: ObservableObject {
             total += food.calories
         }
         
+        totalCals = total
         return total
     }
     
     
     
+    /** MARK: - Filter functions */
+    
+    /**
+     * filterForDay
+     * Filtering function to filter food entries based on day
+     */
+    func filterForDay() {
+        foodsListCopy = foodsList.filter {  Calendar.current.isDateInToday($0.date) }
+        foodsListCopy.sort(by: {$0.date < $1.date })
+    }
+    
+    /**
+     * filterForWeek
+     * Filtering function to filter food entries based on week
+     */
+    func filterForWeek() {
+        foodsListCopy = foodsList.filter {  Calendar.current.compare(Date(), to: $0.date, toGranularity: .weekOfYear) == .orderedSame }
+        foodsListCopy.sort(by: {$0.date < $1.date })
+    }
+    
+    /**
+     * filterForMonth
+     * Filtering function to filter food entreis based on moth
+     */
+    func filterForMonth() {
+        foodsListCopy = foodsList.filter {  Calendar.current.compare(Date(), to: $0.date, toGranularity: .month) == .orderedSame }
+        foodsListCopy.sort(by: {$0.date < $1.date })
+    }
+    
+    
+    /**
+     * getDayChartData()
+     */
     func getDayChartData() -> [Double] {
         return [Double(calculateConsumedCalories())];
     }

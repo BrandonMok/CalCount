@@ -32,14 +32,14 @@ struct FoodView: View {
     @State var chartData: [Double] = []
     
     // Calulated fields 
-    @State private var totalCalories = 0
+//    @State private var totalCalories = 0
     @State private var remainingCalories = 0
 
     
     var body: some View {
         VStack {
             // MARK: - TOP BAR (Day, Week, Month)
-            TopPeriodBar(selectedPeriod: $selectedPeriod, totalCalories: $totalCalories, remainingCalories: $remainingCalories, chartData: $chartData)
+            TopPeriodBar(selectedPeriod: $selectedPeriod, remainingCalories: $remainingCalories, chartData: $chartData)
             
             ScrollView {
                 VStack {
@@ -58,7 +58,7 @@ struct FoodView: View {
                     // HStack with the calculated calories & remainder
                     HStack {
                         VStack{
-                            Text("\(totalCalories)")
+                            Text("\(foodManager.totalCals)")
                                 .font(.largeTitle)
                             
                             Text("Total")
@@ -115,20 +115,20 @@ struct FoodView: View {
                         Spacer()
                     }
                 }//vstack
-                .onReceive(foodManager.$foodsList, perform: { _ in
-                    // SAME as the Day btn action, BUT needed the data to show initially even w/o having clicked the button!
-                    foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.isDateInToday($0.date) }
-                    foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
-
-                    totalCalories = foodManager.calculateConsumedCalories()
-                })
-                
-                // do an on appear? and check on the selectedPeriod??
-                
-                
-                
-                
-                
+                .onAppear {
+                    chartData = []
+                    
+                    if selectedPeriod == Periods.day {
+                        foodManager.filterForDay()
+                        chartData.append(contentsOf: foodManager.getDayChartData())
+                    }
+                    else if selectedPeriod == Periods.week {
+                        foodManager.filterForWeek()
+                    }
+                    else if selectedPeriod == Periods.month {
+                        foodManager.filterForMonth()
+                    }
+                }
             }//ScrollView
             .padding(.bottom, 20)
         }//outter vstack
@@ -209,7 +209,7 @@ struct TopPeriodBar: View {
     
     // Binding - passed in value
     @Binding var selectedPeriod: Periods
-    @Binding var totalCalories: Int
+//    @Binding var totalCalories: Int
     @Binding var remainingCalories: Int
     @Binding var chartData: [Double]
 
@@ -226,12 +226,9 @@ struct TopPeriodBar: View {
 ////                        var totalAllottedCals = status.currentGoal?.weightGoal
 //                    }
 
-                    foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.isDateInToday($0.date) }
-                    foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
-                    
-                    totalCalories = foodManager.calculateConsumedCalories()
+                    foodManager.filterForDay()
         
-//                    chartData = []
+                    chartData = []
                     chartData.append(contentsOf: foodManager.getDayChartData())
                 }
                 
@@ -258,11 +255,7 @@ struct TopPeriodBar: View {
 ////                        var totalAllottedCals = status.currentGoal?.weightGoal
 //                    }
                     
-                    foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.compare(Date(), to: $0.date, toGranularity: .weekOfYear) == .orderedSame }
-                    
-                    foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
-                    
-                    totalCalories = foodManager.calculateConsumedCalories()
+                    foodManager.filterForWeek()
                     
 //                    foodManager.getWeekChartData()
                 }
@@ -289,13 +282,8 @@ struct TopPeriodBar: View {
 ////                        var totalAllottedCals = status.currentGoal?.weightGoal
 //                    }
  
-                    
-                    foodManager.foodsListCopy = foodManager.foodsList.filter {  Calendar.current.compare(Date(), to: $0.date, toGranularity: .month) == .orderedSame }
-                    foodManager.foodsListCopy.sort(by: {$0.date < $1.date })
-                    
-                    totalCalories = foodManager.calculateConsumedCalories()
+                    foodManager.filterForMonth()
                 }
-                
                 
                 selectedPeriod = Periods.month
             }, label: {
