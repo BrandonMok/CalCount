@@ -11,6 +11,9 @@ struct SettingsView: View {
     @EnvironmentObject var status: LoggedInStatus
     @EnvironmentObject var realmObject: RealmObject
     
+    @EnvironmentObject var foodManager: FoodManager
+    @EnvironmentObject var waterManager: WaterManager
+    
     
     var body: some View {
         NavigationView {
@@ -56,6 +59,17 @@ struct SettingsView: View {
                         // logout
                         self.status.loggedIn = false
                         self.status.currentUser = User()
+                        
+                        // clear all foodManager info
+                        self.foodManager.foodsList = []
+                        self.foodManager.foodsListCopy = []
+                        
+                        // clear all waterManager info
+                        self.waterManager.waterList = []
+                        self.waterManager.totalConsumed = 0
+                        self.waterManager.username = ""
+                        
+                    
                         
 //                        UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
 //                        UserDefaults.standard.set(nil, forKey: "curUser")

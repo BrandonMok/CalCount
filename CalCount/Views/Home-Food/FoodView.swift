@@ -31,14 +31,12 @@ struct FoodView: View {
     @State var selectedPeriod = Periods.day
     @State var chartData: [Double] = []
     
-    // Calulated fields 
-    @State private var remainingCalories = 0
+    @State private var remainingCalories: Int = 0
 
-    
     var body: some View {
         VStack {
             // MARK: - TOP BAR (Day, Week, Month)
-            TopPeriodBar(remainingCalories: $remainingCalories, chartData: $chartData)
+            TopPeriodBar(chartData: $chartData)
             
             ScrollView {
                 VStack {
@@ -66,15 +64,17 @@ struct FoodView: View {
                         }
                         .padding()
                         
-                        VStack {
-                            Text("\(remainingCalories)")
-                                .font(.largeTitle)
-                            
-                            Text("Remaining")
-                                .font(.title)
-                                .bold()
+                        if self.status.currentUser.gender != "Prefer not to say" {
+                            VStack {
+                                Text("\(remainingCalories)")
+                                    .font(.largeTitle)
+                                
+                                Text("Remaining")
+                                    .font(.title)
+                                    .bold()
+                            }
+                            .padding()
                         }
-                        .padding()
                     }//hstack
                     
                     
@@ -128,11 +128,25 @@ struct FoodView: View {
                     }
                     
                     foodManager.calculateConsumedCalories()
+                    updateRemainingCals()
                 }
             }//ScrollView
             .padding(.bottom, 20)
         }//outter vstack
     }//body
+    
+    
+    func updateRemainingCals() {
+        if status.currentUser.gender == "Male" {
+            self.remainingCalories = 3000 - self.foodManager.totalCals
+        }
+        else if status.currentUser.gender == "Female" {
+            self.remainingCalories = 2400 - self.foodManager.totalCals
+        }
+        else {
+            self.remainingCalories = 0
+        }
+    }
 }//struct
 
 struct FoodView_Previews: PreviewProvider {
@@ -171,7 +185,6 @@ struct FoodRow: View {
                     .font(.title)
                     .foregroundColor(.black)
                     .bold()
-                    
             }
             
             Spacer()
@@ -180,7 +193,6 @@ struct FoodRow: View {
                 .font(.subheadline)
                 .foregroundColor(.black)
                 .bold()
-        
         }
         .frame(maxWidth: .infinity, maxHeight: 50)
         .padding()
@@ -208,7 +220,6 @@ struct TopPeriodBar: View {
     @EnvironmentObject var foodManager: FoodManager
     
     // Binding - passed in value
-    @Binding var remainingCalories: Int
     @Binding var chartData: [Double]
     
     var selectedPeriod: Periods {

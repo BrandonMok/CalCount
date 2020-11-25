@@ -21,7 +21,6 @@ class FoodManager: ObservableObject {
     @Published var foodsList: [FoodEntry] = [FoodEntry]()       // The MAIN food list - used to be filtered on
     @Published var foodsListCopy: [FoodEntry] = [FoodEntry]()   // A copy of the food list that will use the main foodsList to filter upon (allows the original to be preserved)
     @Published var totalCals = 0
-    
     @Published var selectedPeriod = Periods.day
     
     
@@ -104,26 +103,27 @@ class FoodManager: ObservableObject {
 //        // [value, value] each value in the array will be the total for each day of the week
 //        var weekFoodArr: [Double] = []
 //        var day: Date? = nil
-//        
-////        let test = Dictionary(grouping: foodsListCopy) { $0.date }
-////        print("TEST: \(test)")
 //
-////        for food in foodsListCopy {
-////            // need to check if the first date is the same as the 2nd date
-//////            if day == nil {
-//////                day = food.date
-//////            }
-//////            else {
-//////
-//////            }
-////
-////
-//////            if Calendar.current.dateComponents([.day], from: )
-////
-////
-////
-////            weekFoodArr.append(Double(food.calories))
-////        }
+//        for food in foodsListCopy {
+//            if day == nil {
+//                day = food.date
+//
+//
+//
+//            }
+//            else {
+//                // check if the saved day is the same, if not change it
+//
+//
+//
+//            }
+//
+////            if Calendar.current.dateComponents([.day], from: )
+//
+//
+//
+//            weekFoodArr.append(Double(food.calories))
+//        }
 //        return weekFoodArr
 //    }
 
