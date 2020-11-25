@@ -53,22 +53,23 @@ struct WaterView: View {
                     }
                     .padding()
                 }//hstack
+                
+                
+                Button(action: {
+                    modalManager.showWaterModal.toggle()
+                    modalManager.showModal.toggle()
+                }, label: {
+                    Text("Add Water")
+                        .foregroundColor(.black)
+                        .font(.title)
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
+                })
+                .background(Color("PrimaryBlue"))
+                .cornerRadius(5)
+                
             }//vstack
             .padding(.vertical, 20)
-            
-            // MARK: - Add water button
-            Button(action: {
-                modalManager.showWaterModal.toggle()
-                modalManager.showModal.toggle()
-            }, label: {
-                Text("Add Water")
-                    .foregroundColor(.black)
-                    .font(.title)
-                    .padding(.horizontal)
-                    .padding(.vertical, 5)
-            })
-            .background(Color("PrimaryBlue"))
-            .cornerRadius(5)
             
             Spacer()
             
