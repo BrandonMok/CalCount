@@ -45,7 +45,9 @@ struct WaterView: View {
                     //                        .frame(maxWidth: .infinity)
                 }
                 else {
-                    PieChartView(data: [(waterManager.totalConsumed != 0) ? generalWaterVal - Double(waterManager.totalConsumed) : generalWaterVal, Double(waterManager.totalConsumed)], title: "Water Consumption")
+                    PieChartView(data: [
+                                    (waterManager.totalConsumed != 0) ? (generalWaterVal - Double(waterManager.totalConsumed)) : generalWaterVal, Double(waterManager.totalConsumed)
+                                ], title: "Water Consumption")
                         .frame(maxWidth: .infinity)
                 }
                 
