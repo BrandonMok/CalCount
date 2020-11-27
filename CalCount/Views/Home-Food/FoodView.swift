@@ -231,9 +231,8 @@ struct TopPeriodBar: View {
             // DAY BTN
             Button(action: {
                 if !foodManager.foodsList.isEmpty {
-                    // TODO: Need to know what / how many calories should be set for the goal
-                    // Calculate for gender how many calories gain or lose weight should be
-                    // MAYBE have a custom input option?
+
+                    // NOTE: Since the goal feature wasn't fully implemented due to time constraints, requirement of a lot of personal information, a lot of calculations, and other factors needed to compute the goal values, would do something to show as in the below
 //                    if status.currentGoal != nil {
 ////                        var totalAllottedCals = status.currentGoal?.weightGoal
 //                    }
@@ -261,9 +260,7 @@ struct TopPeriodBar: View {
             // WEEK BTN
             Button(action: {
                 if !foodManager.foodsList.isEmpty {
-                    // TODO: Need to know what / how many calories should be set for the goal
-                    // Calculate for gender how many calories gain or lose weight should be
-                    // MAYBE have a custom input option?
+                    // NOTE: Since the goal feature wasn't fully implemented due to time constraints, requirement of a lot of personal information, a lot of calculations, and other factors needed to compute the goal values, would do something to show as in the below
 //                    if status.currentGoal != nil {
 ////                        var totalAllottedCals = status.currentGoal?.weightGoal
 //                    }
@@ -290,9 +287,7 @@ struct TopPeriodBar: View {
             // MONTH BTN
             Button(action: {
                 if !foodManager.foodsList.isEmpty {
-                    // TODO: Need to know what / how many calories should be set for the goal
-                    // Calculate for gender how many calories gain or lose weight should be
-                    // MAYBE have a custom input option?
+                    // NOTE: Since the goal feature wasn't fully implemented due to time constraints, requirement of a lot of personal information, a lot of calculations, and other factors needed to compute the goal values, would do something to show as in the below
 //                    if status.currentGoal != nil {
 ////                        var totalAllottedCals = status.currentGoal?.weightGoal
 //                    }

@@ -18,6 +18,7 @@ struct WaterView: View {
     
     @State var waterChartData: [Double] = []
     
+    // NOTE: These are generalized values for the recommended water intake
     var generalWaterVal: Double {
         var tempVal = 0.0;
 
@@ -52,20 +53,19 @@ struct WaterView: View {
                 }
                 
                 HStack {
-                    
-                    // NEED TO THINK if I want to have the goal showing as majority of the values are based on personal information
-                    // so might just show consumed
-                    if status.currentGoal != nil {
-                        VStack{
-                            Text("oz")                 // TODO: fill in with the goal's value
-                                .font(.largeTitle)
-                            
-                            Text("Goal")
-                                .font(.title)
-                                .bold()
-                        }
-                        .padding()
-                    }
+                    // NOTE: Since didn't end up fully implementing / know how a water goal would work, left this commented out
+                    // (i.e. maintaining or increasing water intake, what would they entail? - I'm not too sure)
+//                    if status.currentGoal != nil {
+//                        VStack{
+//                            Text("oz")
+//                                .font(.largeTitle)
+//
+//                            Text("Goal")
+//                                .font(.title)
+//                                .bold()
+//                        }
+//                        .padding()
+//                    }
                     
                     VStack {
                         Text("\(waterManager.totalConsumed)oz")
