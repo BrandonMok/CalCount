@@ -102,9 +102,42 @@ struct TabRow: View {
  
             // Show full
             if tapped {
-                VStack {
-                    Text("TESTING")
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("Carbs")
+                            .font(.title3)
+                            .foregroundColor(.black)
+                            .bold()
+                        
+                        Spacer()
+                        
+//                        Text("\()")
+//                            .bold()
+                    }
                     
+                    HStack {
+                        Text("Protein")
+                            .font(.title3)
+                            .foregroundColor(.black)
+                            .bold()
+                        
+                        Spacer()
+                        
+//                        Text("\()")
+//                            .bold()
+                    }
+                    
+                    HStack {
+                        Text("Fats")
+                            .font(.title3)
+                            .foregroundColor(.black)
+                            .bold()
+                        
+                        Spacer()
+                        
+//                        Text("\()")
+//                            .bold()
+                    }
                 }
                 .padding()
                 .frame(maxWidth: .infinity)
