@@ -42,13 +42,8 @@ struct NutritionView: View {
 
                 VStack {
                     if !foodManager.foodsListCopy.isEmpty {
-//                        if foodManager.selectedPeriod == Periods.day {
-                            TabRow()
-//                        }
-                        
-//                        ForEach(foodManager.foodsListCopy, id: \.id) { food in
-//                            TabRow(food: food)
-//                        }
+                        // Only one row / tab thing bc data in it is the only thing that'll change
+                        TabRow()
                     }
                     else {
                         Text("No food records!")
@@ -86,9 +81,6 @@ struct NutritionView_Previews: PreviewProvider {
 
 
 struct TabRow: View {
-    
-    // NOTE: Is not based on one food, is based on ALL food of the period
-    
     @EnvironmentObject var foodManager: FoodManager
     
     @State private var du = DateUtility()
@@ -96,10 +88,22 @@ struct TabRow: View {
     
     @State private var data: (calories: Int, carbs: Int, protein: Int, fat: Int) = (0,0,0,0)
     
+//    var tabPeriod: String {       // used as the tab display before tapping on it to show more info
+//        switch foodManager.selectedPeriod {
+//        case Periods.day:
+//            return du.formatDate(passedDate: Date(), dateStyle: .medium)
+//        case Periods.week:
+//            // get beginning && and of week then pass through func
+//        case Periods.month:
+//            // something
+//    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Image(systemName: tapped ? "arrowtriangle.up" : "arrowtriangle.down.fill")
+                
+                // check period bc if Day => show today's date, Week => show range, etc.
                 
 //                Text("\(du.formatDate(passedDate: food.date, dateStyle: .medium ))")
 //                    .font(.title2)

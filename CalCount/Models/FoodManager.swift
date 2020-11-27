@@ -77,7 +77,7 @@ class FoodManager: ObservableObject {
     
     
     
-    /** MARK: - Filter functions */
+    /** MARK: - Filter functions **/
     
     /**
      * filterForDay
