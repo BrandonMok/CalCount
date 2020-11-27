@@ -73,7 +73,7 @@ struct FloatingMenu: View {
             }, label: {
                 Image(systemName: showMenuItems ? "xmark" : "plus")
                 .font(.system(.title))
-                .frame(width: 80, height: 80)
+                .frame(width: 70, height: 70)
                     .foregroundColor(showMenuItems ? Color.black : Color(red: 248/255, green: 249/255, blue: 250/255))
             })
             .background(showMenuItems ? .white : Color("PrimaryBlue"))

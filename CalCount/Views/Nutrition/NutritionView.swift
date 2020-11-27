@@ -23,69 +23,37 @@ struct NutritionView: View {
         VStack {
             // MARK: - TOP BAR (Day, Week, Month)
             TopPeriodBar(chartData: $chartData)
-            
+
             ScrollView {
                 VStack {
                     switch selectedPeriod {
                         case Periods.day:
-                            PieChartView(data: chartData, title: "Calories")
+                            PieChartView(data: chartData, title: "Nutrition")
                                 .frame(maxWidth: .infinity)
                         case Periods.week:
                             BarChartView(data: ChartData(points: chartData), title: "Week")
                         case Periods.month:
                             LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Month")
-                        default:
-                            PieChartView(data: chartData, title: "Calories")
-                                .frame(maxWidth: .infinity)
                     }
-                
-                    
-                    // HStack with the calculated calories & remainder
-                    HStack {
-                        VStack{
-                            Text("\(foodManager.totalCals)")
-                                .font(.largeTitle)
-                            
-                            Text("Total")
-                                .font(.title)
-                                .bold()
-                        }
-                        .padding()
-                        
-//                        if self.status.currentUser.gender != "Prefer not to say" {
-//                            VStack {
-//                                Text("\(remainingCalories)")
-//                                    .font(.largeTitle)
-//
-//                                Text("Remaining")
-//                                    .font(.title)
-//                                    .bold()
-//                            }
-//                            .padding()
-//                        }
-                    }//hstack
-                    
-                    
-                    // MARK: - Add food button
-//                    Button(action: {
-//                        modalManager.showCalorieModal.toggle()
-//                        modalManager.showModal.toggle()
-//                    }, label: {
-//                        Text("Add Food")
-//                            .foregroundColor(.black)
-//                            .font(.title)
-//                            .padding(.horizontal)
-//                            .padding(.vertical, 5)
-//                    })
-//                    .background(Color("PrimaryBlue"))
-//                    .cornerRadius(5)
                 }
                 .padding(.vertical, 20)
-                
+
                 Spacer()
-                
+
                 VStack {
-                    // list
+                    if !foodManager.foodsListCopy.isEmpty {
+                        ForEach(foodManager.foodsListCopy, id: \.id) { food in
+                            SingleRow(food: food)
+                        }
+                    }
+                    else {
+                        Text("No food records!")
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+
+                        Spacer()
+                        Spacer()
+                    }
                 }
                 .onAppear {
 //                    chartData = []
@@ -100,19 +68,40 @@ struct NutritionView: View {
 //                            foodManager.filterForMonth()
 //                    }
                 }
-                
+
             }//scrollview
         }//Vstack
-        
-        
-        
-        
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }//body
 }//struct
 
 struct NutritionView_Previews: PreviewProvider {
     static var previews: some View {
         NutritionView()
+    }
+}
+
+
+struct SingleRow: View {
+    var food: FoodEntry
+    
+    @State private var du = DateUtility()
+    @State private var tapped = false
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Image(systemName: tapped ? "arrowtriangle.down" : "arrowtriangle.down.fill")
+                
+                Text("\(du.formatDate(passedDate: food.date, dateStyle: .medium ))")
+                    .font(.title)
+                    .foregroundColor(.black)
+                
+                
+            }
+        }
+        .onTapGesture {
+            // display the bigger view possibly through either opacity or if elses
+            tapped.toggle()
+        }
     }
 }

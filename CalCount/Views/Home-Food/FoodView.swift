@@ -49,9 +49,6 @@ struct FoodView: View {
                             BarChartView(data: ChartData(points: chartData), title: "Week")
                         case Periods.month:
                             LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Month")
-                        default:
-                            PieChartView(data: chartData, title: "Calories")
-                                .frame(maxWidth: .infinity)
                     }
                     
                     // HStack with the calculated calories & remainder
@@ -163,12 +160,13 @@ struct FoodView_Previews: PreviewProvider {
  * A view to represent a Food Entry row
  */
 struct FoodRow: View {
-    // EnvironmentObjects
-    @EnvironmentObject var realmObject: RealmObject
-    @EnvironmentObject var foodManager: FoodManager
     
     var food: FoodEntry // passed in food
     
+    // EnvironmentObjects
+    @EnvironmentObject var realmObject: RealmObject
+    @EnvironmentObject var foodManager: FoodManager
+
     // local state variables
     @State private var du = DateUtility()
     @State var showEditModal = false
@@ -191,7 +189,7 @@ struct FoodRow: View {
             
             Spacer()
 
-            Text("\(du.formatDate(passedDate: food.date, dateStyle: .medium )) - \(du.formatTime(passedDate: food.date, timeStyle: .short))")
+            Text("\(du.formatDate(passedDate: food.date, dateStyle: .medium)) - \(du.formatTime(passedDate: food.date, timeStyle: .short))")
                 .font(.subheadline)
                 .foregroundColor(.black)
                 .bold()

@@ -40,7 +40,7 @@ struct HomeView: View {
                         }
                         .tag(Tabs.water)
                     
-                    Text("Tab again")
+                    NutritionView()
                         .environmentObject(self.status)
                         .environmentObject(self.realmObject)
                         .tabItem {
