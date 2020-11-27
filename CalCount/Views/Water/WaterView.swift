@@ -18,6 +18,25 @@ struct WaterView: View {
     
     @State var waterChartData: [Double] = []
     
+    var generalWaterVal: Double {
+        var tempVal = 0.0;
+
+        switch status.currentUser.gender {
+            case "Male":
+                tempVal = 125
+            case "Female":
+                tempVal = 91
+            case "Prefer not to say":
+                tempVal = 101   // middle ground between male (125oz) & female (91oz) that should be fine
+            default:
+                break
+        }
+
+        return tempVal
+    }
+    
+    
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -26,14 +45,17 @@ struct WaterView: View {
                     //                        .frame(maxWidth: .infinity)
                 }
                 else {
-                    PieChartView(data: [Double(waterManager.totalConsumed)], title: "Water Consumption")
+                    PieChartView(data: [(waterManager.totalConsumed != 0) ? generalWaterVal - Double(waterManager.totalConsumed) : generalWaterVal, Double(waterManager.totalConsumed)], title: "Water Consumption")
                         .frame(maxWidth: .infinity)
                 }
                 
                 HStack {
+                    
+                    // NEED TO THINK if I want to have the goal showing as majority of the values are based on personal information
+                    // so might just show consumed
                     if status.currentGoal != nil {
                         VStack{
-                            Text("TEMP oz")                 // TODO: fill in with the goal's value
+                            Text("oz")                 // TODO: fill in with the goal's value
                                 .font(.largeTitle)
                             
                             Text("Goal")
@@ -53,7 +75,6 @@ struct WaterView: View {
                     }
                     .padding()
                 }//hstack
-                
                 
                 Button(action: {
                     modalManager.showWaterModal.toggle()
