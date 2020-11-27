@@ -21,6 +21,8 @@ struct GoalView: View {
     
     @State private var usrGoal: Goal?
     
+    @State private var showDisclaimer = false
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 40) {
@@ -163,6 +165,8 @@ struct GoalView: View {
             
         }//ScrollView
         .onAppear(perform: {
+            showDisclaimer.toggle()
+            
             // Check if this user already has a goal obj set!
             let goalResults = realmObj.realm.objects(Goal.self)
             
@@ -180,6 +184,13 @@ struct GoalView: View {
                     self.selectedWaterGoal = waterGoalOptions.firstIndex(of: "\(userGoal.waterGoal)")!
                 }
             }
+        })
+        .alert(isPresented: $showDisclaimer, content: {
+            Alert(title: Text("Disclaimer"),
+                  message: Text("The goal feature isn't fully built. After futher consideration, the goals would require a lot more personal information and calculations that was deemed out-of-scope and not within the time budget. CalCount is deeply sorry for the inconvenience."),
+                  dismissButton: .default(Text("OK"), action: {
+                    showDisclaimer.toggle()
+                  }))
         })
     }//body
 }//struct
