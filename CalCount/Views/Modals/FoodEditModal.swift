@@ -106,16 +106,15 @@ struct FoodEditModal: View {
                     .foregroundColor(.black)
                     .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                     .cornerRadius(5.0)
-
-                TextField("Fat (g)", text: $fat)
+                
+                TextField("Protein (g)", text: $protein)
                     .padding()
                     .keyboardType(.numberPad)
                     .foregroundColor(.black)
                     .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
                     .cornerRadius(5.0)
 
-
-                TextField("Protein (g)", text: $protein)
+                TextField("Fat (g)", text: $fat)
                     .padding()
                     .keyboardType(.numberPad)
                     .foregroundColor(.black)

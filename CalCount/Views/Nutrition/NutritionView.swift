@@ -42,9 +42,13 @@ struct NutritionView: View {
 
                 VStack {
                     if !foodManager.foodsListCopy.isEmpty {
-                        ForEach(foodManager.foodsListCopy, id: \.id) { food in
-                            TabRow(food: food)
-                        }
+//                        if foodManager.selectedPeriod == Periods.day {
+                            TabRow()
+//                        }
+                        
+//                        ForEach(foodManager.foodsListCopy, id: \.id) { food in
+//                            TabRow(food: food)
+//                        }
                     }
                     else {
                         Text("No food records!")
@@ -82,19 +86,24 @@ struct NutritionView_Previews: PreviewProvider {
 
 
 struct TabRow: View {
-    var food: FoodEntry
+    
+    // NOTE: Is not based on one food, is based on ALL food of the period
+    
+    @EnvironmentObject var foodManager: FoodManager
     
     @State private var du = DateUtility()
     @State private var tapped = false
+    
+    @State private var data: (calories: Int, carbs: Int, protein: Int, fat: Int) = (0,0,0,0)
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Image(systemName: tapped ? "arrowtriangle.up" : "arrowtriangle.down.fill")
                 
-                Text("\(du.formatDate(passedDate: food.date, dateStyle: .medium ))")
-                    .font(.title2)
-                    .foregroundColor(.black)
+//                Text("\(du.formatDate(passedDate: food.date, dateStyle: .medium ))")
+//                    .font(.title2)
+//                    .foregroundColor(.black)
                 
                 Spacer()
             }
@@ -104,6 +113,19 @@ struct TabRow: View {
             if tapped {
                 VStack(alignment: .leading) {
                     HStack {
+                        Text("Total Calories:")
+                            .font(.title2)
+                            .fontWeight(.heavy)
+                        
+                        Spacer()
+                        
+                        Text("\(data.calories)")
+                            .font(.title2)
+                            .fontWeight(.heavy)
+                    }
+                    .padding(.bottom)
+                    
+                    HStack {
                         Text("Carbs")
                             .font(.title3)
                             .foregroundColor(.black)
@@ -111,8 +133,8 @@ struct TabRow: View {
                         
                         Spacer()
                         
-//                        Text("\()")
-//                            .bold()
+                        Text("\(data.carbs)")
+                            .bold()
                     }
                     
                     HStack {
@@ -123,8 +145,8 @@ struct TabRow: View {
                         
                         Spacer()
                         
-//                        Text("\()")
-//                            .bold()
+                        Text("\(data.protein)")
+                            .bold()
                     }
                     
                     HStack {
@@ -135,8 +157,8 @@ struct TabRow: View {
                         
                         Spacer()
                         
-//                        Text("\()")
-//                            .bold()
+                        Text("\(data.fat)")
+                            .bold()
                     }
                 }
                 .padding()
@@ -150,6 +172,7 @@ struct TabRow: View {
         .onTapGesture {
             // display the bigger view possibly through either opacity or if elses
             tapped.toggle()
+            data = foodManager.calcMacros()
         }
     }
 }

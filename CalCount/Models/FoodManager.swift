@@ -60,6 +60,21 @@ class FoodManager: ObservableObject {
         return total
     }
     
+    func calcMacros() -> (Int, Int, Int, Int) {
+        // need to calculate carbs, protein, fats for the period (i.e. all foods from today, week, etc)
+        var carbs = 0
+        var protein = 0
+        var fat = 0
+        
+        for food in foodsListCopy {
+            carbs += food.carbs
+            protein += food.protein
+            fat += food.fat
+        }
+        
+        return (calories: self.totalCals, carbs: carbs, protein: protein, fat: fat)
+    }
+    
     
     
     /** MARK: - Filter functions */
