@@ -43,7 +43,7 @@ struct NutritionView: View {
                 VStack {
                     if !foodManager.foodsListCopy.isEmpty {
                         ForEach(foodManager.foodsListCopy, id: \.id) { food in
-                            SingleRow(food: food)
+                            TabRow(food: food)
                         }
                     }
                     else {
@@ -81,7 +81,7 @@ struct NutritionView_Previews: PreviewProvider {
 }
 
 
-struct SingleRow: View {
+struct TabRow: View {
     var food: FoodEntry
     
     @State private var du = DateUtility()
@@ -90,15 +90,30 @@ struct SingleRow: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: tapped ? "arrowtriangle.down" : "arrowtriangle.down.fill")
+                Image(systemName: tapped ? "arrowtriangle.up" : "arrowtriangle.down.fill")
                 
                 Text("\(du.formatDate(passedDate: food.date, dateStyle: .medium ))")
-                    .font(.title)
+                    .font(.title2)
                     .foregroundColor(.black)
                 
-                
+                Spacer()
+            }
+            .padding()
+ 
+            // Show full
+            if tapped {
+                VStack {
+                    Text("TESTING")
+                    
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color(red: 218.0/255, green: 221.0/255, blue: 224.0/255))
             }
         }
+        .frame(maxWidth: .infinity)
+        .background(Color(red: 233.0/255, green: 236.0/255, blue: 239.0/255))
+        .padding()
         .onTapGesture {
             // display the bigger view possibly through either opacity or if elses
             tapped.toggle()
