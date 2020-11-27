@@ -40,16 +40,18 @@ struct FoodView: View {
             
             ScrollView {
                 VStack {
-                    // Top Chart to display data
-                    if selectedPeriod == Periods.day {
-                        PieChartView(data: chartData, title: "Calories")
-                            .frame(maxWidth: .infinity)
-                    }
-                    else if selectedPeriod == Periods.week {
-//                        BarChartView(data: ChartData(points: chartData), title: "Week")
-                    }
-                    else if selectedPeriod == Periods.month {
-//                        LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Month")
+                    // Top chart to show data based on data
+                    switch selectedPeriod {
+                        case Periods.day:
+                            PieChartView(data: chartData, title: "Calories")
+                                .frame(maxWidth: .infinity)
+                        case Periods.week:
+                            BarChartView(data: ChartData(points: chartData), title: "Week")
+                        case Periods.month:
+                            LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Month")
+                        default:
+                            PieChartView(data: chartData, title: "Calories")
+                                .frame(maxWidth: .infinity)
                     }
                     
                     // HStack with the calculated calories & remainder

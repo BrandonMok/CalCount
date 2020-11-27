@@ -35,6 +35,7 @@
 		C97010682547A0DE003EC8FF /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97010672547A0DE003EC8FF /* GoalView.swift */; };
 		C97285672554E44000EC5D1E /* FloatingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97285662554E44000EC5D1E /* FloatingMenu.swift */; };
 		C9739E32256D54D8007EED1C /* WaterEditModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9739E31256D54D8007EED1C /* WaterEditModal.swift */; };
+		C976588E257161D40028FF2C /* NutritionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C976588D257161D40028FF2C /* NutritionView.swift */; };
 		C976BE3A255E114500EE4ACB /* DateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C976BE39255E114500EE4ACB /* DateUtility.swift */; };
 		C9832D092554B2740006FC31 /* RealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9832D082554B2740006FC31 /* RealmObject.swift */; };
 		C9AEF435253680C100DEF119 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AEF434253680C100DEF119 /* User.swift */; };
@@ -73,6 +74,7 @@
 		C97010672547A0DE003EC8FF /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		C97285662554E44000EC5D1E /* FloatingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingMenu.swift; sourceTree = "<group>"; };
 		C9739E31256D54D8007EED1C /* WaterEditModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterEditModal.swift; sourceTree = "<group>"; };
+		C976588D257161D40028FF2C /* NutritionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionView.swift; sourceTree = "<group>"; };
 		C976BE39255E114500EE4ACB /* DateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtility.swift; sourceTree = "<group>"; };
 		C9832D082554B2740006FC31 /* RealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObject.swift; sourceTree = "<group>"; };
 		C9AEF434253680C100DEF119 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		C9511F8A25322BBA0052C8FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C976588C257161BB0028FF2C /* Nutrition */,
 				C968A12E25689A55008A193C /* Water */,
 				C968A12D25689A3A008A193C /* Home-Food */,
 				C95BA14D255A291400EF8149 /* Modals */,
@@ -192,6 +195,14 @@
 				C9511F9125323E390052C8FA /* SignUpView.swift */,
 			);
 			path = "Login-Registration";
+			sourceTree = "<group>";
+		};
+		C976588C257161BB0028FF2C /* Nutrition */ = {
+			isa = PBXGroup;
+			children = (
+				C976588D257161D40028FF2C /* NutritionView.swift */,
+			);
+			path = Nutrition;
 			sourceTree = "<group>";
 		};
 		C9AEF433253680AF00DEF119 /* Models */ = {
@@ -307,6 +318,7 @@
 				C9FD4D2F25572B5D00BFF24A /* FoodView.swift in Sources */,
 				C968A13025689A64008A193C /* WaterView.swift in Sources */,
 				C9AEF435253680C100DEF119 /* User.swift in Sources */,
+				C976588E257161D40028FF2C /* NutritionView.swift in Sources */,
 				C96028492547267C001A3829 /* SettingsView.swift in Sources */,
 				C9471074252B8ED500033FA5 /* ContentView.swift in Sources */,
 				C95BA151255A29D000EF8149 /* WaterAddModal.swift in Sources */,
