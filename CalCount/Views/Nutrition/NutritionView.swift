@@ -17,17 +17,32 @@ struct NutritionView: View {
     
     // Selected Time Period of data to see (e.g. Day, Week, Month)
     @State var selectedPeriod = Periods.day
-    @State var nutritionData: [Double] = []
+    @State var chartData: [Double] = []
+    
+    
+    var nutritionData: [Double] {
+        set {
+            nutritionData = []
+        }
+        get {
+            let data = foodManager.calcMacros()
+            var tempArr: [Double] = []
+            tempArr.append(Double(data.1))
+            tempArr.append(Double(data.2))
+            tempArr.append(Double(data.3))
+            return tempArr
+        }
+    }
+    
     
     var body: some View {
         VStack {
             // MARK: - TOP BAR (Day, Week, Month)
-            TopPeriodBar(chartData: $nutritionData)
+            TopPeriodBar(chartData: $chartData)
 
             ScrollView {
                 VStack {
                     PieChartView(data: nutritionData, title: "Nutrition")
-                        .frame(maxWidth: .infinity)
                     
 //                    switch selectedPeriod {
 //                        case Periods.day:
@@ -57,17 +72,17 @@ struct NutritionView: View {
                         Spacer()
                     }
                 }//Vstack
-                .onAppear {
-                    if !nutritionData.isEmpty {
-                        nutritionData = []
-                    }
-                    
-                    // SO the chart data array (nutritionData) has the data, but won't show it :/
-                    let data = foodManager.calcMacros()
-                    nutritionData.append(Double(data.1))
-                    nutritionData.append(Double(data.2))
-                    nutritionData.append(Double(data.3))
-                }
+//                .onAppear {
+//                    if !nutritionData.isEmpty {
+//                        nutritionData = []
+//                    }
+//
+//                    // SO the chart data array (nutritionData) has the data, but won't show it :/
+//                    let data = foodManager.calcMacros()
+//                    nutritionData.append(Double(data.1))
+//                    nutritionData.append(Double(data.2))
+//                    nutritionData.append(Double(data.3))
+//                }
 
             }//scrollview
         }//Vstack
