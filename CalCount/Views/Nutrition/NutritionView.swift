@@ -15,11 +15,6 @@ struct NutritionView: View {
     @EnvironmentObject var realmObject: RealmObject
     @EnvironmentObject var foodManager: FoodManager
     
-    // Selected Time Period of data to see (e.g. Day, Week, Month)
-    @State var selectedPeriod = Periods.day
-    @State var chartData: [Double] = []
-    
-    
     var nutritionData: [Double] {
         set {
             nutritionData = []
@@ -38,21 +33,11 @@ struct NutritionView: View {
     var body: some View {
         VStack {
             // MARK: - TOP BAR (Day, Week, Month)
-            TopPeriodBar(chartData: $chartData)
+            TopPeriodBar()
 
             ScrollView {
                 VStack {
                     PieChartView(data: nutritionData, title: "Nutrition")
-                    
-//                    switch selectedPeriod {
-//                        case Periods.day:
-//                            PieChartView(data: $nutritionData, title: "Nutrition")
-//                                .frame(maxWidth: .infinity)
-//                        case Periods.week:
-//                            BarChartView(data: ChartData(points: chartData), title: "Week")
-//                        case Periods.month:
-//                            LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Month")
-//                    }
                 }
                 .padding(.vertical, 20)
 
@@ -60,7 +45,6 @@ struct NutritionView: View {
 
                 VStack {
                     if !foodManager.foodsListCopy.isEmpty {
-                        // Only one row / tab thing bc data in it is the only thing that'll change
                         TabRow()
                     }
                     else {
@@ -72,18 +56,6 @@ struct NutritionView: View {
                         Spacer()
                     }
                 }//Vstack
-//                .onAppear {
-//                    if !nutritionData.isEmpty {
-//                        nutritionData = []
-//                    }
-//
-//                    // SO the chart data array (nutritionData) has the data, but won't show it :/
-//                    let data = foodManager.calcMacros()
-//                    nutritionData.append(Double(data.1))
-//                    nutritionData.append(Double(data.2))
-//                    nutritionData.append(Double(data.3))
-//                }
-
             }//scrollview
         }//Vstack
     }//body
@@ -102,6 +74,7 @@ struct NutritionView_Previews: PreviewProvider {
  * First initially only shows a little tab like view and then on tap, will show more data
  */
 struct TabRow: View {
+    //EnvironmentObject
     @EnvironmentObject var foodManager: FoodManager
 
     @State private var du = DateUtility()
@@ -140,7 +113,7 @@ struct TabRow: View {
             }
             .padding()
  
-            // Show full
+            // Show full view of all the information
             if tapped {
                 VStack(alignment: .leading) {
                     HStack {

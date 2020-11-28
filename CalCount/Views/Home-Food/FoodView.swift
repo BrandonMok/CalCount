@@ -27,21 +27,56 @@ struct FoodView: View {
     @EnvironmentObject var foodManager: FoodManager
     @EnvironmentObject var modalManager: ModalManager
     
-    // Selected Time Period of data to see (e.g. Day, Week, Month)
-    @State var selectedPeriod = Periods.day
     @State var chartData: [Double] = []
-    
+
     @State private var remainingCalories: Int = 0
+    
+    // something isn't right :/
+//    var foodData: [Double] {
+//        set {
+//            if !foodManager.foodsListCopy.isEmpty {
+//                var tempArr: [Double] = []
+//                let calculatedVals = foodManager.calculateConsumedCalories()
+//                tempArr.append(Double(calculatedVals))
+//                self.foodData =  tempArr
+//            }
+//            else {
+//                self.foodData = [0.0]
+//            }
+//        }
+        
+//        var tempArr: [Double] = []
+//
+//        if !foodManager.foodsListCopy.isEmpty {
+//            if foodManager.foodsListCopy.count == 1 && foodManager.foodsListCopy.first!.calories == 0 {
+//                // need to catch if the only value is 0
+//            }
+//            else {
+//                tempArr = [foodManager.getDayChartData()]
+//            }
+//        }
+//
+//        return tempArr
+//
+////        switch foodManager.selectedPeriod {
+////            case Periods.day:
+////                return [foodManager.getDayChartData()]
+////            case Periods.week:
+////                return [foodManager.getDayChartData() ]   // temp
+////            case Periods.month:
+////                return [foodManager.getDayChartData() ]   // temp
+////        }
+//    }
 
     var body: some View {
         VStack {
             // MARK: - TOP BAR (Day, Week, Month)
-            TopPeriodBar(chartData: $chartData)
+            TopPeriodBar()
             
             ScrollView {
                 VStack {
                     // Top chart to show data based on data
-                    switch selectedPeriod {
+                    switch foodManager.selectedPeriod {
                         case Periods.day:
                             PieChartView(data: chartData, title: "Calories")
                                 .frame(maxWidth: .infinity)
@@ -114,28 +149,29 @@ struct FoodView: View {
                     }
                 }//vstack
                 .onAppear {
+                    // NOTE: data gets added, BUT chart won't use it for some reason
                     chartData = []
                     
                     switch foodManager.selectedPeriod {
                         case Periods.day:
                             foodManager.filterForDay()
-                            chartData.append(contentsOf: foodManager.getDayChartData())
+                            chartData.append(Double(foodManager.getDayChartData()))
                         case Periods.week:
                             foodManager.filterForWeek()
                         case Periods.month:
                             foodManager.filterForMonth()
-                    }
-                    
+                    }                    
                     foodManager.calculateConsumedCalories()
                     updateRemainingCals()
                 }
             }//ScrollView
             .padding(.bottom, 20)
-        }//outter vstack
+        }
     }//body
     
     
     func updateRemainingCals() {
+        // based on recommended daily calorie intakes (not the best bc doesn't account for personal cases)
         if status.currentUser.gender == "Male" {
             self.remainingCalories = 3000 - self.foodManager.totalCals
         }
@@ -219,9 +255,6 @@ struct TopPeriodBar: View {
     @EnvironmentObject var realmObj: RealmObject
     @EnvironmentObject var foodManager: FoodManager
     
-    // Binding - passed in value
-    @Binding var chartData: [Double]
-    
     var selectedPeriod: Periods {
         self.foodManager.selectedPeriod
     }
@@ -231,7 +264,6 @@ struct TopPeriodBar: View {
             // DAY BTN
             Button(action: {
                 if !foodManager.foodsList.isEmpty {
-
                     // NOTE: Since the goal feature wasn't fully implemented due to time constraints, requirement of a lot of personal information, a lot of calculations, and other factors needed to compute the goal values, would do something to show as in the below
 //                    if status.currentGoal != nil {
 ////                        var totalAllottedCals = status.currentGoal?.weightGoal
@@ -239,9 +271,6 @@ struct TopPeriodBar: View {
 
                     foodManager.filterForDay()
                     foodManager.calculateConsumedCalories()
-        
-                    chartData = []
-                    chartData.append(contentsOf: foodManager.getDayChartData())
                 }
                 
 
@@ -267,7 +296,6 @@ struct TopPeriodBar: View {
                     
                     foodManager.filterForWeek()
                     foodManager.calculateConsumedCalories()
-
                     
 //                    foodManager.getWeekChartData()
                 }
@@ -313,7 +341,5 @@ struct TopPeriodBar: View {
         }//hstack
         .frame(maxWidth: .infinity)
         .background(Color(red: 233/255, green: 236/255, blue: 239/255))
-        
-        
     }//body
 }//struct
