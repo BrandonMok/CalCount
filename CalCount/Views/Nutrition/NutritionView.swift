@@ -17,24 +17,27 @@ struct NutritionView: View {
     
     // Selected Time Period of data to see (e.g. Day, Week, Month)
     @State var selectedPeriod = Periods.day
-    @State var chartData: [Double] = []
+    @State var nutritionData: [Double] = []
     
     var body: some View {
         VStack {
             // MARK: - TOP BAR (Day, Week, Month)
-            TopPeriodBar(chartData: $chartData)
+            TopPeriodBar(chartData: $nutritionData)
 
             ScrollView {
                 VStack {
-                    switch selectedPeriod {
-                        case Periods.day:
-                            PieChartView(data: chartData, title: "Nutrition")
-                                .frame(maxWidth: .infinity)
-                        case Periods.week:
-                            BarChartView(data: ChartData(points: chartData), title: "Week")
-                        case Periods.month:
-                            LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Month")
-                    }
+                    PieChartView(data: nutritionData, title: "Nutrition")
+                        .frame(maxWidth: .infinity)
+                    
+//                    switch selectedPeriod {
+//                        case Periods.day:
+//                            PieChartView(data: $nutritionData, title: "Nutrition")
+//                                .frame(maxWidth: .infinity)
+//                        case Periods.week:
+//                            BarChartView(data: ChartData(points: chartData), title: "Week")
+//                        case Periods.month:
+//                            LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Month")
+//                    }
                 }
                 .padding(.vertical, 20)
 
@@ -53,19 +56,17 @@ struct NutritionView: View {
                         Spacer()
                         Spacer()
                     }
-                }
+                }//Vstack
                 .onAppear {
-//                    chartData = []
-//
-//                    switch foodManager.selectedPeriod {
-//                        case Periods.day:
-//                            foodManager.filterForDay()
-//                            chartData.append(contentsOf: foodManager.getDayChartData())
-//                        case Periods.week:
-//                            foodManager.filterForWeek()
-//                        case Periods.month:
-//                            foodManager.filterForMonth()
-//                    }
+                    if !nutritionData.isEmpty {
+                        nutritionData = []
+                    }
+                    
+                    // SO the chart data array (nutritionData) has the data, but won't show it :/
+                    let data = foodManager.calcMacros()
+                    nutritionData.append(Double(data.1))
+                    nutritionData.append(Double(data.2))
+                    nutritionData.append(Double(data.3))
                 }
 
             }//scrollview
