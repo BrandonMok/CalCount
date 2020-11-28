@@ -14,7 +14,8 @@ class DateUtility {
         return formatter.string(from: passedDate)
     }
     
-    // Gets the name of the month of the date passedss
+    // Gets the name of the month of the date passeds
+    // source: https://stackoverflow.com/questions/55492003/how-can-i-find-current-month-name-and-current-month-number-in-swift
     func getMonthFromDate(passedDate: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM"
