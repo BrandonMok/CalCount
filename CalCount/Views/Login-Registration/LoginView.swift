@@ -37,6 +37,8 @@ struct LoginView: View {
             
             ZStack {
                 HStack {
+                    // Hiding/toggling of either showing the password or hiding it based on tapping an image
+                    // source: https://www.youtube.com/watch?v=84uwH4DVPJg&ab_channel=AppDesigner2
                     if phidden {
                         TextField("Password", text: $password)
                             .padding()
