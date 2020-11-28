@@ -80,34 +80,45 @@ struct NutritionView_Previews: PreviewProvider {
 }
 
 
+/**
+ * TabRow
+ * A view to display the macronutrients of the selected time period
+ * First initially only shows a little tab like view and then on tap, will show more data
+ */
 struct TabRow: View {
     @EnvironmentObject var foodManager: FoodManager
-    
+
     @State private var du = DateUtility()
     @State private var tapped = false
-    
     @State private var data: (calories: Int, carbs: Int, protein: Int, fat: Int) = (0,0,0,0)
     
-//    var tabPeriod: String {       // used as the tab display before tapping on it to show more info
-//        switch foodManager.selectedPeriod {
-//        case Periods.day:
-//            return du.formatDate(passedDate: Date(), dateStyle: .medium)
-//        case Periods.week:
-//            // get beginning && and of week then pass through func
-//        case Periods.month:
-//            // something
-//    }
+    
+    var tabPeriod: String {
+        switch foodManager.selectedPeriod {
+            case Periods.day:
+                return du.formatDate(passedDate: Date(), dateStyle: .medium)
+            case Periods.week:
+                // https://www.reddit.com/r/swift/comments/f8ai10/finding_start_and_end_of_current_week_gives_me/
+                let start = du.convertDateToLocalTime(foodManager.foodsListCopy.first!.date.startOfWeek!)
+                let end = du.convertDateToLocalTime(foodManager.foodsListCopy.first!.date.endOfWeek!)
+
+                let startingDay = du.formatDate(passedDate: start, dateStyle: .short)
+                let endingDay = du.formatDate(passedDate: end, dateStyle: .short)
+                let combined = "\(startingDay) - \(endingDay)"
+                return combined
+            case Periods.month:
+                return du.getMonthFromDate(passedDate: foodManager.foodsListCopy.first!.date)
+        }
+    }//tabPeriod
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Image(systemName: tapped ? "arrowtriangle.up" : "arrowtriangle.down.fill")
                 
-                // check period bc if Day => show today's date, Week => show range, etc.
-                
-//                Text("\(du.formatDate(passedDate: food.date, dateStyle: .medium ))")
-//                    .font(.title2)
-//                    .foregroundColor(.black)
+                Text("\(tabPeriod)")
+                    .font(.title2)
+                    .foregroundColor(.black)
                 
                 Spacer()
             }
