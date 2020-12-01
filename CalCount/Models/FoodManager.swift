@@ -61,7 +61,13 @@ class FoodManager: ObservableObject {
         totalCals = total
         return total
     }
+
     
+    /**
+     * calcMacros
+     * Function to calculate the macros of FoodEntries within a given time period
+     * @return Tuple(Int, Int, Int, Int)
+     */
     func calcMacros() -> (Int, Int, Int, Int) {
         // need to calculate carbs, protein, fats for the period (i.e. all foods from today, week, etc)
         var carbs = 0

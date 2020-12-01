@@ -1,9 +1,3 @@
-//
-//  ContentView.swift
-//  CalCount
-//
-//  Created by Brandon MOk on 2020-10-05.
-//
 
 import SwiftUI
 

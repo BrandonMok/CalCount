@@ -28,7 +28,7 @@ struct FoodView: View {
     @EnvironmentObject var modalManager: ModalManager
     
     @State var chartData: [Double] = []
-    @State private var remainingCalories: Int = 0
+    @State var remainingCalories: Int = 0
     
     // something isn't right - App hangs and doesn't allow anything past login screen
 //    var foodChartData: [Double] {
@@ -46,8 +46,6 @@ struct FoodView: View {
 ////            }
 //    }
     
-    
-
     var body: some View {
         VStack {
             // MARK: - TOP BAR (Day, Week, Month)
@@ -302,8 +300,6 @@ struct TopPeriodBar: View {
  
                     foodManager.filterForMonth()
                     foodManager.calculateConsumedCalories()
-
-                    
                 }
                 
                 self.foodManager.selectedPeriod = Periods.month
