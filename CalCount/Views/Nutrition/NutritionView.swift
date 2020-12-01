@@ -87,7 +87,7 @@ struct TabRow: View {
             case Periods.day:
                 return du.formatDate(passedDate: Date(), dateStyle: .medium)
             case Periods.week:
-                // https://www.reddit.com/r/swift/comments/f8ai10/finding_start_and_end_of_current_week_gives_me/
+                // source: https://www.reddit.com/r/swift/comments/f8ai10/finding_start_and_end_of_current_week_gives_me/
                 let start = du.convertDateToLocalTime(foodManager.foodsListCopy.first!.date.startOfWeek!)
                 let end = du.convertDateToLocalTime(foodManager.foodsListCopy.first!.date.endOfWeek!)
 

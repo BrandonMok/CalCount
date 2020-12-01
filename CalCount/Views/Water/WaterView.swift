@@ -41,16 +41,16 @@ struct WaterView: View {
     var body: some View {
         ScrollView {
             VStack {
-                if status.currentGoal != nil {
-                    // PieChartView(data: [somenumberIDK, Double(waterManager.totalConsumed)], title: "Water Consumption")
-                    //                        .frame(maxWidth: .infinity)
-                }
-                else {
-                    PieChartView(data: [
-                                    (waterManager.totalConsumed != 0) ? (generalWaterVal - Double(waterManager.totalConsumed)) : generalWaterVal, Double(waterManager.totalConsumed)
-                                ], title: "Water Consumption")
-                        .frame(maxWidth: .infinity)
-                }
+//                if status.currentGoal != nil {
+//                    // PieChartView(data: [somenumberIDK, Double(waterManager.totalConsumed)], title: "Water Consumption")
+//                    //                        .frame(maxWidth: .infinity)
+//                }
+//                else {
+                PieChartView(data: [
+                                (waterManager.totalConsumed != 0) ? (generalWaterVal - Double(waterManager.totalConsumed)) : generalWaterVal, Double(waterManager.totalConsumed)
+                            ], title: "Water Consumption")
+                    .frame(maxWidth: .infinity)
+//                }
                 
                 HStack {
                     // NOTE: Since didn't end up fully implementing / know how a water goal would work, left this commented out

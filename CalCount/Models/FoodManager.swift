@@ -50,15 +50,16 @@ class FoodManager: ObservableObject {
      * The foodsListCopy is an array that's a filtered version of the foodsList for the specific/chosen time period (e.g. Day, Week, Month)
      */
     func calculateConsumedCalories() -> Int {
-        totalCals = 0
+        var total = 0
         
         if !foodsListCopy.isEmpty {
             for food in foodsListCopy {
-                totalCals += food.calories
+                total += food.calories
             }
         }
 
-        return totalCals
+        totalCals = total
+        return total
     }
     
     func calcMacros() -> (Int, Int, Int, Int) {

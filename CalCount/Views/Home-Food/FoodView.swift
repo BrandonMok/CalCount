@@ -28,45 +28,25 @@ struct FoodView: View {
     @EnvironmentObject var modalManager: ModalManager
     
     @State var chartData: [Double] = []
-
     @State private var remainingCalories: Int = 0
     
-    // something isn't right :/
-//    var foodData: [Double] {
-//        set {
-//            if !foodManager.foodsListCopy.isEmpty {
-//                var tempArr: [Double] = []
-//                let calculatedVals = foodManager.calculateConsumedCalories()
-//                tempArr.append(Double(calculatedVals))
-//                self.foodData =  tempArr
-//            }
-//            else {
-//                self.foodData = [0.0]
-//            }
-//        }
-        
-//        var tempArr: [Double] = []
-//
-//        if !foodManager.foodsListCopy.isEmpty {
-//            if foodManager.foodsListCopy.count == 1 && foodManager.foodsListCopy.first!.calories == 0 {
-//                // need to catch if the only value is 0
-//            }
-//            else {
-//                tempArr = [foodManager.getDayChartData()]
-//            }
-//        }
-//
-//        return tempArr
-//
-////        switch foodManager.selectedPeriod {
-////            case Periods.day:
-////                return [foodManager.getDayChartData()]
-////            case Periods.week:
-////                return [foodManager.getDayChartData() ]   // temp
-////            case Periods.month:
-////                return [foodManager.getDayChartData() ]   // temp
-////        }
+    // something isn't right - App hangs and doesn't allow anything past login screen
+//    var foodChartData: [Double] {
+////        var tempArr: [Double] = []
+////        tempArr.append(foodManager.getDayChartData()) // this getDayChartData gets called on a loop??
+////        return tempArr
+//            
+////            switch foodManager.selectedPeriod {
+////                case Periods.day:
+////                    return [foodManager.getDayChartData()]
+////                case Periods.week:
+////                    return [foodManager.getDayChartData()]   // temp
+////                case Periods.month:
+////                    return [foodManager.getDayChartData()]   // temp
+////            }
 //    }
+    
+    
 
     var body: some View {
         VStack {
